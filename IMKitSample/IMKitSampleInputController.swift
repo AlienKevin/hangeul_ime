@@ -72,6 +72,16 @@ class IMKitSampleInputController: IMKInputController {
         return nil
     }
     
+    private func enterKeyHandler(event: NSEvent) -> Bool? {
+        // 回车键输入原字符
+        if event.keyCode == kVK_Return && _originalString.count > 0 {
+            // 插入原字符
+            insertText(_originalString)
+            return true
+        }
+        return nil
+    }
+    
     func clean() {
         NSLog("[InputController] clean")
         _originalString = ""
@@ -101,6 +111,7 @@ class IMKitSampleInputController: IMKInputController {
         let handler = processHandlers(handlers: [
             deleteKeyHandler,
             charKeyHandler,
+            enterKeyHandler,
             spaceKeyHandler,
         ])
         return handler(event) ?? false
