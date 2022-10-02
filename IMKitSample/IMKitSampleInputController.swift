@@ -82,6 +82,17 @@ class IMKitSampleInputController: IMKInputController {
         return nil
     }
     
+    private func punctutionKeyHandler(event: NSEvent) -> Bool? {
+        // 获取输入的字符
+        let key = event.characters!
+        if let punc = punctuations[key] {
+            print("Punctuation " + punc)
+            insertText(jamos2Hangul(ascii2Jamos(_originalString)) + punc)
+            return true
+        }
+        return nil
+    }
+    
     func clean() {
         NSLog("[InputController] clean")
         _originalString = ""
@@ -111,6 +122,7 @@ class IMKitSampleInputController: IMKInputController {
         let handler = processHandlers(handlers: [
             deleteKeyHandler,
             charKeyHandler,
+            punctutionKeyHandler,
             enterKeyHandler,
             spaceKeyHandler,
         ])
@@ -337,3 +349,37 @@ func jamos2Hangul(_ inp: String) -> String {
     
     return hangul
 }
+
+let punctuations: [String: String] = [
+    "`" : "₩",
+    "," : ",",
+    "." : ".",
+    "<" : "<",
+    ">" : ">",
+    "/" : "/",
+    "?" : "?",
+    ";" : ";",
+    ":" : ":",
+    "'" : "'",
+    "\"" : "\"",
+    "\\" : "\\",
+    "|" : "|",
+    "~" : "~",
+    "!" : "!",
+    "@" : "@",
+    "#" : "#",
+    "%" : "%",
+    "^" : "^",
+    "&" : "&",
+    "*" : "*",
+    "(" : "(",
+    ")" : ")",
+    "-" : "-",
+    "_" : "_",
+    "+" : "+",
+    "=" : "=",
+    "[" : "[",
+    "]" : "]",
+    "{" : "{",
+    "}" : "}",
+]
