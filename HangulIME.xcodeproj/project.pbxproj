@@ -7,14 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AE4899528ECAAD5003A255C /* main.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E64626E74937009B65D7 /* main.tiff */; };
 		1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61B26E745DD009B65D7 /* Assets.xcassets */; };
 		1A41E61F26E745DD009B65D7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61E26E745DD009B65D7 /* Preview Assets.xcassets */; };
-		1A41E62926E745DD009B65D7 /* IMKitSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E62826E745DD009B65D7 /* IMKitSampleTests.swift */; };
-		1A41E63326E745DD009B65D7 /* IMKitSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E63226E745DD009B65D7 /* IMKitSampleUITests.swift */; };
-		1A41E63526E745DD009B65D7 /* IMKitSampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E63426E745DD009B65D7 /* IMKitSampleUITestsLaunchTests.swift */; };
 		1A41E64226E74627009B65D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64126E74627009B65D7 /* AppDelegate.swift */; };
-		1A41E64426E74669009B65D7 /* IMKitSampleInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64326E74669009B65D7 /* IMKitSampleInputController.swift */; };
-		1A41E64726E74937009B65D7 /* main.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E64626E74937009B65D7 /* main.tiff */; };
+		1A41E64426E74669009B65D7 /* HangulIMEInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,19 +32,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A41E61426E745D9009B65D7 /* IMKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A41E61426E745D9009B65D7 /* HangulIME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HangulIME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A41E61B26E745DD009B65D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A41E61E26E745DD009B65D7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1A41E62426E745DD009B65D7 /* IMKitSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMKitSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A41E62826E745DD009B65D7 /* IMKitSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKitSampleTests.swift; sourceTree = "<group>"; };
-		1A41E62E26E745DD009B65D7 /* IMKitSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMKitSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A41E63226E745DD009B65D7 /* IMKitSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKitSampleUITests.swift; sourceTree = "<group>"; };
-		1A41E63426E745DD009B65D7 /* IMKitSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKitSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1A41E62426E745DD009B65D7 /* HangulIMETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HangulIMETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A41E62E26E745DD009B65D7 /* HangulIMEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HangulIMEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A41E64126E74627009B65D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1A41E64326E74669009B65D7 /* IMKitSampleInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKitSampleInputController.swift; sourceTree = "<group>"; };
+		1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulIMEInputController.swift; sourceTree = "<group>"; };
 		1A41E64526E7470D009B65D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		1A41E64626E74937009B65D7 /* main.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = main.tiff; path = IMKitSample/main.tiff; sourceTree = SOURCE_ROOT; };
-		1A41E64826E7495A009B65D7 /* IMKitSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IMKitSample.entitlements; sourceTree = "<group>"; };
+		1A41E64626E74937009B65D7 /* main.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = main.tiff; path = HangulIME/main.tiff; sourceTree = SOURCE_ROOT; };
+		1A41E64826E7495A009B65D7 /* HangulIME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HangulIME.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +72,7 @@
 		1A41E60B26E745D9009B65D7 = {
 			isa = PBXGroup;
 			children = (
-				1A41E61626E745D9009B65D7 /* IMKitSample */,
-				1A41E62726E745DD009B65D7 /* IMKitSampleTests */,
-				1A41E63126E745DD009B65D7 /* IMKitSampleUITests */,
+				1A41E61626E745D9009B65D7 /* HangulIME */,
 				1A41E61526E745D9009B65D7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,25 +80,25 @@
 		1A41E61526E745D9009B65D7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1A41E61426E745D9009B65D7 /* IMKitSample.app */,
-				1A41E62426E745DD009B65D7 /* IMKitSampleTests.xctest */,
-				1A41E62E26E745DD009B65D7 /* IMKitSampleUITests.xctest */,
+				1A41E61426E745D9009B65D7 /* HangulIME.app */,
+				1A41E62426E745DD009B65D7 /* HangulIMETests.xctest */,
+				1A41E62E26E745DD009B65D7 /* HangulIMEUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1A41E61626E745D9009B65D7 /* IMKitSample */ = {
+		1A41E61626E745D9009B65D7 /* HangulIME */ = {
 			isa = PBXGroup;
 			children = (
 				1A41E64526E7470D009B65D7 /* Info.plist */,
-				1A41E64826E7495A009B65D7 /* IMKitSample.entitlements */,
-				1A41E64326E74669009B65D7 /* IMKitSampleInputController.swift */,
+				1A41E64826E7495A009B65D7 /* HangulIME.entitlements */,
+				1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */,
 				1A41E64126E74627009B65D7 /* AppDelegate.swift */,
 				1A41E61B26E745DD009B65D7 /* Assets.xcassets */,
 				1A41E64626E74937009B65D7 /* main.tiff */,
 				1A41E61D26E745DD009B65D7 /* Preview Content */,
 			);
-			path = IMKitSample;
+			path = HangulIME;
 			sourceTree = "<group>";
 		};
 		1A41E61D26E745DD009B65D7 /* Preview Content */ = {
@@ -117,29 +109,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		1A41E62726E745DD009B65D7 /* IMKitSampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				1A41E62826E745DD009B65D7 /* IMKitSampleTests.swift */,
-			);
-			path = IMKitSampleTests;
-			sourceTree = "<group>";
-		};
-		1A41E63126E745DD009B65D7 /* IMKitSampleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				1A41E63226E745DD009B65D7 /* IMKitSampleUITests.swift */,
-				1A41E63426E745DD009B65D7 /* IMKitSampleUITestsLaunchTests.swift */,
-			);
-			path = IMKitSampleUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1A41E61326E745D9009B65D7 /* IMKitSample */ = {
+		1A41E61326E745D9009B65D7 /* HangulIME */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A41E63826E745DD009B65D7 /* Build configuration list for PBXNativeTarget "IMKitSample" */;
+			buildConfigurationList = 1A41E63826E745DD009B65D7 /* Build configuration list for PBXNativeTarget "HangulIME" */;
 			buildPhases = (
 				1A41E61026E745D9009B65D7 /* Sources */,
 				1A41E61126E745D9009B65D7 /* Frameworks */,
@@ -149,14 +124,14 @@
 			);
 			dependencies = (
 			);
-			name = IMKitSample;
+			name = HangulIME;
 			productName = IMKitSample;
-			productReference = 1A41E61426E745D9009B65D7 /* IMKitSample.app */;
+			productReference = 1A41E61426E745D9009B65D7 /* HangulIME.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1A41E62326E745DD009B65D7 /* IMKitSampleTests */ = {
+		1A41E62326E745DD009B65D7 /* HangulIMETests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A41E63B26E745DD009B65D7 /* Build configuration list for PBXNativeTarget "IMKitSampleTests" */;
+			buildConfigurationList = 1A41E63B26E745DD009B65D7 /* Build configuration list for PBXNativeTarget "HangulIMETests" */;
 			buildPhases = (
 				1A41E62026E745DD009B65D7 /* Sources */,
 				1A41E62126E745DD009B65D7 /* Frameworks */,
@@ -167,14 +142,14 @@
 			dependencies = (
 				1A41E62626E745DD009B65D7 /* PBXTargetDependency */,
 			);
-			name = IMKitSampleTests;
+			name = HangulIMETests;
 			productName = IMKitSampleTests;
-			productReference = 1A41E62426E745DD009B65D7 /* IMKitSampleTests.xctest */;
+			productReference = 1A41E62426E745DD009B65D7 /* HangulIMETests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		1A41E62D26E745DD009B65D7 /* IMKitSampleUITests */ = {
+		1A41E62D26E745DD009B65D7 /* HangulIMEUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A41E63E26E745DD009B65D7 /* Build configuration list for PBXNativeTarget "IMKitSampleUITests" */;
+			buildConfigurationList = 1A41E63E26E745DD009B65D7 /* Build configuration list for PBXNativeTarget "HangulIMEUITests" */;
 			buildPhases = (
 				1A41E62A26E745DD009B65D7 /* Sources */,
 				1A41E62B26E745DD009B65D7 /* Frameworks */,
@@ -185,9 +160,9 @@
 			dependencies = (
 				1A41E63026E745DD009B65D7 /* PBXTargetDependency */,
 			);
-			name = IMKitSampleUITests;
+			name = HangulIMEUITests;
 			productName = IMKitSampleUITests;
-			productReference = 1A41E62E26E745DD009B65D7 /* IMKitSampleUITests.xctest */;
+			productReference = 1A41E62E26E745DD009B65D7 /* HangulIMEUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -213,7 +188,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1A41E60F26E745D9009B65D7 /* Build configuration list for PBXProject "IMKitSample" */;
+			buildConfigurationList = 1A41E60F26E745D9009B65D7 /* Build configuration list for PBXProject "HangulIME" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -226,9 +201,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1A41E61326E745D9009B65D7 /* IMKitSample */,
-				1A41E62326E745DD009B65D7 /* IMKitSampleTests */,
-				1A41E62D26E745DD009B65D7 /* IMKitSampleUITests */,
+				1A41E61326E745D9009B65D7 /* HangulIME */,
+				1A41E62326E745DD009B65D7 /* HangulIMETests */,
+				1A41E62D26E745DD009B65D7 /* HangulIMEUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -238,7 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A41E64726E74937009B65D7 /* main.tiff in Resources */,
+				0AE4899528ECAAD5003A255C /* main.tiff in Resources */,
 				1A41E61F26E745DD009B65D7 /* Preview Assets.xcassets in Resources */,
 				1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */,
 			);
@@ -266,7 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A41E64226E74627009B65D7 /* AppDelegate.swift in Sources */,
-				1A41E64426E74669009B65D7 /* IMKitSampleInputController.swift in Sources */,
+				1A41E64426E74669009B65D7 /* HangulIMEInputController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +249,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A41E62926E745DD009B65D7 /* IMKitSampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,8 +256,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A41E63326E745DD009B65D7 /* IMKitSampleUITests.swift in Sources */,
-				1A41E63526E745DD009B65D7 /* IMKitSampleUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,12 +264,12 @@
 /* Begin PBXTargetDependency section */
 		1A41E62626E745DD009B65D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1A41E61326E745D9009B65D7 /* IMKitSample */;
+			target = 1A41E61326E745D9009B65D7 /* HangulIME */;
 			targetProxy = 1A41E62526E745DD009B65D7 /* PBXContainerItemProxy */;
 		};
 		1A41E63026E745DD009B65D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1A41E61326E745D9009B65D7 /* IMKitSample */;
+			target = 1A41E61326E745D9009B65D7 /* HangulIME */;
 			targetProxy = 1A41E62F26E745DD009B65D7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -430,20 +402,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = IMKitSample/IMKitSample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_NAME)/$(PROJECT_NAME).entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"IMKitSample/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"$(PROJECT_NAME)/Preview Content\"";
 				DEVELOPMENT_TEAM = Z5TP7VUYRW;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = IMKitSample/Info.plist;
+				INFOPLIST_FILE = "$(PROJECT_NAME)/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -451,7 +423,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.ensan.inputmethod.IMKitSample;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.kevin.inputmethod.$(PROJECT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -463,20 +435,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = IMKitSample/IMKitSample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_NAME)/$(PROJECT_NAME).entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"IMKitSample/Preview Content\"";
-				DEVELOPMENT_TEAM = 9S3UXHYP65;
+				DEVELOPMENT_ASSET_PATHS = "\"$(PROJECT_NAME)/Preview Content\"";
+				DEVELOPMENT_TEAM = Z5TP7VUYRW;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = IMKitSample/Info.plist;
+				INFOPLIST_FILE = "$(PROJECT_NAME)/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -484,7 +456,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.ensan.inputmethod.IMKitSample;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.kevin.inputmethod.$(PROJECT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -512,7 +484,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IMKitSample.app/Contents/MacOS/IMKitSample";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HangulIME.app/Contents/MacOS/HangulIME";
 			};
 			name = Debug;
 		};
@@ -537,7 +509,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IMKitSample.app/Contents/MacOS/IMKitSample";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HangulIME.app/Contents/MacOS/HangulIME";
 			};
 			name = Release;
 		};
@@ -590,7 +562,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1A41E60F26E745D9009B65D7 /* Build configuration list for PBXProject "IMKitSample" */ = {
+		1A41E60F26E745D9009B65D7 /* Build configuration list for PBXProject "HangulIME" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A41E63626E745DD009B65D7 /* Debug */,
@@ -599,7 +571,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A41E63826E745DD009B65D7 /* Build configuration list for PBXNativeTarget "IMKitSample" */ = {
+		1A41E63826E745DD009B65D7 /* Build configuration list for PBXNativeTarget "HangulIME" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A41E63926E745DD009B65D7 /* Debug */,
@@ -608,7 +580,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A41E63B26E745DD009B65D7 /* Build configuration list for PBXNativeTarget "IMKitSampleTests" */ = {
+		1A41E63B26E745DD009B65D7 /* Build configuration list for PBXNativeTarget "HangulIMETests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A41E63C26E745DD009B65D7 /* Debug */,
@@ -617,7 +589,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A41E63E26E745DD009B65D7 /* Build configuration list for PBXNativeTarget "IMKitSampleUITests" */ = {
+		1A41E63E26E745DD009B65D7 /* Build configuration list for PBXNativeTarget "HangulIMEUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A41E63F26E745DD009B65D7 /* Debug */,

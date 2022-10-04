@@ -1,6 +1,6 @@
 //
-//  IMKitSampleInputController.swift
-//  IMKitSampleInputController
+//  HangulIMEInputController.swift
+//  HangulIMEInputController
 //
 //  Created by ensan on 2021/09/07.
 //
@@ -8,8 +8,8 @@
 import Cocoa
 import InputMethodKit
 
-@objc(IMKitSampleInputController)
-class IMKitSampleInputController: IMKInputController {
+@objc(HangulIMEInputController)
+class HangulIMEInputController: IMKInputController {
     private var _originalString = "" {
         didSet {
             NSLog("[InputController] original changed: \(self._originalString), refresh window")
