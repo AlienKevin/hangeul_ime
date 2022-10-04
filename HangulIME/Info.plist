@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon.icns</string>
 	<key>NSPrincipalClass</key>
 	<string>$(PRODUCT_MODULE_NAME).NSManualApplication</string>
 	<key>InputMethodConnectionName</key>
@@ -18,7 +20,13 @@
 	<array>
 		<string>Hang</string>
 	</array>
+	<key>tsInputModeMenuIconFileKey</key>
+	<string>icon.pdf</string>
+	<key>tsInputModeAlternateMenuIconFileKey</key>
+	<string>icon.pdf</string>
+	<key>tsInputModePaletteIconFileKey</key>
+	<string>icon.pdf</string>
 	<key>tsInputMethodIconFileKey</key>
-	<string>main.tiff</string>
+	<string>icon.pdf</string>
 </dict>
 </plist>

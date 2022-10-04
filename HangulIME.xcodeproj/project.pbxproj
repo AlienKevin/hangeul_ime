@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AE4899528ECAAD5003A255C /* main.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E64626E74937009B65D7 /* main.tiff */; };
+		0A72214B28ECD6B1004D153F /* icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A72214A28ECD6B1004D153F /* icon.pdf */; };
 		1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61B26E745DD009B65D7 /* Assets.xcassets */; };
-		1A41E61F26E745DD009B65D7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61E26E745DD009B65D7 /* Preview Assets.xcassets */; };
 		1A41E64226E74627009B65D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64126E74627009B65D7 /* AppDelegate.swift */; };
 		1A41E64426E74669009B65D7 /* HangulIMEInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */; };
 /* End PBXBuildFile section */
@@ -32,15 +31,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A2DBA4828ECD75900DDAF23 /* icon.fig */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.fig; sourceTree = "<group>"; };
+		0A72214A28ECD6B1004D153F /* icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = icon.pdf; sourceTree = "<group>"; };
 		1A41E61426E745D9009B65D7 /* HangulIME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HangulIME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A41E61B26E745DD009B65D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1A41E61E26E745DD009B65D7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1A41E62426E745DD009B65D7 /* HangulIMETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HangulIMETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A41E62E26E745DD009B65D7 /* HangulIMEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HangulIMEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A41E64126E74627009B65D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulIMEInputController.swift; sourceTree = "<group>"; };
 		1A41E64526E7470D009B65D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		1A41E64626E74937009B65D7 /* main.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = main.tiff; path = HangulIME/main.tiff; sourceTree = SOURCE_ROOT; };
 		1A41E64826E7495A009B65D7 /* HangulIME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HangulIME.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,18 +94,10 @@
 				1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */,
 				1A41E64126E74627009B65D7 /* AppDelegate.swift */,
 				1A41E61B26E745DD009B65D7 /* Assets.xcassets */,
-				1A41E64626E74937009B65D7 /* main.tiff */,
-				1A41E61D26E745DD009B65D7 /* Preview Content */,
+				0A72214A28ECD6B1004D153F /* icon.pdf */,
+				0A2DBA4828ECD75900DDAF23 /* icon.fig */,
 			);
 			path = HangulIME;
-			sourceTree = "<group>";
-		};
-		1A41E61D26E745DD009B65D7 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				1A41E61E26E745DD009B65D7 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,9 +204,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AE4899528ECAAD5003A255C /* main.tiff in Resources */,
-				1A41E61F26E745DD009B65D7 /* Preview Assets.xcassets in Resources */,
 				1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */,
+				0A72214B28ECD6B1004D153F /* icon.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,13 +392,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_NAME)/$(PROJECT_NAME).entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"$(PROJECT_NAME)/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Z5TP7VUYRW;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -435,13 +426,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_NAME)/$(PROJECT_NAME).entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"$(PROJECT_NAME)/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Z5TP7VUYRW;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
