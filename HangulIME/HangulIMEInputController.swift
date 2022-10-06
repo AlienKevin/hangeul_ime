@@ -15,13 +15,51 @@ class HangulIMEInputController: IMKInputController {
             NSLog("[InputController] original changed: \(self._originalString), refresh window")
 
             // 建议mark originalString, 否则在某些APP中会有问题
-            self.markText()
+            let jamos = ascii2Jamos(_originalString)
+            var hanguls = jamos2Hangul(jamos)
+            let vowels = CharacterSet.init(charactersIn: "aeiouw");
+            
+            if hanguls.unicodeScalars.count == 2 {
+                NSLog("Found 2 hanguls")
+                NSLog(String(hanguls.unicodeScalars.last!))
+                if isJamo(Int(hanguls.unicodeScalars.first!.value)) &&
+                    isJamo(Int(hanguls.unicodeScalars.last!.value)) {
+                    let first_hangul = String(hanguls.unicodeScalars.prefix(hanguls.unicodeScalars.count - 1))
+                    NSLog("First hangul: " + first_hangul)
+                    client()?.insertText(first_hangul, replacementRange: replacementRange())
+                    NSLog("Second jamo: " + String(_originalString.unicodeScalars.last!))
+                    _originalString = String(_originalString.unicodeScalars.last!)
+                    self.markText(String(hanguls.unicodeScalars.last!))
+                } else {
+                    let nextStart = hanguls.removeLast()
+                    let value = NSAttributedString(string: hanguls)
+                    client()?.insertText(value, replacementRange: replacementRange())
+                    var lastConsonantOffset = _originalString.unicodeScalars.count - 1;
+                    for (i, char) in _originalString.unicodeScalars.reversed().enumerated()  {
+                        NSLog(String(i))
+                        if !vowels.contains(char) {
+                            NSLog(String(char))
+                            lastConsonantOffset = i
+                            break
+                        }
+                    }
+                    NSLog(String(lastConsonantOffset))
+                    if lastConsonantOffset == _originalString.unicodeScalars.count - 1 {
+                        _originalString = String(_originalString.last!)
+                    } else {
+                        NSLog("found nextstartIndex")
+                        let start = _originalString.index(_originalString.endIndex, offsetBy: -lastConsonantOffset-1)
+                        _originalString = String(_originalString[start...])
+                    }
+                    self.markText(String(nextStart))
+                }
+            } else {
+                self.markText(hanguls)
+            }
         }
     }
     
-    private func markText() {
-        let text = jamos2Hangul(ascii2Jamos(_originalString))
-        print(text.count)
+    private func markText(_ text: String) {
         client()?.setMarkedText(text, selectionRange: NSRange(location: text.count, length: 0), replacementRange: replacementRange())
     }
     
@@ -274,6 +312,10 @@ private func isVPartJamo(_ c: Int) -> Bool {
 
 private func isTPartJamo(_ c: Int) -> Bool {
     return 0x11A8 <= c && c <= 0x11C2
+}
+
+private func isJamo(_ c: Int) -> Bool {
+    return isLPartJamo(c) || isVPartJamo(c) || isTPartJamo(c)
 }
 
 func jamos2Hangul(_ inp: String) -> String {
