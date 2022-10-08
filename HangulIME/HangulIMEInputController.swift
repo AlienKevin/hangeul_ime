@@ -13,7 +13,16 @@ class HangulIMEInputController: IMKInputController {
     private var _originalString = "" {
         didSet {
             NSLog("[InputController] original changed: \(self._originalString), refresh window")
-            self.markText(ascii2Hanguls(_originalString))
+            let syllables = syllableSegmentation(_originalString)
+            if syllables.count >= 2 {
+                NSLog(syllables.map({ $0.description }).joined(separator: " "))
+                NSLog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
+                self.insertText(jamos2Hangul(syllable2Jamos(syllables.first!)), doClean: false)
+                _originalString = String(_originalString.dropFirst(syllables.first!.count()))
+                self.markText(jamos2Hangul(syllables.dropFirst().map(syllable2Jamos).joined()))
+            } else {
+                self.markText(jamos2Hangul(syllables.map(syllable2Jamos).joined()))
+            }
         }
     }
 
@@ -62,7 +71,7 @@ class HangulIMEInputController: IMKInputController {
 
     private func spaceKeyHandler(event: NSEvent) -> Bool? {
         if event.keyCode == kVK_Space && _originalString.count > 0 {
-            insertText(ascii2Hanguls(_originalString))
+            insertText(ascii2Hanguls(_originalString), doClean: true)
             return true
         }
         return nil
@@ -73,7 +82,7 @@ class HangulIMEInputController: IMKInputController {
         let key = event.characters!
         if let punc = punctuations[key] {
             print("Punctuation " + punc)
-            insertText(ascii2Hanguls(_originalString) + punc)
+            insertText(ascii2Hanguls(_originalString) + punc, doClean: true)
             return true
         }
         return nil
@@ -84,11 +93,11 @@ class HangulIMEInputController: IMKInputController {
         _originalString = ""
     }
 
-    func insertText(_ text: String) {
+    func insertText(_ text: String, doClean: Bool) {
         NSLog("insertText: %@", text)
         let value = NSAttributedString(string: text)
         client()?.insertText(value, replacementRange: replacementRange())
-        clean()
+        if doClean { clean() }
     }
 
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
@@ -126,6 +135,13 @@ struct Syllable: Equatable {
     func isEmpty() -> Bool {
         return initial == nil && nucleus == nil && final == nil
     }
+    
+    func count() -> Int {
+        return (initial.map { $0.count } ?? 0) + (nucleus.map { $0.count } ?? 0)
+            + (final.map { $0.count } ?? 0)
+    }
+    
+    public var description: String { (initial ?? "") + (nucleus ?? "") + (final ?? "") }
 }
 
 func syllableSegmentation(_ s: String) -> [Syllable] {
