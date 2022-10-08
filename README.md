@@ -1,149 +1,87 @@
-# What is this?
+# Hangeul IME
 
-This is a sample implementation of IMKit App with Swift/SwiftUI.
+A Hangeul input method based on the Revised Romanization of Korean.
 
-## Working Environment
+## Revised Romanization of Korean
 
-Check in July 2022.
-* macOS 12.4
-* Swift 5.6
-* Xcode 13.4.1
+The spellings used by this input method
+is a superset of the spellings standardized in the Revised Romanization (RR). If you already know RR, you can type out most Hangeul expressions using this IME straightaway. However, some of our spellings are not the same as the common RR spellings. The most notable difference is that no sound change rules are observed in our spellings. According to paragraph (8) of the official documentation on the Revised Romanization published by the Ministry of Culture & Tourism in July 2000:
 
-Check in 2021.
-* macOS 11.5
-* Swift 5.5
-* Xcode13 (beta)
+> When it is necessary to convert Romanized Korean back to Hangeul in special cases such as in academic articles, Romanization is done according to Hangeul spelling and not pronunciation. Each Hangeul letter is Romanized as explained in section 2 except that ㄱ, ㄷ, ㅂ, ㄹ are always written as g, d, b, l. When ㅇ has no sound value, it is replaced by a hyphen may also be used when it is necessary to distinguish between syllables.
 
-## Usage
-To try this sample project, use following steps.
+A Hangeul input method is a special case where conversion to Hangeul is necessary so our spelling largely follows the rules outlined in paragraph (8) of the documentation. The exceptions to the rules are:
 
-* Open this project in Xcode.
-* Do `sudo chmod -R 777 /Library/Input\ Methods` on terminal.
-* Run the project.
-* Add 'IMKitSample' in **setting** > **keyboard** > **input source** > **English**.
-* Choose IMKitSample as input source and try it on some text field.
+1. **A hyphen '-' is not used to mark syllable boundaries. Capitalize the first letter of the second syllable instead.**
 
-## Procedure to make project
-I used following steps to prepare this sample project.
+	The hyphen key is a pain to press because it's located far away from the home row and requires your little finger to press. Instead, you can capitalize the first letter of the second syllable if ambiguities arise during syllable segmentation.
 
-* Create new project. Bundle Identifier must contain `.inputmethod.` part in the String.
+	Example: "hanga" can be ambiguously interpreted as "han-ga" (한가) or "hang-a" (항아). By default if you type everything in lowercase, we interpret "hanga" as 한가. If you actually want to type 항아, you should capitalize the second "a": "hangA".
 
-* Run.
+2. **"i" and "y" are interchangeable everywhere.**
 
-* Remove `IMKitSampleApp.swift`, `ContentView.swift`
+	In RR, both "i" and "y" are used to represent the sound /i/ in various vowels. Unlike "i", "y" cannot be used alone and has to be followed by other vowel letters like "a", "e", "o", and "u". When typing a vowel like ㅒ (yae), however, "y" can be alone during the intermediate typing states. To make sure that all intermediate typing states of valid RR syllables are also valid, we decided to allow "i" and "y" to be used interchangeably.
 
-* Add Swift files `AppDelegate.swift` and `IMKitSampleInputController.swift`.
+	Example: 민 can be typed out using "min" or "myn".
 
-  ```swift
-  // AppDelegate.swift
-  import Cocoa
-  import InputMethodKit
-  
-  // necessary to launch this app
-  class NSManualApplication: NSApplication {
-      private let appDelegate = AppDelegate()
-  
-      override init() {
-          super.init()
-          self.delegate = appDelegate
-      }
-  
-      required init?(coder: NSCoder) {
-          fatalError("init(coder:) has not been implemented")
-      }
-  }
-  
-  @main
-  class AppDelegate: NSObject, NSApplicationDelegate {
-      var server = IMKServer()
-      var candidatesWindow = IMKCandidates()
-  
-      func applicationDidFinishLaunching(_ notification: Notification) {
-          // Insert code here to initialize your application
-          server = IMKServer(name: Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String, bundleIdentifier: Bundle.main.bundleIdentifier)
-          candidatesWindow = IMKCandidates(server: server, panelType: kIMKSingleRowSteppingCandidatePanel, styleType: kIMKMain)
-          NSLog("tried connection")
-      }
-  
-      func applicationWillTerminate(_ notification: Notification) {
-          // Insert code here to tear down your application
-      }
-  }
-  ```
+3. **"u" and "w" are interchangeable everywhere except in the cases of "wi" (ㅟ) and "ui" (ㅢ).**
 
-  ```swift
-  // IMKitSampleInputController.swift
-  import Cocoa
-  import InputMethodKit
-  
-  @objc(IMKitSampleInputController)
-  class IMKitSampleInputController: IMKInputController {
-      override func inputText(_ string: String!, client sender: Any!) -> Bool {
-          NSLog(string)
-          // get client to insert
-          guard let client = sender as? IMKTextInput else {
-              return false
-          }
-          client.insertText(string+string, replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
-          return true
-      }
-  }
-  ```
+	The reason is similar to why we made "i"/"y" interchangeable. In RR, "wi" (ㅟ) and "ui" (ㅢ) are the only places in the spelling where "u" and "w" contrasts so we can't interchange "u" and "w" there.
 
-* Add icon file `main.tiff`.
+	Examples:
+	* 환자 can be typed out using "hwanja" or "huanja".
+	* 의사 can only be typed out using "uisa" or "uysa", but not "wisa" or "wysa".
+	* 위구 can only be typed out using "wigu" or "wygu", but not "uigu" or "uygu".
 
-* Modify Info.plist
+## Schema
 
-  ```
-  key: NSPrincipalClass  type: _  value: $(PRODUCT_MODULE_NAME).NSManualApplication
-  key: InputMethodConnectionName  type: String  value: $(PRODUCT_BUNDLE_IDENTIFIER)_Connection
-  key: InputMethodServerControllerClass  type: String  value: $(PRODUCT_MODULE_NAME).IMKitSampleInputController
-  key: Application is background only  type: Boolean  value: YES
-  key: tsInputMethodCharacterRepertoireKey  type: Array  value: [item0: String = Latn]
-  key: tsInputMethodIconFileKey  type: String  value: main.tiff
-  ```
+The schema is split into multiple charts by the types of vowels and consonants in Korean.
+* The first row of each chart are the Hangeul jamos.
+* The second row of each chart are the standard Revised Romanization spellings of the jamos on the first row.
+* The third row of each chart are the alternative spellings for typing.
 
-* Add entitlements
+### Simple Vowels
+|ㅏ|ㅓ|ㅗ|ㅜ|ㅡ|ㅣ|ㅐ|ㅔ|ㅚ|ㅟ|
+|-|-|-|-|-|-|-|-|-|-|
+|a|eo|o|u|eu|i|ae|e|oe|wi|
+||||w|ew|y|||||
 
-  * Go **Signing & Capabilities** → **+Capability** → **App Sandbox**
+### Diphthongs
+|ㅑ|ㅕ|ㅛ|ㅠ|ㅒ|ㅖ|ㅘ|ㅙ|ㅝ|ㅞ|ㅢ|
+|-|-|-|-|-|-|-|-|-|-|-|
+|ya|yeo|yo|yu|yae|ye|wa|wae|wo|we|ui|
+|ia|ieo|io|iu|iae|ie|ua|uae|uo|ue||
 
-  * Go IMKitSample.entitlements, add 
+### Plosives
+|ㄱ|ㄲ|ㅋ|ㄷ|ㄸ|ㅌ|ㅂ|ㅃ|ㅍ|
+|-|-|-|-|-|-|-|-|-|
+|g|kk|k|d|tt|t|b|pp|p|
 
-    ```
-    key: com.apple.security.temporary-exception.mach-register.global-name
-    type: String
-    value: $(PRODUCT_BUNDLE_IDENTIFIER)_Connection
-    ```
+### Affricates
+|ㅈ|ㅉ|ㅊ|
+|-|-|-|
+|j|jj|ch|
+|||c|
 
-* Do `sudo chmod -R 777 /Library/Input\ Methods` on terminal.
+### Fricatives
+|ㅅ|ㅆ|ㅎ|
+|-|-|-|
+|s|ss|h|
 
-* Modify build settings.
-  * Go **Build Locations** → **Build Products Path** of debug → value `/Library/Input Methods`
-  * Go **+** → **Add User-Defined Setting** → Set key `CONFIGURATION_BUILD_DIR`, value `/Library/Input Methods`.
-  * !!! DO NOT edit thinklessly, this setting is really fragile.
+### Nasals
+|ㄴ|ㅁ|ㅇ|
+|-|-|-|
+|n|m|ng|
 
-* Try Run.
+### Liquids
+|ㄹ|
+|-|
+|l,r|
 
-## Trouble Shooting
+# License
+MIT
 
-*I'm not an expert of macOS. Please don't ask too much, I don't know either.*
+# Credits
 
-* InputMethods says **connection \*\*Failed\*\*** all though there are no diff!
-  * Open 'Activity Monitor' app, search the name of your InputMethods, and kill the process. Then try again.
-
-* `print()` doesn't work!
-  * Use `NSLog()`.
-
-* App doesn't run!
-  * Check the path of build product file. If it isn't at `/Library/Input Methods/...`, something went wrong.
-  * Maybe build setting went wrong. Check the settings. Especially, if `CONFIGURATION_BUILD_DIR="";` found, remove the line.
-* Where's my InputMethod!?!?
-  * Check English section. You would found it.
-
-## Reference
-
-Thanks to authors!!
-
-* https://mzp.hatenablog.com/entry/2017/09/17/220320
-* https://www.logcg.com/en/archives/2078.html
-* https://stackoverflow.com/questions/27813151/how-to-develop-a-simple-input-method-for-mac-os-x-in-swift
+* This project was bootstrapped using the sample code for macOS IMKit from https://github.com/ensan-hcl/macOS_IMKitSample_2021
+* The open source Gureum IME provided a good reference model: https://github.com/gureum/gureum/
+* The schema is derived from the official documentation on the Revised Romanization from https://web.archive.org/web/20070916025652/http://www.korea.net/korea/kor_loca.asp?code=A020303
