@@ -68,16 +68,6 @@ class HangulIMEInputController: IMKInputController {
         return nil
     }
 
-    private func enterKeyHandler(event: NSEvent) -> Bool? {
-        // 回车键输入原字符
-        if event.keyCode == kVK_Return && _originalString.count > 0 {
-            // 插入原字符
-            insertText(_originalString)
-            return true
-        }
-        return nil
-    }
-
     private func punctutionKeyHandler(event: NSEvent) -> Bool? {
         // 获取输入的字符
         let key = event.characters!
@@ -108,7 +98,6 @@ class HangulIMEInputController: IMKInputController {
             deleteKeyHandler,
             charKeyHandler,
             punctutionKeyHandler,
-            enterKeyHandler,
             spaceKeyHandler,
             ])
         return handler(event) ?? false
