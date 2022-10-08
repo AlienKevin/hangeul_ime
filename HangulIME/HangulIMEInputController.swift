@@ -5,11 +5,11 @@ import InputMethodKit
 class HangulIMEInputController: IMKInputController {
     private var _originalString = "" {
         didSet {
-            NSLog("[InputController] original changed: \(self._originalString), refresh window")
+//            NSLog("[InputController] original changed: \(self._originalString), refresh window")
             let syllables = syllableSegmentation(_originalString)
             if syllables.count >= 2 {
-                NSLog(syllables.map({ $0.description }).joined(separator: " "))
-                NSLog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
+//                NSLog(syllables.map({ $0.description }).joined(separator: " "))
+//                NSLog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
                 self.insertText(jamos2Hangul(syllable2Jamos(syllables.first!)), doClean: false)
                 _originalString = String(_originalString.dropFirst(syllables.first!.count()))
                 self.markText(jamos2Hangul(syllables.dropFirst().map(syllable2Jamos).joined()))
@@ -67,7 +67,7 @@ class HangulIMEInputController: IMKInputController {
     private func punctutionKeyHandler(event: NSEvent) -> Bool? {
         let key = event.characters!
         if let punc = punctuations[key] {
-            print("Punctuation " + punc)
+//            NSLog("Punctuation " + punc)
             insertText(ascii2Hanguls(_originalString) + punc, doClean: true)
             return true
         }
@@ -75,19 +75,19 @@ class HangulIMEInputController: IMKInputController {
     }
 
     func clean() {
-        NSLog("[InputController] clean")
+//        NSLog("[InputController] clean")
         _originalString = ""
     }
 
     func insertText(_ text: String, doClean: Bool) {
-        NSLog("insertText: %@", text)
+//        NSLog("insertText: %@", text)
         let value = NSAttributedString(string: text)
         client()?.insertText(value, replacementRange: replacementRange())
         if doClean { clean() }
     }
 
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-        NSLog("[InputController] handle: \(event.debugDescription)")
+//        NSLog("[InputController] handle: \(event.debugDescription)")
 
         let handler = processHandlers(handlers: [
             deleteKeyHandler,
@@ -393,7 +393,6 @@ func jamos2Hangul(_ inp: String) -> String {
                 appendHangul = String(UnicodeScalar(part)!)
                 partState = lState
             }
-            print(s)
             hangul.append(String(UnicodeScalar(s)!) + appendHangul)
         }
     }
