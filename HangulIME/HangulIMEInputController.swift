@@ -13,49 +13,7 @@ class HangulIMEInputController: IMKInputController {
     private var _originalString = "" {
         didSet {
             NSLog("[InputController] original changed: \(self._originalString), refresh window")
-
-            // 建议mark originalString, 否则在某些APP中会有问题
-            let jamos = ascii2Jamos(_originalString)
-            var hanguls = jamos2Hangul(jamos)
-            let vowels = CharacterSet.init(charactersIn: "aeiouw");
-
-            if hanguls.unicodeScalars.count == 2 {
-                NSLog("Found 2 hanguls")
-                NSLog(String(hanguls.unicodeScalars.last!))
-                if isJamo(Int(hanguls.unicodeScalars.first!.value)) &&
-                    isJamo(Int(hanguls.unicodeScalars.last!.value)) {
-                    let first_hangul = String(hanguls.unicodeScalars.prefix(hanguls.unicodeScalars.count - 1))
-                    NSLog("First hangul: " + first_hangul)
-                    client()?.insertText(first_hangul, replacementRange: replacementRange())
-                    NSLog("Second jamo: " + String(_originalString.unicodeScalars.last!))
-                    _originalString = String(_originalString.unicodeScalars.last!)
-                    self.markText(String(hanguls.unicodeScalars.last!))
-                } else {
-                    let nextStart = hanguls.removeLast()
-                    let value = NSAttributedString(string: hanguls)
-                    client()?.insertText(value, replacementRange: replacementRange())
-                    var lastConsonantOffset = _originalString.unicodeScalars.count - 1;
-                    for (i, char) in _originalString.unicodeScalars.reversed().enumerated() {
-                        NSLog(String(i))
-                        if !vowels.contains(char) {
-                            NSLog(String(char))
-                            lastConsonantOffset = i
-                            break
-                        }
-                    }
-                    NSLog(String(lastConsonantOffset))
-                    if lastConsonantOffset == _originalString.unicodeScalars.count - 1 {
-                        _originalString = String(_originalString.last!)
-                    } else {
-                        NSLog("found nextstartIndex")
-                        let start = _originalString.index(_originalString.endIndex, offsetBy: -lastConsonantOffset - 1)
-                        _originalString = String(_originalString[start...])
-                    }
-                    self.markText(String(nextStart))
-                }
-            } else {
-                self.markText(hanguls)
-            }
+            self.markText(ascii2Hanguls(_originalString))
         }
     }
 
@@ -104,7 +62,7 @@ class HangulIMEInputController: IMKInputController {
 
     private func spaceKeyHandler(event: NSEvent) -> Bool? {
         if event.keyCode == kVK_Space && _originalString.count > 0 {
-            insertText(jamos2Hangul(ascii2Jamos(_originalString)))
+            insertText(ascii2Hanguls(_originalString))
             return true
         }
         return nil
@@ -125,7 +83,7 @@ class HangulIMEInputController: IMKInputController {
         let key = event.characters!
         if let punc = punctuations[key] {
             print("Punctuation " + punc)
-            insertText(jamos2Hangul(ascii2Jamos(_originalString)) + punc)
+            insertText(ascii2Hanguls(_originalString) + punc)
             return true
         }
         return nil
@@ -171,124 +129,203 @@ func processHandlers<T>(
     return handleFn
 }
 
-extension String {
-    mutating func replacingRegexMatches(pattern: String, with: String) {
-        do {
-            let regex = try NSRegularExpression(pattern: pattern)
-            let range = NSRange(location: 0, length: self.count)
-            self = regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: with)
-        } catch { return }
-    }
-
-    mutating func replacingWrappedMatches(pattern: String, with: String) {
-        self.replacingRegexMatches(pattern: "([aeiouw])" + pattern + "$", with: "$1" + with)
-        self.replacingRegexMatches(pattern: "([aeiouw])" + pattern + "([^aeiouw])", with: "$1" + with + "$2")
-    }
-
-    mutating func replacingRightBoundMatches(pattern: String, with: String) {
-        self.replacingRegexMatches(pattern: pattern + "([^aeiouw]|'|$)", with: with + "$1")
+struct Syllable: Equatable {
+    var initial: String? = nil
+    var nucleus: String? = nil
+    var final: String? = nil
+    
+    func isEmpty() -> Bool {
+        return initial == nil && nucleus == nil && final == nil
     }
 }
 
-func ascii2Jamos(_ inp: String) -> String {
-    if inp == "" {
+func syllableSegmentation(_ s: String) -> [Syllable] {
+    var syllables: [Syllable] = []
+    let vowel = try! NSRegularExpression(pattern: "^([iy]ae|[uw]ae|[iy]eo|ae|[iy]e|[uw]e|[iy]a|[iy]o|oe|[iy][uw]|[uw]o|[uw][iy]|[uw]a|e[uw]|eo|a|e|[iy]|o|[uw])", options: [NSRegularExpression.Options.caseInsensitive])
+    let initial_consonant = try! NSRegularExpression(pattern: "^(jj|ch|ss|pp|tt|kk|p|t|k|b|d|g|j|c|s|h|n|m|l)", options: [NSRegularExpression.Options.caseInsensitive])
+    let final_consonant = try! NSRegularExpression(pattern: "^(kk|ss|ng|ch|gs|nj|nh|lg|lm|lb|ls|lt|lp|lh|bs|g|k|d|t|b|p|j|c|s|h|n|m|l)", options: [NSRegularExpression.Options.caseInsensitive])
+    
+    var start = s.startIndex
+    var end = start
+    
+    while start != s.endIndex {
+        if end == s.endIndex {
+            break
+        }
+        // Skip the first letter which can be lower or uppercase
+        end = s.index(end, offsetBy: 1)
+        // Move end to the next uppercase letter or end of string
+        while end != s.endIndex && s[end].isLowercase {
+            end = s.index(end, offsetBy: 1)
+        }
+        
+        while start != end {
+            var syllable = Syllable()
+            
+            let initial_match = initial_consonant.matches(in: s, range: NSRange(start..<end, in: s))
+            if let match = initial_match.first {
+                if let swiftRange = Range(match.range, in: s) {
+                    syllable.initial = String(s[swiftRange]).lowercased()
+                    start = s.index(start, offsetBy: match.range.length)
+                }
+            }
+            
+            let vowel_match = vowel.matches(in: s, range: NSRange(start..<end, in: s))
+            if let match = vowel_match.first {
+                if let swiftRange = Range(match.range, in: s) {
+                    syllable.nucleus = String(s[swiftRange]).lowercased().replacingOccurrences(of: "w", with: "u").replacingOccurrences(of: "y", with: "i")
+                    start = s.index(start, offsetBy: match.range.length)
+                }
+                
+                let final_match = final_consonant.matches(in: s, range: NSRange(start..<end, in: s))
+                if let final_match = final_match.first {
+                    let next_start = s.index(start, offsetBy: final_match.range.length)
+                    if vowel.matches(in: s, range: NSRange(next_start..<end, in: s)).isEmpty {
+                        if let swiftRange = Range(final_match.range, in: s) {
+                            syllable.final = String(s[swiftRange]).lowercased()
+                            start = s.index(start, offsetBy: final_match.range.length)
+                        }
+                    } else {
+                        let shrinked_range = NSRange(final_match.range.lowerBound..<final_match.range.upperBound - 1)
+                        if shrinked_range.length > 0 {
+                            if let swiftRange = Range(shrinked_range, in: s) {
+                                syllable.final = String(s[swiftRange]).lowercased()
+                                start = s.index(start, offsetBy: final_match.range.length - 1)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if !syllable.isEmpty() {
+                syllables.append(syllable)
+            } else {
+                syllables.append(Syllable(initial: String(s[start])))
+                start = s.index(start, offsetBy: 1)
+            }
+        }
+    }
+    
+    return syllables
+}
+
+let initial2Jamo: [(initial: String, jamo: String)] = [
+    ("pp", "ᄈ"),
+    ("tt", "ᄄ"),
+    ("kk", "ᄁ"),
+    ("jj", "ᄍ"),
+    ("ch", "ᄎ"),
+    ("ss", "ᄊ"),
+    ("g", "ᄀ"),
+    ("k", "ᄏ"),
+    ("n", "ᄂ"),
+    ("d", "ᄃ"),
+    ("l", "ᄅ"),
+    ("m", "ᄆ"),
+    ("b", "ᄇ"),
+    ("s", "ᄉ"),
+    ("j", "ᄌ"),
+    ("c", "ᄎ"),
+    ("t", "ᄐ"),
+    ("p", "ᄑ"),
+    ("h", "ᄒ"),
+]
+
+let nucleus2Jamo: [(nucleus: String, jamo: String)] = [
+    ("iae", "ᅤ"),
+    ("uae", "ᅫ"),
+    ("ieo", "ᅧ"),
+    ("ae", "ᅢ"),
+    ("ie", "ᅨ"),
+    ("ue", "ᅰ"),
+    ("ia", "ᅣ"),
+    ("io", "ᅭ"),
+    ("oe", "ᅬ"),
+    ("iu", "ᅲ"),
+    ("uo", "ᅯ"),
+    ("ui", "ᅴ"),
+    ("ua", "ᅪ"),
+    ("eu", "ᅳ"),
+    ("eo", "ᅥ"),
+    ("a", "ᅡ"),
+    ("e", "ᅦ"),
+    ("i", "ᅵ"),
+    ("o", "ᅩ"),
+    ("u", "ᅮ"),
+]
+
+let final2Jamo: [(final: String, jamo: String)] = [
+    ("kk", "ᆩ"),
+    ("ch", "ᆾ"),
+    ("ss", "ᆻ"),
+    ("ng", "ᆼ"),
+    
+    ("gs", "ᆪ"),
+    ("nj", "ᆬ"),
+    ("nh", "ᆭ"),
+    ("lg", "ᆰ"),
+    ("lm", "ᆱ"),
+    ("lb", "ᆲ"),
+    ("ls", "ᆳ"),
+    ("lt", "ᆴ"),
+    ("lp", "ᆵ"),
+    ("lh", "ᆶ"),
+    ("bs", "ᆹ"),
+    
+    ("g", "ᆨ"),
+    ("n", "ᆫ"),
+    ("d", "ᆮ"),
+    ("l", "ᆯ"),
+    ("m", "ᆷ"),
+    ("b", "ᆸ"),
+    
+    ("s", "ᆺ"),
+    ("j", "ᆽ"),
+    ("k", "ᆿ"),
+    ("t", "ᇀ"),
+    ("p", "ᇁ"),
+    ("h", "ᇂ"),
+]
+
+func syllable2Jamos(_ syllable: Syllable) -> String {
+    if syllable.isEmpty() {
         return ""
     }
+    
+    var res = ""
 
-    var inp = inp.replacingOccurrences(of: " ", with: "'")
-    inp = inp.replacingOccurrences(of: "wa", with: "oa")
-    inp.replacingRegexMatches(pattern: "w[eo]", with: "ue")
-    inp = inp.replacingOccurrences(of: "f", with: "x")
-    inp = inp.replacingOccurrences(of: "r", with: "l")
+    if var initial = syllable.initial {
+        for (ascii, jamo) in initial2Jamo {
+            initial = initial.replacingOccurrences(of: ascii, with: jamo)
+        }
+        res = res + initial
+    }
+    
+    if var nucleus = syllable.nucleus {
+        for (ascii, jamo) in nucleus2Jamo {
+            nucleus = nucleus.replacingOccurrences(of: ascii, with: jamo)
+        }
+        if syllable.initial == nil {
+            nucleus = "ᄋ" + nucleus
+        }
+        res = res + nucleus
+    }
+    
+    if var final = syllable.final {
+        for (ascii, jamo) in final2Jamo {
+            final = final.replacingOccurrences(of: ascii, with: jamo)
+        }
+        res = res + final;
+    }
 
-    // double final consonants
-    inp.replacingWrappedMatches(pattern: "gs", with: "ᆪ")
-    inp.replacingWrappedMatches(pattern: "nj", with: "ᆬ")
-    inp.replacingWrappedMatches(pattern: "nh", with: "ᆭ")
-    inp.replacingWrappedMatches(pattern: "lg", with: "ᆰ")
-    inp.replacingWrappedMatches(pattern: "lm", with: "ᆱ")
-    inp.replacingWrappedMatches(pattern: "lb", with: "ᆲ")
-    inp.replacingWrappedMatches(pattern: "ls", with: "ᆳ")
-    inp.replacingWrappedMatches(pattern: "lt", with: "ᆴ")
-    inp.replacingWrappedMatches(pattern: "lp", with: "ᆵ")
-    inp.replacingWrappedMatches(pattern: "lh", with: "ᆶ")
-    inp.replacingWrappedMatches(pattern: "bs", with: "ᆹ")
+    return res
+}
 
-    // tense and lax consonant pairs
-    inp.replacingRightBoundMatches(pattern: "G", with: "ᆩ")
-    inp = inp.replacingOccurrences(of: "G", with: "ᄁ")
-    inp.replacingWrappedMatches(pattern: "g", with: "ᆨ")
-    inp = inp.replacingOccurrences(of: "g", with: "ᄀ")
-
-    inp.replacingRightBoundMatches(pattern: "S", with: "ᆻ")
-    inp = inp.replacingOccurrences(of: "S", with: "ᄊ")
-    inp.replacingWrappedMatches(pattern: "s", with: "ᆺ")
-    inp = inp.replacingOccurrences(of: "s", with: "ᄉ")
-
-    inp = inp.replacingOccurrences(of: "B", with: "ᄈ")
-    inp.replacingWrappedMatches(pattern: "b", with: "ᆸ")
-    inp = inp.replacingOccurrences(of: "b", with: "ᄇ")
-
-    inp = inp.replacingOccurrences(of: "D", with: "ᄄ")
-    inp.replacingWrappedMatches(pattern: "d", with: "ᆮ")
-    inp = inp.replacingOccurrences(of: "d", with: "ᄃ")
-
-    inp = inp.replacingOccurrences(of: "J", with: "ᄍ")
-    inp.replacingWrappedMatches(pattern: "j", with: "ᆽ")
-    inp = inp.replacingOccurrences(of: "j", with: "ᄌ")
-
-    // Rest of the consonants
-    inp.replacingWrappedMatches(pattern: "l", with: "ᆯ")
-    inp = inp.replacingOccurrences(of: "l", with: "ᄅ")
-
-    inp.replacingWrappedMatches(pattern: "m", with: "ᆷ")
-    inp = inp.replacingOccurrences(of: "m", with: "ᄆ")
-
-    inp.replacingWrappedMatches(pattern: "h", with: "ᇂ")
-    inp = inp.replacingOccurrences(of: "h", with: "ᄒ")
-
-    inp.replacingWrappedMatches(pattern: "n", with: "ᆫ")
-    inp = inp.replacingOccurrences(of: "n", with: "ᄂ")
-
-    inp.replacingWrappedMatches(pattern: "c", with: "ᆾ")
-    inp = inp.replacingOccurrences(of: "c", with: "ᄎ")
-
-    inp.replacingWrappedMatches(pattern: "p", with: "ᇁ")
-    inp = inp.replacingOccurrences(of: "p", with: "ᄑ")
-
-    inp.replacingWrappedMatches(pattern: "t", with: "ᇀ")
-    inp = inp.replacingOccurrences(of: "t", with: "ᄐ")
-
-    inp.replacingWrappedMatches(pattern: "k", with: "ᆿ")
-    inp = inp.replacingOccurrences(of: "k", with: "ᄏ")
-
-    inp.replacingRegexMatches(pattern: "([^aeiouw])x", with: "$1ᄋ")
-    inp.replacingRegexMatches(pattern: "x([aeiouw])", with: "ᄋ$1")
-    inp = inp.replacingOccurrences(of: "x", with: "ᆼ")
-
-    inp = inp.replacingOccurrences(of: "iai", with: "ᅤ")
-    inp = inp.replacingOccurrences(of: "iei", with: "ᅨ")
-    inp = inp.replacingOccurrences(of: "uei", with: "ᅰ")
-    inp = inp.replacingOccurrences(of: "oai", with: "ᅫ")
-    inp = inp.replacingOccurrences(of: "ai", with: "ᅢ")
-    inp = inp.replacingOccurrences(of: "ei", with: "ᅦ")
-    inp = inp.replacingOccurrences(of: "ia", with: "ᅣ")
-    inp = inp.replacingOccurrences(of: "ie", with: "ᅧ")
-    inp = inp.replacingOccurrences(of: "io", with: "ᅭ")
-    inp = inp.replacingOccurrences(of: "iu", with: "ᅲ")
-    inp = inp.replacingOccurrences(of: "ue", with: "ᅯ")
-    inp = inp.replacingOccurrences(of: "ui", with: "ᅱ")
-    inp = inp.replacingOccurrences(of: "wi", with: "ᅴ")
-    inp = inp.replacingOccurrences(of: "oa", with: "ᅪ")
-    inp = inp.replacingOccurrences(of: "o", with: "ᅩ")
-    inp = inp.replacingOccurrences(of: "e", with: "ᅥ")
-    inp = inp.replacingOccurrences(of: "a", with: "ᅡ")
-    inp = inp.replacingOccurrences(of: "i", with: "ᅵ")
-    inp = inp.replacingOccurrences(of: "u", with: "ᅮ")
-    inp = inp.replacingOccurrences(of: "w", with: "ᅳ")
-
-    inp = inp.replacingOccurrences(of: "'", with: "")
-    return inp
+func ascii2Hanguls(_ s: String) -> String {
+    let syllables = syllableSegmentation(s)
+    let jamos = syllables.map(syllable2Jamos).joined()
+    let hanguls = jamos2Hangul(jamos)
+    return hanguls
 }
 
 private func isLPartJamo(_ c: Int) -> Bool {
