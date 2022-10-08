@@ -63,6 +63,15 @@ class HangulIMEInputController: IMKInputController {
         }
         return nil
     }
+    
+    private func enterKeyHandler(event: NSEvent) -> Bool? {
+        if event.keyCode == kVK_Return && _originalString.count > 0 {
+            // commit the actively edited string
+            insertText(ascii2Hanguls(_originalString), doClean: true)
+            return false
+        }
+        return nil
+    }
 
     private func punctutionKeyHandler(event: NSEvent) -> Bool? {
         let key = event.characters!
@@ -93,6 +102,7 @@ class HangulIMEInputController: IMKInputController {
             deleteKeyHandler,
             charKeyHandler,
             punctutionKeyHandler,
+            enterKeyHandler,
             spaceKeyHandler,
             ])
         return handler(event) ?? false
