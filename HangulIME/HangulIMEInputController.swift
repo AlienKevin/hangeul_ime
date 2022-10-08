@@ -147,8 +147,8 @@ struct Syllable: Equatable {
 func syllableSegmentation(_ s: String) -> [Syllable] {
     var syllables: [Syllable] = []
     let vowel = try! NSRegularExpression(pattern: "^([iy]ae|[uw]ae|[iy]eo|ae|[iy]e|[uw]e|[iy]a|[iy]o|oe|[iy][uw]|[uw]o|[uw][iy]|[uw]a|e[uw]|eo|a|e|[iy]|o|[uw])", options: [NSRegularExpression.Options.caseInsensitive])
-    let initial_consonant = try! NSRegularExpression(pattern: "^(jj|ch|ss|pp|tt|kk|p|t|k|b|d|g|j|c|s|h|n|m|l)", options: [NSRegularExpression.Options.caseInsensitive])
-    let final_consonant = try! NSRegularExpression(pattern: "^(kk|ss|ng|ch|gs|nj|nh|lg|lm|lb|ls|lt|lp|lh|bs|g|k|d|t|b|p|j|c|s|h|n|m|l)", options: [NSRegularExpression.Options.caseInsensitive])
+    let initial_consonant = try! NSRegularExpression(pattern: "^(jj|ch|ss|pp|tt|kk|p|t|k|b|d|g|j|c|s|h|n|m|l|r)", options: [NSRegularExpression.Options.caseInsensitive])
+    let final_consonant = try! NSRegularExpression(pattern: "^(kk|ss|ng|ch|gs|nj|nh|lg|lm|lb|ls|lt|lp|lh|bs|g|k|d|t|b|p|j|c|s|h|n|m|l|r)", options: [NSRegularExpression.Options.caseInsensitive])
     
     var start = s.startIndex
     var end = start
@@ -170,7 +170,7 @@ func syllableSegmentation(_ s: String) -> [Syllable] {
             let initial_match = initial_consonant.matches(in: s, range: NSRange(start..<end, in: s))
             if let match = initial_match.first {
                 if let swiftRange = Range(match.range, in: s) {
-                    syllable.initial = String(s[swiftRange]).lowercased()
+                    syllable.initial = String(s[swiftRange]).lowercased().replacingOccurrences(of: "r", with: "l")
                     start = s.index(start, offsetBy: match.range.length)
                 }
             }
@@ -187,14 +187,14 @@ func syllableSegmentation(_ s: String) -> [Syllable] {
                     let next_start = s.index(start, offsetBy: final_match.range.length)
                     if vowel.matches(in: s, range: NSRange(next_start..<end, in: s)).isEmpty {
                         if let swiftRange = Range(final_match.range, in: s) {
-                            syllable.final = String(s[swiftRange]).lowercased()
+                            syllable.final = String(s[swiftRange]).lowercased().replacingOccurrences(of: "r", with: "l")
                             start = s.index(start, offsetBy: final_match.range.length)
                         }
                     } else {
                         let shrinked_range = NSRange(final_match.range.lowerBound..<final_match.range.upperBound - 1)
                         if shrinked_range.length > 0 {
                             if let swiftRange = Range(shrinked_range, in: s) {
-                                syllable.final = String(s[swiftRange]).lowercased()
+                                syllable.final = String(s[swiftRange]).lowercased().replacingOccurrences(of: "r", with: "l")
                                 start = s.index(start, offsetBy: final_match.range.length - 1)
                             }
                         }
