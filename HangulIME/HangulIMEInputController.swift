@@ -1,10 +1,3 @@
-//
-//  HangulIMEInputController.swift
-//  HangulIMEInputController
-//
-//  Created by ensan on 2021/09/07.
-//
-
 import Cocoa
 import InputMethodKit
 
@@ -32,7 +25,7 @@ class HangulIMEInputController: IMKInputController {
 
     private func deleteKeyHandler(event: NSEvent) -> Bool? {
         let keyCode = event.keyCode
-        // 删除键删除字符
+        // Delete key deletes the last letter
         if keyCode == kVK_Delete {
             if _originalString.count > 0 {
                 _originalString = String(_originalString.dropLast())
@@ -44,7 +37,6 @@ class HangulIMEInputController: IMKInputController {
     }
 
     private func charKeyHandler(event: NSEvent) -> Bool? {
-        // 获取输入的字符
         let string = event.characters!
 
         guard let reg = try? NSRegularExpression(pattern: "^[a-zA-Z]+$") else {
@@ -56,12 +48,7 @@ class HangulIMEInputController: IMKInputController {
             range: NSRange(location: 0, length: string.count)
         )
 
-        // 当前没有输入非字符并且之前没有输入字符,不做处理
-        if _originalString.count <= 0 && match == nil {
-            NSLog("非字符,不做处理")
-            return nil
-        }
-        // 当前输入的是英文字符,附加到之前
+        // Found English letter, add them to the string
         if match != nil {
             _originalString += string
             return true
@@ -78,7 +65,6 @@ class HangulIMEInputController: IMKInputController {
     }
 
     private func punctutionKeyHandler(event: NSEvent) -> Bool? {
-        // 获取输入的字符
         let key = event.characters!
         if let punc = punctuations[key] {
             print("Punctuation " + punc)

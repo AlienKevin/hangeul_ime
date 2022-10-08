@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  AppDelegate
-//
-//  Created by ensan on 2021/09/06.
-//
-
 import Cocoa
 import InputMethodKit
 
