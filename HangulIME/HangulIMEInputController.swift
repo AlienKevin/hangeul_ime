@@ -174,7 +174,11 @@ func syllableSegmentation(_ s: String) -> [Syllable] {
             let vowel_match = vowel.matches(in: s, range: NSRange(start..<end, in: s))
             if let match = vowel_match.first {
                 if let swiftRange = Range(match.range, in: s) {
-                    syllable.nucleus = String(s[swiftRange]).lowercased().replacingOccurrences(of: "w", with: "u").replacingOccurrences(of: "y", with: "i")
+                    syllable.nucleus = String(s[swiftRange]).lowercased()
+                        .replacingOccurrences(of: "y", with: "i")
+                        .replacingOccurrences(of: "wi", with: "Wi")
+                        .replacingOccurrences(of: "w", with: "u")
+                        .replacingOccurrences(of: "Wi", with: "wi")
                     start = s.index(start, offsetBy: match.range.length)
                 }
                 
@@ -245,6 +249,7 @@ let nucleus2Jamo: [(nucleus: String, jamo: String)] = [
     ("iu", "ᅲ"),
     ("uo", "ᅯ"),
     ("ui", "ᅴ"),
+    ("wi", "ᅱ"),
     ("ua", "ᅪ"),
     ("eu", "ᅳ"),
     ("eo", "ᅥ"),
