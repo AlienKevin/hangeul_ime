@@ -23,16 +23,27 @@ class HangulIMEInputController: IMKInputController {
         self.insertText(ascii2Hanguls(_originalString), doClean: true)
         super.deactivateServer(sender)
     }
+    
+    @objc override func commitComposition(_ sender: Any!) {
+        insertText(ascii2Hanguls(_originalString), doClean: true)
+    }
+
+    @objc override func cancelComposition() {
+        clean()
+        super.cancelComposition()
+    }
 
     private func markText(_ text: String) {
-        client()?.setMarkedText(text, selectionRange: NSRange(location: text.count, length: 0), replacementRange: replacementRange())
+        client()?.setMarkedText(text, selectionRange: selectionRange(), replacementRange: replacementRange())
     }
 
     private func deleteKeyHandler(event: NSEvent) -> Bool? {
         let keyCode = event.keyCode
         // Delete key deletes the last letter
         if keyCode == kVK_Delete {
+//            NSLog("Delete")
             if _originalString.count > 0 {
+//                NSLog("Delete when _originalString is empty")
                 _originalString = String(_originalString.dropLast())
                 return true
             }
@@ -63,7 +74,15 @@ class HangulIMEInputController: IMKInputController {
 
     private func spaceKeyHandler(event: NSEvent) -> Bool? {
         if event.keyCode == kVK_Space && _originalString.count > 0 {
-            insertText(ascii2Hanguls(_originalString), doClean: true)
+            insertText(ascii2Hanguls(_originalString) + " ", doClean: true)
+            return true
+        }
+        return nil
+    }
+    
+    private func escKeyHandler(event: NSEvent) -> Bool? {
+        if event.keyCode == kVK_Escape && _originalString.count > 0 {
+            clean()
             return true
         }
         return nil
@@ -107,10 +126,13 @@ class HangulIMEInputController: IMKInputController {
             deleteKeyHandler,
             charKeyHandler,
             punctutionKeyHandler,
+            escKeyHandler,
             enterKeyHandler,
             spaceKeyHandler,
             ])
-        return handler(event) ?? false
+        let stopPropagation = handler(event)
+//        NSLog("stopPropagation: " + String(stopPropagation == true))
+        return stopPropagation ?? false
     }
 }
 
