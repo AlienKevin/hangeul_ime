@@ -18,6 +18,11 @@ class HangulIMEInputController: IMKInputController {
             }
         }
     }
+    
+    override func deactivateServer(_ sender: Any!) {
+        self.insertText(ascii2Hanguls(_originalString), doClean: true)
+        super.deactivateServer(sender)
+    }
 
     private func markText(_ text: String) {
         client()?.setMarkedText(text, selectionRange: NSRange(location: text.count, length: 0), replacementRange: replacementRange())
