@@ -36,6 +36,14 @@ A Hangeul input method is a special case where conversion to Hangeul is necessar
 
 	In common RR spellings, ㄹ is transcribed as r when followed by a vowel, and as l when followed by a consonant or when appearing at the end of a word. ㄹㄹ is transcribed as ll. Essentially, the phoneme ㄹ has two allophones /r/ and /l/. Since r and l appears in common RR spellings and they both map to the same jamo ㄹ without causing more ambiguity, we decided to allow for both in our schema for the user's convenience.
 
+5. **"ch" can be abbreviated as "c" everywhere.**
+
+	In RR spellings, ㅊ is transcribed as "ch". Because you have to type the letter "c" first in the process of typing "ch", we decided to allow "c" as an abbreviation of "ch" at both the syllable initial and final positions. You might prefer to save time and type the abbreviated "c" and you are welcome to. However, you can always type the standard form "ch" if you feel like doing so.
+
+	Examples:
+	* 꽃 can be typed out using "kkoch" or "kkoc".
+	* 초 can be typed out using "cho" or "co".
+
 ## Schema
 
 The schema is split into multiple charts by the types of vowels and consonants in Korean.
