@@ -305,6 +305,7 @@ let final2Jamo: [(final: String, jamo: String)] = [
     ("lh", "ᆶ"),
     ("bs", "ᆹ"),
     
+    ("c", "ᆾ"),
     ("g", "ᆨ"),
     ("n", "ᆫ"),
     ("d", "ᆮ"),
