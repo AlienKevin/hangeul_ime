@@ -9,7 +9,7 @@ is a superset of the spellings standardized in the Revised Romanization (RR). If
 
 > When it is necessary to convert Romanized Korean back to Hangeul in special cases such as in academic articles, Romanization is done according to Hangeul spelling and not pronunciation. Each Hangeul letter is Romanized as explained in section 2 except that ㄱ, ㄷ, ㅂ, ㄹ are always written as g, d, b, l. When ㅇ has no sound value, it is replaced by a hyphen may also be used when it is necessary to distinguish between syllables.
 
-A Hangeul input method is a special case where conversion to Hangeul is necessary so our spelling largely follows the rules outlined in paragraph (8) of the documentation. The exceptions to the rules are:
+A Hangeul input method is a special case where conversion to Hangeul is necessary so our spelling largely follows the transliteration rules outlined in paragraph (8) of the documentation. The exceptions to the rules are:
 
 1. **A hyphen '-' is not used to mark syllable boundaries. Capitalize the first letter of the second syllable instead.**
 
@@ -114,6 +114,13 @@ Here are some examples of how to type out Hangeul phrases using this IME. The fi
 |가곡|`gagog`|
 |조랑말|`jolangmal`|`jorangmal`|`jorangmar`|`jolangmar`|
 |없었습니다|`eobsEossseubnida`|
+
+## Comparison with Other Schemas
+Unlike other schemas including 2-Set and HNC Romaja, this schema is intended to closely comply with the transliteration standard of the Revised Romanization.
+
+Compared with 2-Set, the advantage of this schema is that for people who are already familiar with the QWERTY keyboard, picking up this schema only requires you to know the RR spellings and no memorization of keyboard layout is needed. Reusing the QWERTY layout is very beneficial to Korean learners because they can focus on learning the romanization rather than memorizing the keyboard layout.
+
+Compared with HNC Romaja, the advantage of this schema is that the spellings of the vowels are closer to their phonetic values rather than shape compositions. For example, the vowel ㅐ is spelled as "ai" in HNC Romaja. This resembles the shape composition of the two jamos ㅏ ("a") and ㅣ ("i") more than the sound of the vowel. In this schema, ㅐ is spelled as "ae" which aims to approximate the sound /ɛ/ rather than the shape composition a + i.
 
 ## Credits
 
