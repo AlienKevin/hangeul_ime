@@ -105,6 +105,7 @@ Here are some examples of how to type out Hangeul phrases using this IME. The fi
 |값|`gabs`|
 |붓꽃|`buskkoch`|`buskkoc`|`bwskkoc`|`bwskkoch`|
 |먹는|`meogneun`|
+|아저씨|`ajeoSsi`|
 |독립|`doglib`|`doglyb`|`dogryb`|`dogrib`|
 |문리|`munli`|`munly`|`munry`|`munri`|
 |물엿|`mulYeos`|`murYeos`|`murIeos`|`mulIeos`|
