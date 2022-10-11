@@ -81,11 +81,32 @@ The schema is split into multiple charts by the types of vowels and consonants i
 |-|
 |l,r|
 
-# License
-MIT
+## Examples
 
-# Credits
+Here are some examples of how to type out Hangeul phrases using this IME. The first column are the Hangeul phrases, the second column are the standard spellings based on RR, and the last three columns are alternative spellings designed to accommodate personal spelling preferences.
+
+|Hangeul|Standard Spelling|Alternative 1|Alternative 2|Alternative 3|
+|-|-|-|-|-|
+|집|`jib`|`jyb`|
+|짚|`jip`|`jyp`|
+|밖|`bakk`|
+|값|`gabs`|
+|붓꽃|`buskkoch`|`buskkoc`|`bwskkoc`|`bwskkoch`|
+|먹는|`meogneun`|
+|독립|`doglib`|`doglyb`|`dogryb`|`dogrib`|
+|문리|`munli`|`munly`|`munry`|`munri`|
+|물엿|`mulYeos`|`murYeos`|`murIeos`|`mulIeos`|
+|굳이|`gudI`|`gudY`|`gwdY`|`gwdI`|
+|좋다|`johda`|
+|가곡|`gagog`|
+|조랑말|`jolangmal`|`jorangmal`|`jorangmar`|`jolangmar`|
+|없었습니다|`eobsEossseubnida`|
+
+## Credits
 
 * This project was bootstrapped using the sample code for macOS IMKit from https://github.com/ensan-hcl/macOS_IMKitSample_2021
 * The open source Gureum IME provided a good reference model: https://github.com/gureum/gureum/
-* The schema is derived from the official documentation on the Revised Romanization from https://web.archive.org/web/20070916025652/http://www.korea.net/korea/kor_loca.asp?code=A020303
+* The schema and examples are derived from the official documentation on the Revised Romanization from https://web.archive.org/web/20070916025652/http://www.korea.net/korea/kor_loca.asp?code=A020303
+
+## License
+MIT
