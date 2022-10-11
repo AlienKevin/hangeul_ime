@@ -83,7 +83,7 @@ The schema is split into multiple charts by the types of vowels and consonants i
 
 ## Examples
 
-Here are some examples of how to type out Hangeul phrases using this IME. The first column are the Hangeul phrases, the second column are the standard spellings based on RR, and the last three columns are alternative spellings designed to accommodate personal spelling preferences.
+Here are some examples of how to type out Hangeul phrases using this IME. The first column are the Hangeul phrases, the second column are the standard spellings based on RR, and the last three columns are alternative spellings designed to accommodate personal spelling preferences. Note that the list of alternative spellings are not always exhaustive in the interest of space. Please refer to the spelling rules above to derive all alternative spellings.
 
 |Hangeul|Standard Spelling|Alternative 1|Alternative 2|Alternative 3|
 |-|-|-|-|-|
