@@ -32,6 +32,10 @@ A Hangeul input method is a special case where conversion to Hangeul is necessar
 	* 의사 can only be typed out using "uisa" or "uysa", but not "wisa" or "wysa".
 	* 위구 can only be typed out using "wigu" or "wygu", but not "uigu" or "uygu".
 
+4. **"l" and "r" are interchangeable everywhere.**
+
+	In common RR spellings, ㄹ is transcribed as r when followed by a vowel, and as l when followed by a consonant or when appearing at the end of a word. ㄹㄹ is transcribed as ll. Essentially, the phoneme ㄹ has two allophones /r/ and /l/. Since r and l appears in common RR spellings and they both map to the same jamo ㄹ without causing more ambiguity, we decided to allow for both in our schema for the user's convenience.
+
 ## Schema
 
 The schema is split into multiple charts by the types of vowels and consonants in Korean.
