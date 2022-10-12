@@ -1,6 +1,6 @@
 //
 //  Constants.swift
-//  HangulIME
+//  Hangeul
 //
 //  Created by Kevin Li on 10/12/22.
 //

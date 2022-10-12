@@ -14,7 +14,7 @@
 		0A72214B28ECD6B1004D153F /* icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A72214A28ECD6B1004D153F /* icon.pdf */; };
 		1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61B26E745DD009B65D7 /* Assets.xcassets */; };
 		1A41E64226E74627009B65D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64126E74627009B65D7 /* AppDelegate.swift */; };
-		1A41E64426E74669009B65D7 /* HangulIMEInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */; };
+		1A41E64426E74669009B65D7 /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64326E74669009B65D7 /* InputController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,7 +23,7 @@
 			containerPortal = 1A41E60C26E745D9009B65D7 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A41E61326E745D9009B65D7;
-			remoteInfo = HangulIME;
+			remoteInfo = Hangeul;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -32,15 +32,15 @@
 		0A135F3D28F703BA00B9942A /* Syllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable.swift; sourceTree = "<group>"; };
 		0A135F4128F70BF300B9942A /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		0A2DBA4828ECD75900DDAF23 /* icon.fig */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.fig; sourceTree = "<group>"; };
-		0A58A03A28F196B60092A616 /* HangulIMEInputControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HangulIMEInputControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A58A03A28F196B60092A616 /* InputControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A58A04528F19AF40092A616 /* InputControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputControllerTest.swift; sourceTree = "<group>"; };
 		0A72214A28ECD6B1004D153F /* icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = icon.pdf; sourceTree = "<group>"; };
-		1A41E61426E745D9009B65D7 /* HangulIME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HangulIME.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A41E61426E745D9009B65D7 /* Hangeul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hangeul.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A41E61B26E745DD009B65D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A41E64126E74627009B65D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangulIMEInputController.swift; sourceTree = "<group>"; };
+		1A41E64326E74669009B65D7 /* InputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputController.swift; sourceTree = "<group>"; };
 		1A41E64526E7470D009B65D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		1A41E64826E7495A009B65D7 /* HangulIME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HangulIME.entitlements; sourceTree = "<group>"; };
+		1A41E64826E7495A009B65D7 /* Hangeul.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hangeul.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				0A58A04528F19AF40092A616 /* InputControllerTest.swift */,
-				1A41E61626E745D9009B65D7 /* HangulIME */,
+				1A41E61626E745D9009B65D7 /* Hangeul */,
 				1A41E61526E745D9009B65D7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,18 +73,18 @@
 		1A41E61526E745D9009B65D7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1A41E61426E745D9009B65D7 /* HangulIME.app */,
-				0A58A03A28F196B60092A616 /* HangulIMEInputControllerTests.xctest */,
+				1A41E61426E745D9009B65D7 /* Hangeul.app */,
+				0A58A03A28F196B60092A616 /* InputControllerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1A41E61626E745D9009B65D7 /* HangulIME */ = {
+		1A41E61626E745D9009B65D7 /* Hangeul */ = {
 			isa = PBXGroup;
 			children = (
 				1A41E64526E7470D009B65D7 /* Info.plist */,
-				1A41E64826E7495A009B65D7 /* HangulIME.entitlements */,
-				1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */,
+				1A41E64826E7495A009B65D7 /* Hangeul.entitlements */,
+				1A41E64326E74669009B65D7 /* InputController.swift */,
 				0A135F3D28F703BA00B9942A /* Syllable.swift */,
 				1A41E64126E74627009B65D7 /* AppDelegate.swift */,
 				1A41E61B26E745DD009B65D7 /* Assets.xcassets */,
@@ -93,15 +93,15 @@
 				0A135F3B28F6EA5D00B9942A /* Constants.swift */,
 				0A135F4128F70BF300B9942A /* en.lproj */,
 			);
-			path = HangulIME;
+			path = Hangeul;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0A58A03928F196B60092A616 /* HangulIMEInputControllerTests */ = {
+		0A58A03928F196B60092A616 /* InputControllerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A58A04228F196B60092A616 /* Build configuration list for PBXNativeTarget "HangulIMEInputControllerTests" */;
+			buildConfigurationList = 0A58A04228F196B60092A616 /* Build configuration list for PBXNativeTarget "InputControllerTests" */;
 			buildPhases = (
 				0A58A03628F196B60092A616 /* Sources */,
 				0A58A03728F196B60092A616 /* Frameworks */,
@@ -112,14 +112,14 @@
 			dependencies = (
 				0A58A03F28F196B60092A616 /* PBXTargetDependency */,
 			);
-			name = HangulIMEInputControllerTests;
-			productName = HangulIMEInputControllerTests;
-			productReference = 0A58A03A28F196B60092A616 /* HangulIMEInputControllerTests.xctest */;
+			name = InputControllerTests;
+			productName = InputControllerTests;
+			productReference = 0A58A03A28F196B60092A616 /* InputControllerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		1A41E61326E745D9009B65D7 /* HangulIME */ = {
+		1A41E61326E745D9009B65D7 /* Hangeul */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A41E63826E745DD009B65D7 /* Build configuration list for PBXNativeTarget "HangulIME" */;
+			buildConfigurationList = 1A41E63826E745DD009B65D7 /* Build configuration list for PBXNativeTarget "Hangeul" */;
 			buildPhases = (
 				1A41E61026E745D9009B65D7 /* Sources */,
 				1A41E61126E745D9009B65D7 /* Frameworks */,
@@ -129,9 +129,9 @@
 			);
 			dependencies = (
 			);
-			name = HangulIME;
+			name = Hangeul;
 			productName = IMKitSample;
-			productReference = 1A41E61426E745D9009B65D7 /* HangulIME.app */;
+			productReference = 1A41E61426E745D9009B65D7 /* Hangeul.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -154,7 +154,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1A41E60F26E745D9009B65D7 /* Build configuration list for PBXProject "HangulIME" */;
+			buildConfigurationList = 1A41E60F26E745D9009B65D7 /* Build configuration list for PBXProject "Hangeul" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -167,8 +167,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1A41E61326E745D9009B65D7 /* HangulIME */,
-				0A58A03928F196B60092A616 /* HangulIMEInputControllerTests */,
+				1A41E61326E745D9009B65D7 /* Hangeul */,
+				0A58A03928F196B60092A616 /* InputControllerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -208,7 +208,7 @@
 			files = (
 				1A41E64226E74627009B65D7 /* AppDelegate.swift in Sources */,
 				0A135F3E28F703BA00B9942A /* Syllable.swift in Sources */,
-				1A41E64426E74669009B65D7 /* HangulIMEInputController.swift in Sources */,
+				1A41E64426E74669009B65D7 /* InputController.swift in Sources */,
 				0A135F3C28F6EA5D00B9942A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,7 +218,7 @@
 /* Begin PBXTargetDependency section */
 		0A58A03F28F196B60092A616 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1A41E61326E745D9009B65D7 /* HangulIME */;
+			target = 1A41E61326E745D9009B65D7 /* Hangeul */;
 			targetProxy = 0A58A03E28F196B60092A616 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -246,7 +246,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.HangulIMEInputControllerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.InputControllerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = macosx;
@@ -255,7 +255,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HangulIME.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HangulIME";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hangeul.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hangeul";
 			};
 			name = Debug;
 		};
@@ -281,7 +281,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.HangulIMEInputControllerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.InputControllerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = macosx;
@@ -289,7 +289,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HangulIME.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HangulIME";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hangeul.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hangeul";
 			};
 			name = Release;
 		};
@@ -488,7 +488,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A58A04228F196B60092A616 /* Build configuration list for PBXNativeTarget "HangulIMEInputControllerTests" */ = {
+		0A58A04228F196B60092A616 /* Build configuration list for PBXNativeTarget "InputControllerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A58A04028F196B60092A616 /* Debug */,
@@ -497,7 +497,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A41E60F26E745D9009B65D7 /* Build configuration list for PBXProject "HangulIME" */ = {
+		1A41E60F26E745D9009B65D7 /* Build configuration list for PBXProject "Hangeul" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A41E63626E745DD009B65D7 /* Debug */,
@@ -506,7 +506,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A41E63826E745DD009B65D7 /* Build configuration list for PBXNativeTarget "HangulIME" */ = {
+		1A41E63826E745DD009B65D7 /* Build configuration list for PBXNativeTarget "Hangeul" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A41E63926E745DD009B65D7 /* Debug */,

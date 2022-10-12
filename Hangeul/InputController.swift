@@ -1,8 +1,8 @@
 import Cocoa
 import InputMethodKit
 
-@objc(HangulIMEInputController)
-class HangulIMEInputController: IMKInputController {
+@objc(HangeulInputController)
+class InputController: IMKInputController {
     private var _originalString = "" {
         didSet {
 //            NSLog("[InputController] original changed: \(self._originalString), refresh window")

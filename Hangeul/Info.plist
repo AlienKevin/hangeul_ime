@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon.icns</string>
+	<key>NSPrincipalClass</key>
+	<string>$(PRODUCT_MODULE_NAME).NSManualApplication</string>
+	<key>InputMethodConnectionName</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)_Connection</string>
+	<key>InputMethodServerControllerClass</key>
+	<string>$(PROJECT_NAME)InputController</string>
+	<key>LSBackgroundOnly</key>
+	<true/>
+	<key>TISIntendedLanguage</key>
+	<string>ko</string>
+	<key>TICapsLockLanguageSwitchCapable</key>
+	<true/>
+	<key>tsInputMethodCharacterRepertoireKey</key>
+	<array>
+		<string>Hang</string>
+	</array>
+	<key>tsInputModeMenuIconFileKey</key>
+	<string>icon.pdf</string>
+	<key>tsInputModeAlternateMenuIconFileKey</key>
+	<string>icon.pdf</string>
+	<key>tsInputModePaletteIconFileKey</key>
+	<string>icon.pdf</string>
+	<key>tsInputMethodIconFileKey</key>
+	<string>icon.pdf</string>
+	<key>ComponentInputModeDict</key>
+	<dict>
+		<key>tsInputModeListKey</key>
+		<dict>
+			<key>dev.kevin.inputmethod.Hangeul</key>
+			<dict>
+				<key>TISInputSourceID</key>
+				<string>dev.kevin.inputmethod.Hangeul</string>
+				<key>TISIntendedLanguage</key>
+				<string>ko</string>
+				<key>tsInputModeAlternateMenuIconFileKey</key>
+				<string>icon.pdf</string>
+				<key>tsInputModeDefaultStateKey</key>
+				<true/>
+				<key>tsInputModeIsVisibleKey</key>
+				<true/>
+				<key>tsInputModeMenuIconFileKey</key>
+				<string>icon.pdf</string>
+				<key>tsInputModePaletteIconFileKey</key>
+				<string>icon.pdf</string>
+				<key>tsInputModePrimaryInScriptKey</key>
+				<true/>
+				<key>tsInputModeScriptKey</key>
+				<string>smKorean</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>tsVisibleInputModeOrderedArrayKey</key>
+	<array>
+		<string>Hangeul</string>
+	</array>
+</dict>
+</plist>
