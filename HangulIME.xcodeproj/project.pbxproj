@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A135F3C28F6EA5D00B9942A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A135F3B28F6EA5D00B9942A /* Constants.swift */; };
+		0A135F3E28F703BA00B9942A /* Syllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A135F3D28F703BA00B9942A /* Syllable.swift */; };
 		0A58A04628F19AF40092A616 /* InputControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A58A04528F19AF40092A616 /* InputControllerTest.swift */; };
 		0A72214B28ECD6B1004D153F /* icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A72214A28ECD6B1004D153F /* icon.pdf */; };
 		1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61B26E745DD009B65D7 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		0A135F3B28F6EA5D00B9942A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0A135F3D28F703BA00B9942A /* Syllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable.swift; sourceTree = "<group>"; };
 		0A2DBA4828ECD75900DDAF23 /* icon.fig */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.fig; sourceTree = "<group>"; };
 		0A58A03A28F196B60092A616 /* HangulIMEInputControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HangulIMEInputControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A58A04528F19AF40092A616 /* InputControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputControllerTest.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				1A41E64526E7470D009B65D7 /* Info.plist */,
 				1A41E64826E7495A009B65D7 /* HangulIME.entitlements */,
 				1A41E64326E74669009B65D7 /* HangulIMEInputController.swift */,
+				0A135F3D28F703BA00B9942A /* Syllable.swift */,
 				1A41E64126E74627009B65D7 /* AppDelegate.swift */,
 				1A41E61B26E745DD009B65D7 /* Assets.xcassets */,
 				0A72214A28ECD6B1004D153F /* icon.pdf */,
@@ -200,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A41E64226E74627009B65D7 /* AppDelegate.swift in Sources */,
+				0A135F3E28F703BA00B9942A /* Syllable.swift in Sources */,
 				1A41E64426E74669009B65D7 /* HangulIMEInputController.swift in Sources */,
 				0A135F3C28F6EA5D00B9942A /* Constants.swift in Sources */,
 			);
