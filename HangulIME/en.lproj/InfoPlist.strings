@@ -1,0 +1,6 @@
+/* Localized versions of Info.plist keys */
+
+dev.kevin.inputmethod.HangulIME = "Hangeul";
+
+CFBundleName = "Hangeul";
+CFBundleDisplayName = "Hangeul Input Method";
