@@ -4,6 +4,7 @@ import InputMethodKit
 @objc(HangeulInputController)
 class InputController: IMKInputController {
     private var _isSyllableStart = true
+    private var _prevSelectedLocation: Int? = nil
     
     private var _originalString = "" {
         didSet {
@@ -141,6 +142,11 @@ class InputController: IMKInputController {
 
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
 //        NSLog("[InputController] handle: \(event.debugDescription)")
+        let currSelectedLocation = client()!.selectedRange().location
+        if _prevSelectedLocation != nil && _prevSelectedLocation != currSelectedLocation {
+//            NSLog("Cursor Moved")
+            _isSyllableStart = true
+        }
 
         let handler = processHandlers(handlers: [
             deleteKeyHandler,
@@ -151,6 +157,9 @@ class InputController: IMKInputController {
             charKeyHandler,
             ])
         let stopPropagation = handler(event)
+        
+        _prevSelectedLocation = client()!.selectedRange().location
+        
 //        NSLog("stopPropagation: " + String(stopPropagation == true))
         return stopPropagation ?? false
     }
