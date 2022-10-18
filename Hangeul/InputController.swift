@@ -34,7 +34,10 @@ class InputController: IMKInputController {
     }
 
     private func markText(_ text: String) {
-        client()?.setMarkedText(text, selectionRange: selectionRange(), replacementRange: replacementRange())
+        let attributedString = NSAttributedString(string: text, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        client()?.setMarkedText(attributedString,
+                                selectionRange: NSRange(location: text.utf16.count, length: 0),
+                                replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
     }
 
     private func deleteKeyHandler(event: NSEvent) -> Bool? {
