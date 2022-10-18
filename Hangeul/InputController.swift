@@ -130,7 +130,8 @@ class InputController: IMKInputController {
         let client = client()!
         NSLog(client.selectedRange().description)
         if client.selectedRange().location > 0 {
-            let range = NSRange(location: client.selectedRange().location - 1, length: 1)
+            let length = client.selectedRange().length == 0 ? 1 : client.selectedRange().length
+            let range = NSRange(location: client.selectedRange().location - length, length: length)
             client.insertText(value, replacementRange: range)
         } else {
             client.insertText(value, replacementRange: replacementRange())
