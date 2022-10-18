@@ -3,18 +3,25 @@ import InputMethodKit
 
 @objc(HangeulInputController)
 class InputController: IMKInputController {
+    private var _isSyllableStart = true
+    
     private var _originalString = "" {
         didSet {
-//            NSLog("[InputController] original changed: \(self._originalString), refresh window")
+            NSLog("[InputController] original changed: \(self._originalString)")
             let syllables = Syllable.syllabify(_originalString)
             if syllables.count >= 2 {
-//                NSLog(syllables.map({ $0.description }).joined(separator: " "))
-//                NSLog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
-                self.insertText(jamos2Hangul(syllables.first!.toJamos()), doClean: false)
+                //                NSLog(syllables.map({ $0.description }).joined(separator: " "))
+                //                NSLog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
+                self.replaceText(jamos2Hangul(syllables.first!.toJamos()), doClean: false)
                 _originalString = String(_originalString.dropFirst(syllables.first!.count()))
-                self.markText(jamos2Hangul(syllables.dropFirst().map({ $0.toJamos() }).joined()))
+                self.insertText(jamos2Hangul(syllables.dropFirst().map({ $0.toJamos() }).joined()), doClean: false)
+                NSLog("[InputController] syllables.count >= 2 originalString: \(self._originalString)")
+            } else if _isSyllableStart {
+                NSLog("SyllableStart")
+                self.insertText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()), doClean: false)
+                _isSyllableStart = false
             } else {
-                self.markText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()))
+                self.replaceText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()), doClean: false)
             }
         }
     }
@@ -33,13 +40,6 @@ class InputController: IMKInputController {
         super.cancelComposition()
     }
 
-    private func markText(_ text: String) {
-        let attributedString = NSAttributedString(string: text, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
-        client()?.setMarkedText(attributedString,
-                                selectionRange: NSRange(location: text.utf16.count, length: 0),
-                                replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
-    }
-
     private func deleteKeyHandler(event: NSEvent) -> Bool? {
         let keyCode = event.keyCode
         // Delete key deletes the last letter
@@ -48,7 +48,7 @@ class InputController: IMKInputController {
             if _originalString.count > 0 {
 //                NSLog("Delete when _originalString is empty")
                 _originalString = String(_originalString.dropLast())
-                return true
+                return !_originalString.isEmpty
             }
             return false
         }
@@ -71,8 +71,10 @@ class InputController: IMKInputController {
         if match != nil {
             _originalString += string
             return true
+        } else {
+            self.commitComposition(client())
+            return nil
         }
-        return nil
     }
 
     private func spaceKeyHandler(event: NSEvent) -> Bool? {
@@ -111,14 +113,28 @@ class InputController: IMKInputController {
     }
 
     func clean() {
-//        NSLog("[InputController] clean")
+        NSLog("[InputController] clean")
         _originalString = ""
+        _isSyllableStart = true
     }
 
     func insertText(_ text: String, doClean: Bool) {
 //        NSLog("insertText: %@", text)
         let value = NSAttributedString(string: text)
         client()?.insertText(value, replacementRange: replacementRange())
+        if doClean { clean() }
+    }
+    
+    func replaceText(_ text: String, doClean: Bool) {
+        let value = NSAttributedString(string: text)
+        let client = client()!
+        NSLog(client.selectedRange().description)
+        if client.selectedRange().location > 0 {
+            let range = NSRange(location: client.selectedRange().location - 1, length: 1)
+            client.insertText(value, replacementRange: range)
+        } else {
+            client.insertText(value, replacementRange: replacementRange())
+        }
         if doClean { clean() }
     }
 
