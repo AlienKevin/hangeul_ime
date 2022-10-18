@@ -79,7 +79,7 @@ class InputController: IMKInputController {
 
     private func spaceKeyHandler(event: NSEvent) -> Bool? {
         if event.keyCode == kVK_Space && _originalString.count > 0 {
-            insertText(ascii2Hanguls(_originalString) + " ", doClean: true)
+            insertText(" ", doClean: true)
             return true
         }
         return nil
@@ -96,7 +96,7 @@ class InputController: IMKInputController {
     private func enterKeyHandler(event: NSEvent) -> Bool? {
         if event.keyCode == kVK_Return && _originalString.count > 0 {
             // commit the actively edited string
-            insertText(ascii2Hanguls(_originalString), doClean: true)
+            clean()
             return false
         }
         return nil
@@ -106,7 +106,7 @@ class InputController: IMKInputController {
         let key = event.characters!
         if let punc = punctuations[key] {
 //            NSLog("Punctuation " + punc)
-            insertText(ascii2Hanguls(_originalString) + punc, doClean: true)
+            insertText(punc, doClean: true)
             return true
         }
         return nil
@@ -144,11 +144,11 @@ class InputController: IMKInputController {
 
         let handler = processHandlers(handlers: [
             deleteKeyHandler,
-            charKeyHandler,
-            punctutionKeyHandler,
             escKeyHandler,
             enterKeyHandler,
             spaceKeyHandler,
+            punctutionKeyHandler,
+            charKeyHandler,
             ])
         let stopPropagation = handler(event)
 //        NSLog("stopPropagation: " + String(stopPropagation == true))
