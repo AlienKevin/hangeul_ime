@@ -145,6 +145,7 @@ class InputController: IMKInputController {
         let currSelectedLocation = client()!.selectedRange().location
         if _prevSelectedLocation != nil && _prevSelectedLocation != currSelectedLocation {
 //            NSLog("Cursor Moved")
+            clean()
             _isSyllableStart = true
         }
 
