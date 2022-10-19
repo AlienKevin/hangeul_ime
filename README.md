@@ -2,6 +2,29 @@
 
 A Hangeul input method based on the Revised Romanization of Korean.
 
+## Notice
+This is an experimental software. We can't guarantee that everything will work as intended in all apps. Some apps do not support the TSMDocumentAccess protocol required for the `replacementRange` argument to work in `client()?.insertText`. This input method works in the following apps:
+
+1. Spotlight
+2. Finder
+3. TextEdit
+4. Word
+5. Dictionary.app
+6. Telegram
+7. WeChat
+8. Slack
+9. Safari
+10. Chrome*
+11. Zoom
+12. XCode
+
+Chrome*: working most of the time except autocomplete may mess things up
+
+This IME **doesn't** work in the following apps:
+
+1. WhatsApp
+2. LINE
+
 ## Revised Romanization of Korean
 
 The spellings used by this input method
