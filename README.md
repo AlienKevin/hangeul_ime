@@ -22,6 +22,7 @@ This IME **doesn't** work in the following apps:
 
 1. WhatsApp
 2. LINE
+3. Notion* (Mostly working except the first syllable sometimes gets split)
 
 ## Revised Romanization of Korean
 
