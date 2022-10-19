@@ -129,15 +129,17 @@ class InputController: IMKInputController {
     func replaceText(_ text: String, doClean: Bool) {
         let value = NSAttributedString(string: text)
         let client = client()!
-        NSLog(client.selectedRange().description)
-        if client.selectedRange().location > 0 {
-            let length = client.selectedRange().length == 0 ? 1 : client.selectedRange().length
-            let range = NSRange(location: client.selectedRange().location - length, length: length)
-            client.insertText(value, replacementRange: range)
+        let selectedRange = client.selectedRange()
+        NSLog("client.selectedRange before replaceText(): " + selectedRange.description)
+        if selectedRange != NSRange(location: NSNotFound, length: NSNotFound) && selectedRange.location > 0 {
+            let replacementLength = selectedRange.length == 0 ? 1 : selectedRange.length + 1
+            let replacementRange = NSRange(location: selectedRange.location - 1, length: replacementLength)
+            client.insertText(value, replacementRange: replacementRange)
         } else {
             client.insertText(value, replacementRange: replacementRange())
         }
         if doClean { clean() }
+        NSLog("client.selectedRange after replaceText(): " + client.selectedRange().description)
     }
 
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
