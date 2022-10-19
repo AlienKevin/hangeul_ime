@@ -14,11 +14,9 @@ This is an experimental software. We can't guarantee that everything will work a
 7. WeChat
 8. Slack
 9. Safari
-10. Chrome*
+10. Chrome
 11. Zoom
 12. XCode
-
-Chrome*: working most of the time except autocomplete may mess things up
 
 This IME **doesn't** work in the following apps:
 
