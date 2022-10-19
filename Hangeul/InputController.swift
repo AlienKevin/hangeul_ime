@@ -48,7 +48,7 @@ class InputController: IMKInputController {
 //            NSLog("Delete")
             if _originalString.count > 0 {
 //                NSLog("Delete when _originalString is empty")
-                _originalString = String(_originalString.dropLast())
+                _originalString = String(_originalString.dropLast(getLastJaso(_originalString)?.count ?? 1))
                 return !_originalString.isEmpty
             }
             return false
