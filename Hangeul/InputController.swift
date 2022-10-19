@@ -123,6 +123,7 @@ class InputController: IMKInputController {
 //        dlog("insertText: %@", text)
         let value = NSAttributedString(string: text)
         client()?.insertText(value, replacementRange: replacementRange())
+//        dlog("insertText: " + text)
         if doClean { clean() }
     }
     
@@ -145,6 +146,8 @@ class InputController: IMKInputController {
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
 //        dlog("[InputController] handle: \(event.debugDescription)")
         let currSelectedLocation = client()!.selectedRange().location
+//        dlog("_prevSelectedLocation: " + (_prevSelectedLocation?.description ?? "nil"))
+//        dlog("currSelectedLocation: " + currSelectedLocation.description)
         if _prevSelectedLocation != nil && _prevSelectedLocation != currSelectedLocation {
 //            dlog("Cursor Moved")
             clean()
@@ -162,6 +165,7 @@ class InputController: IMKInputController {
         let stopPropagation = handler(event)
         
         _prevSelectedLocation = client()!.selectedRange().location
+//        dlog("updated _prevSelectedLocation: " + (_prevSelectedLocation?.description ?? "nil"))
         
 //        dlog("stopPropagation: " + String(stopPropagation == true))
         return stopPropagation ?? false
