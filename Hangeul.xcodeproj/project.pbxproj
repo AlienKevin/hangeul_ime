@@ -12,6 +12,7 @@
 		0A135F4228F70BF300B9942A /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 0A135F4128F70BF300B9942A /* en.lproj */; };
 		0A58A04628F19AF40092A616 /* InputControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A58A04528F19AF40092A616 /* InputControllerTest.swift */; };
 		0A72214B28ECD6B1004D153F /* icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A72214A28ECD6B1004D153F /* icon.pdf */; };
+		0A89877C2900423F00B26621 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A89877B2900423F00B26621 /* Debug.swift */; };
 		0A99B8AC28FF9A38005E27A2 /* Jamo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99B8AB28FF9A38005E27A2 /* Jamo.swift */; };
 		0A99B8AE28FF9BE5005E27A2 /* Jaso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99B8AD28FF9BE5005E27A2 /* Jaso.swift */; };
 		1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61B26E745DD009B65D7 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		0A58A03A28F196B60092A616 /* InputControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A58A04528F19AF40092A616 /* InputControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputControllerTest.swift; sourceTree = "<group>"; };
 		0A72214A28ECD6B1004D153F /* icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = icon.pdf; sourceTree = "<group>"; };
+		0A89877B2900423F00B26621 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		0A99B8AB28FF9A38005E27A2 /* Jamo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jamo.swift; sourceTree = "<group>"; };
 		0A99B8AD28FF9BE5005E27A2 /* Jaso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jaso.swift; sourceTree = "<group>"; };
 		1A41E61426E745D9009B65D7 /* Hangeul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hangeul.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,7 @@
 				1A41E64526E7470D009B65D7 /* Info.plist */,
 				1A41E64826E7495A009B65D7 /* Hangeul.entitlements */,
 				1A41E64326E74669009B65D7 /* InputController.swift */,
+				0A89877B2900423F00B26621 /* Debug.swift */,
 				0A135F3D28F703BA00B9942A /* Syllable.swift */,
 				1A41E64126E74627009B65D7 /* AppDelegate.swift */,
 				0A99B8AB28FF9A38005E27A2 /* Jamo.swift */,
@@ -217,6 +220,7 @@
 				1A41E64226E74627009B65D7 /* AppDelegate.swift in Sources */,
 				0A135F3E28F703BA00B9942A /* Syllable.swift in Sources */,
 				1A41E64426E74669009B65D7 /* InputController.swift in Sources */,
+				0A89877C2900423F00B26621 /* Debug.swift in Sources */,
 				0A135F3C28F6EA5D00B9942A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

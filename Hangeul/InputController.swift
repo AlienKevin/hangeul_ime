@@ -8,17 +8,17 @@ class InputController: IMKInputController {
     
     private var _originalString = "" {
         didSet {
-            NSLog("[InputController] original changed: \(self._originalString)")
+            dlog("[InputController] original changed: \(self._originalString)")
             let syllables = Syllable.syllabify(_originalString)
             if syllables.count >= 2 {
-                //                NSLog(syllables.map({ $0.description }).joined(separator: " "))
-                //                NSLog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
+                //                dlog(syllables.map({ $0.description }).joined(separator: " "))
+                //                dlog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
                 self.replaceText(jamos2Hangul(syllables.first!.toJamos()), doClean: false)
                 _originalString = String(_originalString.dropFirst(syllables.first!.count()))
                 self.insertText(jamos2Hangul(syllables.dropFirst().map({ $0.toJamos() }).joined()), doClean: false)
-                NSLog("[InputController] syllables.count >= 2 originalString: \(self._originalString)")
+                dlog("[InputController] syllables.count >= 2 originalString: \(self._originalString)")
             } else if _isSyllableStart {
-                NSLog("SyllableStart")
+                dlog("SyllableStart")
                 self.insertText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()), doClean: false)
                 _isSyllableStart = false
             } else {
@@ -45,9 +45,9 @@ class InputController: IMKInputController {
         let keyCode = event.keyCode
         // Delete key deletes the last letter
         if keyCode == kVK_Delete {
-//            NSLog("Delete")
+//            dlog("Delete")
             if _originalString.count > 0 {
-//                NSLog("Delete when _originalString is empty")
+//                dlog("Delete when _originalString is empty")
                 _originalString = String(_originalString.dropLast(getLastJaso(_originalString)?.count ?? 1))
                 return !_originalString.isEmpty
             }
@@ -106,7 +106,7 @@ class InputController: IMKInputController {
     private func punctutionKeyHandler(event: NSEvent) -> Bool? {
         let key = event.characters!
         if let punc = punctuations[key] {
-//            NSLog("Punctuation " + punc)
+//            dlog("Punctuation " + punc)
             insertText(punc, doClean: true)
             return true
         }
@@ -114,13 +114,13 @@ class InputController: IMKInputController {
     }
 
     func clean() {
-        NSLog("[InputController] clean")
+        dlog("[InputController] clean")
         _originalString = ""
         _isSyllableStart = true
     }
 
     func insertText(_ text: String, doClean: Bool) {
-//        NSLog("insertText: %@", text)
+//        dlog("insertText: %@", text)
         let value = NSAttributedString(string: text)
         client()?.insertText(value, replacementRange: replacementRange())
         if doClean { clean() }
@@ -130,7 +130,7 @@ class InputController: IMKInputController {
         let value = NSAttributedString(string: text)
         let client = client()!
         let selectedRange = client.selectedRange()
-        NSLog("client.selectedRange before replaceText(): " + selectedRange.description)
+        dlog("client.selectedRange before replaceText(): " + selectedRange.description)
         if selectedRange != NSRange(location: NSNotFound, length: NSNotFound) && selectedRange.location > 0 {
             let replacementLength = selectedRange.length == 0 ? 1 : selectedRange.length + 1
             let replacementRange = NSRange(location: selectedRange.location - 1, length: replacementLength)
@@ -139,14 +139,14 @@ class InputController: IMKInputController {
             client.insertText(value, replacementRange: replacementRange())
         }
         if doClean { clean() }
-        NSLog("client.selectedRange after replaceText(): " + client.selectedRange().description)
+        dlog("client.selectedRange after replaceText(): " + client.selectedRange().description)
     }
 
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-//        NSLog("[InputController] handle: \(event.debugDescription)")
+//        dlog("[InputController] handle: \(event.debugDescription)")
         let currSelectedLocation = client()!.selectedRange().location
         if _prevSelectedLocation != nil && _prevSelectedLocation != currSelectedLocation {
-//            NSLog("Cursor Moved")
+//            dlog("Cursor Moved")
             clean()
             _isSyllableStart = true
         }
@@ -163,7 +163,7 @@ class InputController: IMKInputController {
         
         _prevSelectedLocation = client()!.selectedRange().location
         
-//        NSLog("stopPropagation: " + String(stopPropagation == true))
+//        dlog("stopPropagation: " + String(stopPropagation == true))
         return stopPropagation ?? false
     }
 }
