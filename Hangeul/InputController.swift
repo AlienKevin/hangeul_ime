@@ -28,12 +28,12 @@ class InputController: IMKInputController {
     }
     
     override func deactivateServer(_ sender: Any!) {
-        self.insertText(ascii2Hanguls(_originalString), doClean: true)
+        clean()
         super.deactivateServer(sender)
     }
     
     @objc override func commitComposition(_ sender: Any!) {
-        insertText(ascii2Hanguls(_originalString), doClean: true)
+        clean()
     }
 
     @objc override func cancelComposition() {
