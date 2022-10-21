@@ -17,6 +17,7 @@ This is an experimental software. We can't guarantee that everything will work a
 10. Chrome
 11. Zoom
 12. XCode
+13. App Store
 
 This IME **doesn't** work in the following apps:
 
