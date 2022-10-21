@@ -52,6 +52,18 @@ class InputController: IMKInputController {
         _supportsTSM = clientsSupportingReplaceText.contains(clientId)
         dlog("client.bundleIdentifier: " + clientId)
         dlog("_supportsTSM: " + String(_supportsTSM))
+//        dlog("kTSMDocumentTextServicePropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentTextServicePropertyTag))))
+//        dlog("kTSMDocumentUnicodePropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentUnicodePropertyTag))))
+//        dlog("kTSMDocumentTSMTEPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentTSMTEPropertyTag))))
+//        dlog("kTSMDocumentSupportGlyphInfoPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentSupportGlyphInfoPropertyTag))))
+//        dlog("kTSMDocumentUseFloatingWindowPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentUseFloatingWindowPropertyTag))))
+//        dlog("kTSMDocumentUnicodeInputWindowPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentUnicodeInputWindowPropertyTag))))
+//        dlog("kTSMDocumentSupportDocumentAccessPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentSupportDocumentAccessPropertyTag))))
+//        dlog("kTSMDocumentRefconPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentRefconPropertyTag))))
+//        dlog("kTSMDocumentInputModePropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentInputModePropertyTag))))
+//        dlog("kTSMDocumentWindowLevelPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentWindowLevelPropertyTag))))
+//        dlog("kTSMDocumentInputSourceOverridePropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentInputSourceOverridePropertyTag))))
+//        dlog("kTSMDocumentEnabledInputSourcesPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentEnabledInputSourcesPropertyTag))))
         super.activateServer(sender)
     }
     
