@@ -2,29 +2,6 @@
 
 A Hangeul input method based on the Revised Romanization of Korean.
 
-## Notice
-This is an experimental software. We can't guarantee that everything will work as intended in all apps. Some apps do not support the TSMDocumentAccess protocol required for the `replacementRange` argument to work in `client()?.insertText`. This input method works in the following apps:
-
-1. Spotlight
-2. Finder
-3. TextEdit
-4. Word
-5. Dictionary.app
-6. Telegram
-7. WeChat
-8. Slack
-9. Safari
-10. Chrome
-11. Zoom
-12. XCode
-13. App Store
-
-This IME **doesn't** work in the following apps:
-
-1. WhatsApp
-2. LINE
-3. Notion* (Mostly working except the first syllable sometimes gets split)
-
 ## Revised Romanization of Korean
 
 The spellings used by this input method
@@ -144,6 +121,30 @@ Unlike other schemas including 2-Set and HNC Romaja, this schema is intended to 
 Compared with 2-Set, the advantage of this schema is that for people who are already familiar with the QWERTY keyboard, picking up this schema only requires you to know the RR spellings and no memorization of keyboard layout is needed. Reusing the QWERTY layout is very beneficial to Korean learners because they can focus on learning the romanization rather than memorizing the keyboard layout.
 
 Compared with HNC Romaja, the advantage of this schema is that the spellings of the vowels are closer to their phonetic values rather than shape compositions. For example, the vowel ㅐ is spelled as "ai" in HNC Romaja. This resembles the shape composition of the two jamos ㅏ ("a") and ㅣ ("i") more than the sound of the vowel. In this schema, ㅐ is spelled as "ae" which aims to approximate the sound /ɛ/ rather than the shape composition a + i.
+
+## Seamless vs Composition Modes
+For apps that support TSMDocumentAccess protocol, we provide a seamless mode without the need of an inline composition buffer. All jamos are immediately committed to screen and we use `replacementRange` argument in `client()?.insertText` to modify previously committed jamos. Here's a list of apps that support seamless mode:
+
+1. Spotlight
+2. Finder
+3. TextEdit
+4. Word
+5. Dictionary.app
+6. Telegram
+7. WeChat
+8. Slack
+9. Safari
+10. Chrome
+11. Zoom
+12. XCode
+13. App Store
+
+Some apps, like the Terminal, do not have good support for the TSMDocumentAccess protocol. For those apps, we fallback to composition mode, which does require an inline composition buffer. Here's some example apps that only support composition mode:
+
+1. WhatsApp
+2. LINE
+3. Notion
+4. Terminal
 
 ## Credits
 
