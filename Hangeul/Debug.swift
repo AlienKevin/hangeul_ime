@@ -8,8 +8,8 @@
 import Foundation
 
 #if DEBUG
-    func dlog(_ msg: String) {
-        NSLog(msg)
+    func dlog(_ format: String, _ args: CVarArg...) {
+        NSLogv(format, getVaList(args))
     }
 
 #else
