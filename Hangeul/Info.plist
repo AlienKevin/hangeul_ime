@@ -4,30 +4,6 @@
 <dict>
 	<key>CFBundleIconFile</key>
 	<string>AppIcon.icns</string>
-	<key>NSPrincipalClass</key>
-	<string>$(PRODUCT_MODULE_NAME).NSManualApplication</string>
-	<key>InputMethodConnectionName</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)_Connection</string>
-	<key>InputMethodServerControllerClass</key>
-	<string>$(PROJECT_NAME)InputController</string>
-	<key>LSBackgroundOnly</key>
-	<true/>
-	<key>TISIntendedLanguage</key>
-	<string>ko</string>
-	<key>TICapsLockLanguageSwitchCapable</key>
-	<true/>
-	<key>tsInputMethodCharacterRepertoireKey</key>
-	<array>
-		<string>Hang</string>
-	</array>
-	<key>tsInputModeMenuIconFileKey</key>
-	<string>icon.pdf</string>
-	<key>tsInputModeAlternateMenuIconFileKey</key>
-	<string>icon.pdf</string>
-	<key>tsInputModePaletteIconFileKey</key>
-	<string>icon.pdf</string>
-	<key>tsInputMethodIconFileKey</key>
-	<string>icon.pdf</string>
 	<key>ComponentInputModeDict</key>
 	<dict>
 		<key>tsInputModeListKey</key>
@@ -55,6 +31,30 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>InputMethodConnectionName</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)_Connection</string>
+	<key>InputMethodServerControllerClass</key>
+	<string>$(PROJECT_NAME)InputController</string>
+	<key>LSBackgroundOnly</key>
+	<true/>
+	<key>NSPrincipalClass</key>
+	<string>$(PRODUCT_MODULE_NAME).NSManualApplication</string>
+	<key>TICapsLockLanguageSwitchCapable</key>
+	<true/>
+	<key>TISIntendedLanguage</key>
+	<string>ko</string>
+	<key>tsInputMethodCharacterRepertoireKey</key>
+	<array>
+		<string>Hang</string>
+	</array>
+	<key>tsInputMethodIconFileKey</key>
+	<string>icon.pdf</string>
+	<key>tsInputModeAlternateMenuIconFileKey</key>
+	<string>icon.pdf</string>
+	<key>tsInputModeMenuIconFileKey</key>
+	<string>icon.pdf</string>
+	<key>tsInputModePaletteIconFileKey</key>
+	<string>icon.pdf</string>
 	<key>tsVisibleInputModeOrderedArrayKey</key>
 	<array>
 		<string>Hangeul</string>
