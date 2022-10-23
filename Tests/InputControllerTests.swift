@@ -59,5 +59,4 @@ final class InputControllerTest: XCTestCase {
         XCTAssertEqual(Syllable.syllabify("kkyeolbAng"), [Syllable(initial: "kk", nucleus: "ieo", final: "lb"), Syllable(nucleus: "a", final: "ng")])
         XCTAssertEqual(Syllable.syllabify("kkyeokkAng"), [Syllable(initial: "kk", nucleus: "ieo", final: "kk"), Syllable(nucleus: "a", final: "ng")])
     }
-
 }
