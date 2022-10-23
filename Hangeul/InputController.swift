@@ -1,42 +1,74 @@
 import Cocoa
 import InputMethodKit
 
+typealias NotificationObserver = (name: Notification.Name, callback: (_ notification: Notification) -> Void)
+
 @objc(HangeulInputController)
 class InputController: IMKInputController {
     private var _isSyllableStart = true
     private var _prevSelectedLocation: Int? = nil
     private var _supportsTSM = false
+    private var _candidates: [Candidate] = []
+    private var _hasNext: Bool = false
+    internal var inputMode: InputMode {
+        get { State.shared.inputMode }
+        set(value) { State.shared.inputMode = value }
+    }
+
+    internal var temp: (
+        observerList: [NSObjectProtocol],
+        monitorList: [Any?]
+    ) = (
+        observerList: [],
+        monitorList: []
+    )
     
     private var _originalString = "" {
         didSet {
             dlog("[InputController] original changed: \(self._originalString)")
-            let syllables = Syllable.syllabify(_originalString)
-            if _supportsTSM {
-                if syllables.count >= 2 {
-                    //                dlog(syllables.map({ $0.description }).joined(separator: " "))
-                    //                dlog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
-                    self.replaceText(jamos2Hangul(syllables.first!.toJamos()), doClean: false)
-                    _originalString = String(_originalString.dropFirst(syllables.first!.count()))
-                    self.insertText(jamos2Hangul(syllables.dropFirst().map({ $0.toJamos() }).joined()), doClean: false)
-                    dlog("[InputController] syllables.count >= 2 originalString: \(self._originalString)")
-                } else if _isSyllableStart {
-                    dlog("SyllableStart")
-                    self.insertText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()), doClean: false)
-                    _isSyllableStart = false
-                } else {
-                    self.replaceText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()), doClean: false)
-                }
+            if inputMode == InputMode.english {
+                self._originalString.count > 0 ? self.refreshCandidatesWindow() : CandidatesWindow.shared.close()
+                self.markText(self._originalString)
             } else {
-                if syllables.count >= 2 {
-                    dlog(syllables.map({ $0.description }).joined(separator: " "))
-                    dlog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
-                    self.insertText(jamos2Hangul(syllables.first!.toJamos()), doClean: false)
-                    _originalString = String(_originalString.dropFirst(syllables.first!.count()))
-                    dlog("_originalSTring after dropFirst: " + _originalString)
-                    self.markText(jamos2Hangul(syllables.dropFirst().map({ $0.toJamos() }).joined()))
+                let syllables = Syllable.syllabify(_originalString)
+                if _supportsTSM {
+                    if syllables.count >= 2 {
+                        //                dlog(syllables.map({ $0.description }).joined(separator: " "))
+                        //                dlog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
+                        self.replaceText(jamos2Hangul(syllables.first!.toJamos()), doClean: false)
+                        _originalString = String(_originalString.dropFirst(syllables.first!.count()))
+                        self.insertText(jamos2Hangul(syllables.dropFirst().map({ $0.toJamos() }).joined()), doClean: false)
+                        dlog("[InputController] syllables.count >= 2 originalString: \(self._originalString)")
+                    } else if _isSyllableStart {
+                        dlog("SyllableStart")
+                        self.insertText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()), doClean: false)
+                        _isSyllableStart = false
+                    } else {
+                        dlog("syllables.count: %d", syllables.count)
+                        self.replaceText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()), doClean: false)
+                    }
                 } else {
-                    self.markText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()))
+                    if syllables.count >= 2 {
+                        dlog(syllables.map({ $0.description }).joined(separator: " "))
+                        dlog(syllables.dropFirst().map({ $0.description }).joined(separator: " "))
+                        self.insertText(jamos2Hangul(syllables.first!.toJamos()), doClean: false)
+                        _originalString = String(_originalString.dropFirst(syllables.first!.count()))
+                        dlog("_originalSTring after dropFirst: " + _originalString)
+                        self.markText(jamos2Hangul(syllables.dropFirst().map({ $0.toJamos() }).joined()))
+                    } else {
+                        self.markText(jamos2Hangul(syllables.map({ $0.toJamos() }).joined()))
+                    }
                 }
+            }
+        }
+    }
+    
+    private var curPage: Int = 1 {
+        didSet(old) {
+            guard old == self.curPage else {
+                NSLog("[InputHandler] page changed")
+                self.refreshCandidatesWindow()
+                return
             }
         }
     }
@@ -64,6 +96,11 @@ class InputController: IMKInputController {
 //        dlog("kTSMDocumentWindowLevelPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentWindowLevelPropertyTag))))
 //        dlog("kTSMDocumentInputSourceOverridePropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentInputSourceOverridePropertyTag))))
 //        dlog("kTSMDocumentEnabledInputSourcesPropertyTag: " + String(client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentEnabledInputSourcesPropertyTag))))
+        
+        notificationList().forEach { (observer) in temp.observerList.append(NotificationCenter.default.addObserver(
+          forName: observer.name, object: nil, queue: nil, using: observer.callback
+        ))}
+        
         super.activateServer(sender)
     }
     
@@ -103,8 +140,13 @@ class InputController: IMKInputController {
 //            dlog("Delete")
             if _originalString.count > 0 {
 //                dlog("Delete when _originalString is empty")
-                _originalString = String(_originalString.dropLast(getLastJaso(_originalString)?.count ?? 1))
-                return !_originalString.isEmpty
+                if inputMode == .english {
+                    _originalString = String(_originalString.dropLast(1))
+                    return true
+                } else {
+                    _originalString = String(_originalString.dropLast(getLastJaso(_originalString)?.count ?? 1))
+                    return !_originalString.isEmpty
+                }
             }
             return false
         }
@@ -123,8 +165,13 @@ class InputController: IMKInputController {
             range: NSRange(location: 0, length: string.count)
         )
 
+        if string == "q" {
+            dlog("Pressed q, toggleInputMode")
+            State.shared.toggleInputMode()
+            return true
+        }
         // Found English letter, add them to the string
-        if match != nil {
+        else if match != nil {
             _originalString += string
             return true
         } else {
@@ -132,10 +179,28 @@ class InputController: IMKInputController {
             return nil
         }
     }
+    
+    private func numberKeyHandler(event: NSEvent) -> Bool? {
+        // 获取输入的字符
+        let string = event.characters!
+        // 当前输入的是数字,选择当前候选列表中的第N个字符 v
+        if inputMode == InputMode.english {
+            if let pos = Int(string), _originalString.count > 0 {
+                let index = pos - 1
+                if index < _candidates.count {
+                    insertCandidate(_candidates[index])
+                }
+                return true
+            }
+        }
+        return nil
+    }
 
     private func spaceKeyHandler(event: NSEvent) -> Bool? {
         if event.keyCode == kVK_Space && _originalString.count > 0 {
-            if _supportsTSM {
+            if inputMode == InputMode.english {
+                _originalString += " "
+            } else if _supportsTSM {
                 insertText(" ", doClean: true)
             } else {
                 insertText(ascii2Hanguls(_originalString) + " ", doClean: true)
@@ -156,7 +221,12 @@ class InputController: IMKInputController {
     private func enterKeyHandler(event: NSEvent) -> Bool? {
         if event.keyCode == kVK_Return && _originalString.count > 0 {
             // commit the actively edited string
-            if _supportsTSM {
+            if inputMode == InputMode.english {
+                if let first = self._candidates.first {
+                    insertCandidate(first)
+                    return true
+                }
+            } else if _supportsTSM {
                 clean()
             } else {
                 insertText(ascii2Hanguls(_originalString), doClean: true)
@@ -230,6 +300,7 @@ class InputController: IMKInputController {
             enterKeyHandler,
             spaceKeyHandler,
             punctutionKeyHandler,
+            numberKeyHandler,
             charKeyHandler,
             ])
         let stopPropagation = handler(event)
@@ -241,6 +312,65 @@ class InputController: IMKInputController {
         
 //        dlog("stopPropagation: " + String(stopPropagation == true))
         return stopPropagation ?? false
+    }
+    
+    func updateCandidates(_ sender: Any!) {
+        let (candidates, hasNext) = State.shared.getCandidates(origin: self._originalString, page: curPage)
+        _candidates = candidates
+        _hasNext = hasNext
+    }
+
+    // 更新候选窗口
+    func refreshCandidatesWindow() {
+        updateCandidates(client())
+        if _candidates.count <= 0 {
+            // 不在候选框显示输入码时，如果候选词为空，则不显示候选框
+            CandidatesWindow.shared.close()
+            return
+        }
+        let candidatesData = (list: _candidates, hasPrev: curPage > 1, hasNext: _hasNext)
+        CandidatesWindow.shared.setCandidates(
+            candidatesData,
+            originalString: _originalString,
+            topLeft: getOriginPoint()
+        )
+    }
+    
+    func insertCandidate(_ candidate: Candidate) {
+        insertText(candidate.koreanWord, doClean: true)
+        let notification = Notification(
+            name: State.candidateInserted,
+            object: nil,
+            userInfo: [ "candidate": candidate ]
+        )
+        // 异步派发事件，防止阻塞当前线程
+        NotificationQueue.default.enqueue(notification, postingStyle: .whenIdle)
+    }
+    
+    // 获取当前输入的光标位置
+    private func getOriginPoint() -> NSPoint {
+        let xd: CGFloat = 0
+        let yd: CGFloat = 4
+        var rect = NSRect()
+        client()?.attributes(forCharacterIndex: 0, lineHeightRectangle: &rect)
+        return NSPoint(x: rect.minX + xd, y: rect.minY - yd)
+    }
+    
+    func notificationList() -> [NotificationObserver] {
+        return [
+            (State.candidateSelected, { notification in
+                if let candidate = notification.userInfo?["candidate"] as? Candidate {
+                    self.insertCandidate(candidate)
+                }
+            }),
+            (State.prevPageBtnTapped, { _ in self.curPage = self.curPage > 1 ? self.curPage - 1 : 1 }),
+            (State.nextPageBtnTapped, { _ in self.curPage = self._hasNext ? self.curPage + 1 : self.curPage }),
+            (State.inputModeChanged, { notification in
+                if self._originalString.count > 0, notification.userInfo?["val"] as? InputMode == InputMode.english {
+                    self.commitComposition(self.client()!)
+                }
+            })
+        ]
     }
 }
 

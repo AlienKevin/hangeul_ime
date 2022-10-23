@@ -18,8 +18,7 @@ class NSManualApplication: NSApplication {
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var server = IMKServer()
-    var candidatesWindow = IMKCandidates()
+    var state: State!
     
     func installInputSource() {
         print("install input source")
@@ -55,10 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         
-        // Insert code here to initialize your application
-        server = IMKServer(name: Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String, bundleIdentifier: Bundle.main.bundleIdentifier)
-        candidatesWindow = IMKCandidates(server: server, panelType: kIMKSingleRowSteppingCandidatePanel, styleType: kIMKMain)
-//        NSLog("tried connection")
+        state = State.shared
     }
 
     func applicationWillTerminate(_ notification: Notification) {
