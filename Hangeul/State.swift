@@ -10,6 +10,7 @@ import Foundation
 import Cocoa
 import InputMethodKit
 
+let candidateCount = 5
 
 class State: NSObject {
     // SwiftUI 界面事件
@@ -48,8 +49,14 @@ class State: NSObject {
         if origin.count <= 0 {
             return ([], false)
         }
-        let (candidates, hasNext) = reverseLookupByEnglish(word: origin, dict: krDict)
-        return (candidates, hasNext)
+        let candidates = reverseLookupByEnglish(word: origin, dict: krDict)
+        if (page - 1) * candidateCount < candidates.count {
+            let candidatesInPage = Array(candidates[((page - 1) * candidateCount)..<min(page * candidateCount, candidates.count)])
+            let hasNext = page * candidateCount < candidates.count
+            return (candidatesInPage, hasNext)
+        } else {
+            return ([], false)
+        }
     }
 
     static let shared = State()

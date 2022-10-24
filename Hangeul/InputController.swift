@@ -132,6 +132,22 @@ class InputController: IMKInputController {
                                 selectionRange: NSRange(location: text.utf16.count, length: 0),
                                 replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
     }
+    
+    private func pageKeyHandler(event: NSEvent) -> Bool? {
+        // +/-/arrow down/arrow up/arrow right/arrow left翻页
+        let keyCode = event.keyCode
+        if inputMode == .english && _originalString.count > 0 {
+            if keyCode == kVK_ANSI_Equal || keyCode == kVK_DownArrow || keyCode == kVK_RightArrow {
+                curPage = _hasNext ? curPage + 1 : curPage
+                return true
+            }
+            if keyCode == kVK_ANSI_Minus || keyCode == kVK_UpArrow || keyCode == kVK_LeftArrow {
+                curPage = curPage > 1 ? curPage - 1 : 1
+                return true
+            }
+        }
+        return nil
+    }
 
     private func deleteKeyHandler(event: NSEvent) -> Bool? {
         let keyCode = event.keyCode
@@ -295,6 +311,7 @@ class InputController: IMKInputController {
         }
 
         let handler = processHandlers(handlers: [
+            pageKeyHandler,
             deleteKeyHandler,
             escKeyHandler,
             enterKeyHandler,

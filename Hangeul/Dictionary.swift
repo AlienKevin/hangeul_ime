@@ -16,7 +16,7 @@ struct Entry : Decodable {
 
 typealias Dictionary = [String : [Entry]]
 
-func reverseLookupByEnglish(word: String, dict: Dictionary) -> ([Candidate], Bool) {
+func reverseLookupByEnglish(word: String, dict: Dictionary) -> [Candidate] {
     var resultDict = Dictionary()
     for (entryWord, entries) in dict {
         for entry in entries {
@@ -39,12 +39,10 @@ func reverseLookupByEnglish(word: String, dict: Dictionary) -> ([Candidate], Boo
         return entries.map({return $0.equivalentEnglishWords.count}).reduce(0, +)
     }
     let sortedResultKeyValuePairs = resultKeyValuePairs.sorted(by: { countEnglishWordOccurrences(entries: $0.1) > countEnglishWordOccurrences(entries: $1.1) })
-    return (sortedResultKeyValuePairs.map({
+    return sortedResultKeyValuePairs.map({
         let koreanWord = $0.0
         let firstEntry = $0.1.first!
         let englishWords = NSOrderedSet(array: firstEntry.equivalentEnglishWords).map({ $0 as! [String] })
         return Candidate(koreanWord: koreanWord, englishWords: englishWords.first!)
-    }),
-        sortedResultKeyValuePairs.count > 5
-    )
+    })
 }
