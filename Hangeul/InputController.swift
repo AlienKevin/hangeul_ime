@@ -27,6 +27,12 @@ class InputController: IMKInputController {
         didSet {
             dlog("[InputController] original changed: \(self._originalString)")
             if inputMode == InputMode.english {
+                if self.curPage != 1 {
+                    // after code is updated, reset curPage to 1
+                    self.curPage = 1
+                    self.markText(self._originalString)
+                    return
+                }
                 self._originalString.count > 0 ? self.refreshCandidatesWindow() : CandidatesWindow.shared.close()
                 self.markText(self._originalString)
             } else {
