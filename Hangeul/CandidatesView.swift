@@ -71,68 +71,32 @@ struct CandidatesView: View {
     }
 
     var _indicator: some View {
+        let arrowUp = getIndicatorIcon(imageName: "arrowUp", direction: direction, activeFlag: hasPrev, eventName: State.prevPageBtnTapped)
+        let arrowDown = getIndicatorIcon(imageName: "arrowDown", direction: direction, activeFlag: hasNext, eventName: State.nextPageBtnTapped)
         if direction == CandidatesDirection.horizontal {
-            return AnyView(VStack(spacing: 0) {
-                Image("arrowUp")
-                    .renderingMode(.template)
-                    .resizable()
-                    .frame(width: 10, height: 10, alignment: .center)
-                    .onTapGesture {
-                        if !hasPrev { return }
-                        NotificationCenter.default.post(
-                            name: State.prevPageBtnTapped,
-                            object: nil
-                        )
-                    }
-                    .foregroundColor(Color(hasPrev
-                                     ? themeConfig[colorScheme].pageIndicatorColor
-                                     : themeConfig[colorScheme].pageIndicatorDisabledColor
-                    ))
-                Image("arrowDown")
-                    .renderingMode(.template)
-                    .resizable()
-                    .frame(width: 10, height: 10, alignment: .center)
-                    .onTapGesture {
-                        if !hasNext { return }
-                        print("next")
-                        NotificationCenter.default.post(
-                            name: State.nextPageBtnTapped,
-                            object: nil
-                        )
-                    }
-                    .foregroundColor(Color(hasNext
-                                     ? themeConfig[colorScheme].pageIndicatorColor
-                                     : themeConfig[colorScheme].pageIndicatorDisabledColor
-                    ))
-            })
+            return AnyView(VStack(spacing: 0) { arrowUp; arrowDown })
+        } else {
+            return AnyView(HStack(spacing: 4) { arrowUp; arrowDown })
         }
-        return AnyView(HStack(spacing: 4) {
-            Image("arrowUp")
-                .renderingMode(.template)
-                .resizable()
-                .frame(width: 10, height: 10, alignment: .center)
-                .rotationEffect(Angle(degrees: -90), anchor: .center)
-                .onTapGesture {
-                    if !hasPrev { return }
-                    NotificationCenter.default.post(
-                        name: State.prevPageBtnTapped,
-                        object: nil
-                    )
-                }
-            Image("arrowDown")
-                .renderingMode(.template)
-                .resizable()
-                .frame(width: 10, height: 10, alignment: .center)
-                .rotationEffect(Angle(degrees: -90), anchor: .center)
-                .onTapGesture {
-                    if !hasNext { return }
-                    print("next")
-                    NotificationCenter.default.post(
-                        name: State.nextPageBtnTapped,
-                        object: nil
-                    )
-                }
-        })
+    }
+    
+    func getIndicatorIcon(imageName: String, direction: CandidatesDirection, activeFlag: Bool, eventName: Notification.Name) -> some View {
+        return Image(imageName)
+            .renderingMode(.template)
+            .resizable()
+            .frame(width: 10, height: 10, alignment: .center)
+            .rotationEffect(Angle(degrees: direction == CandidatesDirection.horizontal ? 0 : -90), anchor: .center)
+            .onTapGesture {
+                if !activeFlag { return }
+                NotificationCenter.default.post(
+                    name: eventName,
+                    object: nil
+                )
+            }
+            .foregroundColor(Color(activeFlag
+                                   ? themeConfig[colorScheme].pageIndicatorColor
+                                   : themeConfig[colorScheme].pageIndicatorDisabledColor
+                                  ))
     }
 
     var body: some View {
