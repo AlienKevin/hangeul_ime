@@ -8,7 +8,7 @@
 import SwiftUI
 import InputMethodKit
 
-typealias CandidatesData = (list: [Candidate], hasPrev: Bool, hasNext: Bool)
+typealias CandidatesData = (list: [Candidate], hasPrev: Bool, hasNext: Bool, selectedIndex: Int)
 
 class CandidatesWindow: NSWindow, NSWindowDelegate {
     let hostingView = NSHostingView(rootView: CandidatesView(candidates: [], origin: ""))
@@ -38,6 +38,7 @@ class CandidatesWindow: NSWindow, NSWindowDelegate {
         hostingView.rootView.origin = originalString
         hostingView.rootView.hasNext = candidatesData.hasNext
         hostingView.rootView.hasPrev = candidatesData.hasPrev
+        hostingView.rootView.selectedIndex = candidatesData.selectedIndex
         print("origin top left: \(topLeft)")
         print("candidates: \(candidatesData)")
         self.setFrameTopLeftPoint(topLeft)

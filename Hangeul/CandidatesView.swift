@@ -54,6 +54,7 @@ struct CandidatesView: View {
     var origin: String
     var hasPrev: Bool = false
     var hasNext: Bool = false
+    var selectedIndex: Int = 0
 
     var direction = CandidatesDirection.vertical
     var themeConfig = defaultThemeConfig
@@ -65,7 +66,7 @@ struct CandidatesView: View {
                 candidate: candidate,
                 index: index,
                 origin: origin,
-                selected: index == 0
+                selected: index == selectedIndex
             )
         }
     }

@@ -79,6 +79,16 @@ class InputController: IMKInputController {
         }
     }
     
+    private var _selectedIndex: Int = 0 {
+        didSet(old) {
+            guard old == self._selectedIndex else {
+                NSLog("[InputHandler] selected candidate changed")
+                self.refreshCandidatesWindow(doUpdateCandidates: false)
+                return
+            }
+        }
+    }
+    
     override func activateServer(_ sender: Any!) {
         /*_supportsTSM = client()!.supportsProperty(TSMDocumentPropertyTag(kTSMDocumentSupportDocumentAccessPropertyTag))*/
         /* &&
@@ -140,15 +150,48 @@ class InputController: IMKInputController {
     }
     
     private func pageKeyHandler(event: NSEvent) -> Bool? {
-        // +/-/arrow down/arrow up/arrow right/arrow left翻页
+        // +/-/arrow left/arrow right翻页
         let keyCode = event.keyCode
         if inputMode == .english && _originalString.count > 0 {
-            if keyCode == kVK_ANSI_Equal || keyCode == kVK_DownArrow || keyCode == kVK_RightArrow {
+            if keyCode == kVK_ANSI_Equal || keyCode == kVK_RightArrow {
                 curPage = _hasNext ? curPage + 1 : curPage
+                _selectedIndex = 0
                 return true
             }
-            if keyCode == kVK_ANSI_Minus || keyCode == kVK_UpArrow || keyCode == kVK_LeftArrow {
+            if keyCode == kVK_ANSI_Minus || keyCode == kVK_LeftArrow {
                 curPage = curPage > 1 ? curPage - 1 : 1
+                _selectedIndex = 0
+                return true
+            }
+        }
+        return nil
+    }
+    
+    private func nextCandidateKeyHandler(event: NSEvent) -> Bool? {
+        // arrow up select previous candidate, arrow down select next candidate
+        let keyCode = event.keyCode
+        if inputMode == .english && _originalString.count > 0 {
+            if keyCode == kVK_DownArrow {
+                if _selectedIndex >= min(candidateCount, _candidates.count) - 1 {
+                    if _hasNext {
+                        dlog("go to next page")
+                        _selectedIndex = 0
+                        curPage += 1
+                    }
+                } else {
+                    _selectedIndex += 1
+                }
+                return true
+            }
+            if keyCode == kVK_UpArrow {
+                if _selectedIndex <= 0 {
+                    if curPage > 1 {
+                        curPage -= 1
+                        _selectedIndex = candidateCount - 1
+                    }
+                } else {
+                    _selectedIndex -= 1
+                }
                 return true
             }
         }
@@ -317,6 +360,7 @@ class InputController: IMKInputController {
         }
 
         let handler = processHandlers(handlers: [
+            nextCandidateKeyHandler,
             pageKeyHandler,
             deleteKeyHandler,
             escKeyHandler,
@@ -341,17 +385,20 @@ class InputController: IMKInputController {
         let (candidates, hasNext) = State.shared.getCandidates(origin: self._originalString, page: curPage)
         _candidates = candidates
         _hasNext = hasNext
+        _selectedIndex = 0
     }
 
     // 更新候选窗口
-    func refreshCandidatesWindow() {
-        updateCandidates(client())
+    func refreshCandidatesWindow(doUpdateCandidates: Bool = true) {
+        if doUpdateCandidates {
+            updateCandidates(client())
+        }
         if _candidates.count <= 0 {
             // 不在候选框显示输入码时，如果候选词为空，则不显示候选框
             CandidatesWindow.shared.close()
             return
         }
-        let candidatesData = (list: _candidates, hasPrev: curPage > 1, hasNext: _hasNext)
+        let candidatesData = (list: _candidates, hasPrev: curPage > 1, hasNext: _hasNext, selectedIndex: _selectedIndex)
         CandidatesWindow.shared.setCandidates(
             candidatesData,
             originalString: _originalString,
