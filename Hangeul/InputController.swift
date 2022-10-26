@@ -295,8 +295,8 @@ class InputController: IMKInputController {
         if event.keyCode == kVK_Return && _originalString.count > 0 {
             // commit the actively edited string
             if inputMode == InputMode.english {
-                if let first = self._candidates.first {
-                    insertCandidate(first)
+                if !_candidates.isEmpty {
+                    insertCandidate(self._candidates[_selectedIndex])
                     return true
                 }
             } else if _supportsTSM {
