@@ -14,12 +14,16 @@ struct ColorData: Codable {
     let green: Double
     let blue: Double
     let opacity: Double
+    
+    func withOpacity(opacity: Double) -> ColorData {
+        ColorData(red: red, green: green, blue: blue, opacity: opacity)
+    }
 }
 
 extension Color {
     init(_ colorData: ColorData) {
         self.init(
-            Color.RGBColorSpace.sRGBLinear,
+            Color.RGBColorSpace.sRGB,
             red: colorData.red,
             green: colorData.green,
             blue: colorData.blue,
@@ -43,10 +47,12 @@ struct ApperanceThemeConfig: Codable {
     let candidateIndexColor: ColorData
     let candidateTextColor: ColorData
     let candidateCodeColor: ColorData
+    let candidateBackgroundColor: ColorData
 
     let selectedIndexColor: ColorData
     let selectedTextColor: ColorData
     let selectedCodeColor: ColorData
+    let selectedBackgroundColor: ColorData
 
     // 页面指示器颜色
     let pageIndicatorColor: ColorData
@@ -77,12 +83,18 @@ struct ThemeConfig: Codable {
     }
 }
 
+let defaultLightAccentColor = ColorData(red: 0, green: 0.110, blue: 0.247, opacity: 1)
+let defaultLightBackgroundColor = ColorData(red: 1, green: 1, blue: 1, opacity: 1)
+
+let defaultDarkAccentColor = ColorData(red: 0.947, green: 0.184, blue: 0.243, opacity: 1)
+let defaultDarkBackgroundColor = ColorData(red: 0, green: 0, blue: 0, opacity: 1)
+
 let defaultThemeConfig = ThemeConfig(
     id: "default",
     name: "default",
     author: "Kevin Li",
     light: ApperanceThemeConfig(
-        windowBackgroundColor: ColorData(red: 1, green: 1, blue: 1, opacity: 1),
+        windowBackgroundColor: defaultLightBackgroundColor,
         windowPaddingTop: 6,
         windowPaddingLeft: 10,
         windowPaddingRight: 10,
@@ -94,15 +106,17 @@ let defaultThemeConfig = ThemeConfig(
         candidateIndexColor: ColorData(red: 0.1, green: 0.1, blue: 0.1, opacity: 1),
         candidateTextColor: ColorData(red: 0.1, green: 0.1, blue: 0.1, opacity: 1),
         candidateCodeColor: ColorData(red: 0.3, green: 0.3, blue: 0.3, opacity: 0.8),
-        selectedIndexColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 1),
-        selectedTextColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 1),
-        selectedCodeColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 0.8),
-        pageIndicatorColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 1),
-        pageIndicatorDisabledColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 0.4),
+        candidateBackgroundColor: defaultLightBackgroundColor.withOpacity(opacity: 0),
+        selectedIndexColor: defaultLightAccentColor,
+        selectedTextColor: defaultLightBackgroundColor,
+        selectedCodeColor: defaultLightAccentColor.withOpacity(opacity: 0.8),
+        selectedBackgroundColor: defaultLightAccentColor,
+        pageIndicatorColor: defaultLightAccentColor,
+        pageIndicatorDisabledColor: defaultLightAccentColor.withOpacity(opacity: 0.4),
         fontName: "system",
         fontSize: 20),
     dark: ApperanceThemeConfig(
-        windowBackgroundColor: ColorData(red: 0, green: 0, blue: 0, opacity: 1),
+        windowBackgroundColor: defaultDarkBackgroundColor,
         windowPaddingTop: 6,
         windowPaddingLeft: 10,
         windowPaddingRight: 10,
@@ -114,11 +128,13 @@ let defaultThemeConfig = ThemeConfig(
         candidateIndexColor: ColorData(red: 0.9, green: 0.9, blue: 0.9, opacity: 1),
         candidateTextColor: ColorData(red: 0.9, green: 0.9, blue: 0.9, opacity: 1),
         candidateCodeColor: ColorData(red: 0.7, green: 0.7, blue: 0.7, opacity: 0.8),
-        selectedIndexColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 1),
-        selectedTextColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 1),
-        selectedCodeColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 0.8),
-        pageIndicatorColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 1),
-        pageIndicatorDisabledColor: ColorData(red: 0.863, green: 0.078, blue: 0.235, opacity: 0.4),
+        candidateBackgroundColor: defaultDarkBackgroundColor,
+        selectedIndexColor: defaultDarkAccentColor,
+        selectedTextColor: defaultDarkBackgroundColor,
+        selectedCodeColor: defaultDarkAccentColor.withOpacity(opacity: 0.8),
+        selectedBackgroundColor: defaultDarkAccentColor,
+        pageIndicatorColor: defaultDarkAccentColor,
+        pageIndicatorDisabledColor: defaultDarkAccentColor.withOpacity(opacity: 0.4),
         fontName: "system",
         fontSize: 20
     )

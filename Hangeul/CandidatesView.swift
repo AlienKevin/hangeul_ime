@@ -23,6 +23,9 @@ struct CandidateView: View {
         let textColor = selected
             ? themeConfig[colorScheme].selectedTextColor
             : themeConfig[colorScheme].candidateTextColor
+        let backgroundColor = selected
+            ? themeConfig[colorScheme].selectedBackgroundColor
+            : themeConfig[colorScheme].candidateBackgroundColor
         let annotationColor = selected
             ? themeConfig[colorScheme].selectedCodeColor
             : themeConfig[colorScheme].candidateCodeColor
@@ -32,6 +35,8 @@ struct CandidateView: View {
                 .foregroundColor(Color(indexColor))
             Text(candidate.koreanWord)
                 .foregroundColor(Color(textColor))
+                .background(RoundedRectangle(cornerRadius: 4, style: .continuous) 
+                    .fill(Color(backgroundColor)))
             Text(candidate.englishWords.joined(separator: ", "))
                 .foregroundColor(Color(annotationColor))
         }
