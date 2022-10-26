@@ -142,10 +142,10 @@ class InputController: IMKInputController {
         super.cancelComposition()
     }
     
-    private func markText(_ text: String) {
+    private func markText(_ text: String, cursorLocation: Int? = nil) {
         let attributedString = NSAttributedString(string: text, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         client()?.setMarkedText(attributedString,
-                                selectionRange: NSRange(location: text.utf16.count, length: 0),
+                                selectionRange: NSRange(location: cursorLocation ?? text.utf16.count, length: 0),
                                 replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
     }
     
@@ -207,11 +207,18 @@ class InputController: IMKInputController {
 //                dlog("Delete when _originalString is empty")
                 if inputMode == .english {
                     _originalString = String(_originalString.dropLast(1))
+                    if _originalString.isEmpty {
+                        State.shared.toggleInputMode()
+                    }
                     return true
                 } else {
                     _originalString = String(_originalString.dropLast(getLastJaso(_originalString)?.count ?? 1))
                     return !_originalString.isEmpty
                 }
+            } else if inputMode == .english {
+                State.shared.toggleInputMode()
+                self.markText("")
+                return true
             }
             return false
         }
@@ -230,9 +237,10 @@ class InputController: IMKInputController {
             range: NSRange(location: 0, length: string.count)
         )
 
-        if string == "q" {
+        if inputMode == .hangeul && string == "q" {
             dlog("Pressed q, toggleInputMode")
             State.shared.toggleInputMode()
+            self.markText("q[English]", cursorLocation: 1)
             return true
         }
         // Found English letter, add them to the string
