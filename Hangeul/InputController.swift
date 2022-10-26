@@ -423,6 +423,7 @@ class InputController: IMKInputController {
         )
         // 异步派发事件，防止阻塞当前线程
         NotificationQueue.default.enqueue(notification, postingStyle: .whenIdle)
+        State.shared.toggleInputMode()
     }
     
     // 获取当前输入的光标位置
