@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OrderedCollections
 
 struct Entry : Decodable {
     var origin: String
