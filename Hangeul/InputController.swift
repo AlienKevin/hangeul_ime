@@ -259,11 +259,11 @@ class InputController: IMKInputController {
         // 当前输入的是数字,选择当前候选列表中的第N个字符 v
         if inputMode == InputMode.english {
             if let pos = Int(string), _originalString.count > 0 {
-                let index = pos - 1
-                if index < _candidates.count {
+                if pos >= 1 && pos <= _candidates.count {
+                    let index = pos - 1
                     insertCandidate(_candidates[index])
+                    return true
                 }
-                return true
             }
         }
         return nil
