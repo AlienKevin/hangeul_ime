@@ -67,6 +67,10 @@ private func loadJson(filename fileName: String) -> Dictionary? {
         fatalError("Missing data asset: \(fileName)")
     }
     let decoder = JSONDecoder()
-    let jsonData = try! decoder.decode(Dictionary.self, from: asset.data)
-    return jsonData
+    let rawDict = try! decoder.decode(RawDictionary.self, from: asset.data)
+    var dict = Dictionary();
+    for rawEntries in rawDict {
+        dict[rawEntries.word] = rawEntries.entries
+    }
+    return dict
 }

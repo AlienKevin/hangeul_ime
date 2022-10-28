@@ -115,4 +115,7 @@ if __name__ == "__main__":
 
     # Write to output
     with open("KrDict.json", "w+") as output:
-        output.write(json.dumps(words, cls=EnhancedJSONEncoder, ensure_ascii=False))
+        word_list = list(
+            map(lambda item: {"word": item[0], "entries": item[1]}, words.items())
+        )
+        output.write(json.dumps(word_list, cls=EnhancedJSONEncoder, ensure_ascii=False, indent=None))

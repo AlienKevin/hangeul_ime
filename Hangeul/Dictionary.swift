@@ -15,7 +15,13 @@ struct Entry : Decodable {
     var equivalentEnglishWords: [[String]]
 }
 
-typealias Dictionary = [String : [Entry]]
+struct RawEntries : Decodable {
+    var word: String
+    var entries: [Entry]
+}
+
+typealias RawDictionary = [RawEntries]
+typealias Dictionary = OrderedDictionary<String, [Entry]>
 
 func reverseLookupByEnglish(word: String, dict: Dictionary) -> [Candidate] {
     var resultDict = Dictionary()
