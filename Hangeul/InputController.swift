@@ -156,16 +156,16 @@ class InputController: IMKInputController {
     }
     
     private func pageKeyHandler(event: NSEvent) -> Bool? {
-        // Go to previous page: - or arrow left
-        // Go to next page: + or arrow right
+        // Go to previous page: arrow left
+        // Go to next page: arrow right
         let keyCode = event.keyCode
         if inputMode == .english && _originalString.count > 0 {
-            if keyCode == kVK_ANSI_Equal || keyCode == kVK_RightArrow {
+            if keyCode == kVK_RightArrow {
                 curPage = _hasNext ? curPage + 1 : curPage
                 _selectedIndex = 0
                 return true
             }
-            if keyCode == kVK_ANSI_Minus || keyCode == kVK_LeftArrow {
+            if keyCode == kVK_LeftArrow {
                 curPage = curPage > 1 ? curPage - 1 : 1
                 _selectedIndex = 0
                 return true
