@@ -7,6 +7,7 @@
 
 import Foundation
 import OrderedCollections
+import NaturalLanguage
 
 struct Entry : Decodable {
     var origin: String
@@ -25,15 +26,33 @@ typealias Dictionary = OrderedDictionary<String, [Entry]>
 
 func reverseLookupByEnglish(word: String, dict: Dictionary) -> [Candidate] {
     var resultDict = Dictionary()
-    for (entryWord, entries) in dict {
-        for entry in entries {
-            let equivalentEnglishWords = entry.equivalentEnglishWords.filter({$0.map({$0.lowercased()}).contains(word.lowercased())})
-            if !equivalentEnglishWords.isEmpty {
-                var resultEntries = resultDict[entryWord] ?? []
-                var resultEntry = entry
-                resultEntry.equivalentEnglishWords = equivalentEnglishWords
-                resultEntries.append(resultEntry)
-                resultDict[entryWord] = resultEntries
+    func searchDict(word: String) {
+        for (entryWord, entries) in dict {
+            for entry in entries {
+                let equivalentEnglishWords = entry.equivalentEnglishWords.filter({$0.map({$0.lowercased()}).contains(word.lowercased())})
+                if !equivalentEnglishWords.isEmpty {
+                    var resultEntries = resultDict[entryWord] ?? []
+                    var resultEntry = entry
+                    resultEntry.equivalentEnglishWords = equivalentEnglishWords
+                    resultEntries.append(resultEntry)
+                    resultDict[entryWord] = resultEntries
+                }
+            }
+        }
+    }
+    searchDict(word: word)
+    if resultDict.isEmpty {
+        if containsOnlyLetters(word) {
+            if let wordEmbedding = NLEmbedding.wordEmbedding(for: .english) {
+                wordEmbedding.enumerateNeighbors(for: word, maximumCount: 5) { neighborWord, distance in
+                    if distance < 1 {
+                        searchDict(word: neighborWord)
+                        if !resultDict.isEmpty {
+                            return false
+                        }
+                    }
+                    return true
+                }
             }
         }
     }
@@ -52,4 +71,13 @@ func reverseLookupByEnglish(word: String, dict: Dictionary) -> [Candidate] {
         let englishWords = NSOrderedSet(array: firstEntry.equivalentEnglishWords).map({ $0 as! [String] })
         return Candidate(koreanWord: koreanWord, englishWords: englishWords.first!)
     })
+}
+
+private func containsOnlyLetters(_ input: String) -> Bool {
+   for chr in input {
+      if (!(chr >= "a" && chr <= "z") && !(chr >= "A" && chr <= "Z") ) {
+         return false
+      }
+   }
+   return true
 }
