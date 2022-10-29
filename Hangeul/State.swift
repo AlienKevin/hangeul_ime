@@ -13,13 +13,13 @@ import InputMethodKit
 let candidateCount = 5
 
 class State: NSObject {
-    // SwiftUI 界面事件
+    // SwiftUI interface events
     static let candidateSelected = Notification.Name("State.candidateSelected")
     static let candidateListUpdated = Notification.Name("State.candidateListUpdated")
     static let nextPageBtnTapped = Notification.Name("State.nextPageBtnTapped")
     static let prevPageBtnTapped = Notification.Name("State.prevPageBtnTapped")
 
-    // 逻辑
+    // Logic related events
     static let candidateInserted = Notification.Name("State.candidateInserted")
     static let inputModeChanged = Notification.Name("State.inputModeChanged")
 

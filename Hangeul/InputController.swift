@@ -156,7 +156,8 @@ class InputController: IMKInputController {
     }
     
     private func pageKeyHandler(event: NSEvent) -> Bool? {
-        // +/-/arrow left/arrow right翻页
+        // Go to previous page: - or arrow left
+        // Go to next page: + or arrow right
         let keyCode = event.keyCode
         if inputMode == .english && _originalString.count > 0 {
             if keyCode == kVK_ANSI_Equal || keyCode == kVK_RightArrow {
@@ -174,7 +175,8 @@ class InputController: IMKInputController {
     }
     
     private func nextCandidateKeyHandler(event: NSEvent) -> Bool? {
-        // arrow up select previous candidate, arrow down select next candidate
+        // Select previous candidate: arrow up
+        // Select next candidate: arrow down
         let keyCode = event.keyCode
         if inputMode == .english && _originalString.count > 0 {
             if keyCode == kVK_DownArrow {
@@ -260,9 +262,8 @@ class InputController: IMKInputController {
     }
     
     private func numberKeyHandler(event: NSEvent) -> Bool? {
-        // 获取输入的字符
         let string = event.characters!
-        // 当前输入的是数字,选择当前候选列表中的第N个字符 v
+        // When the inputed character is a digit, select the nth candidate on the page
         if inputMode == InputMode.english {
             if let pos = Int(string), _originalString.count > 0 {
                 if pos >= 1 && pos <= _candidates.count {
@@ -404,13 +405,12 @@ class InputController: IMKInputController {
         _selectedIndex = 0
     }
 
-    // 更新候选窗口
     func refreshCandidatesWindow(doUpdateCandidates: Bool = true) {
         if doUpdateCandidates {
             updateCandidates(client())
         }
         if _candidates.count <= 0 {
-            // 不在候选框显示输入码时，如果候选词为空，则不显示候选框
+            // If no candidates are found, close the candidates window
             CandidatesWindow.shared.close()
             return
         }
@@ -429,12 +429,12 @@ class InputController: IMKInputController {
             object: nil,
             userInfo: [ "candidate": candidate ]
         )
-        // 异步派发事件，防止阻塞当前线程
+        // Asynchronously send out notification to prevent congestion of UI threads
         NotificationQueue.default.enqueue(notification, postingStyle: .whenIdle)
         State.shared.toggleInputMode()
     }
     
-    // 获取当前输入的光标位置
+    // Get the mouse cursor's position
     private func getOriginPoint() -> NSPoint {
         let xd: CGFloat = 0
         let yd: CGFloat = 4
