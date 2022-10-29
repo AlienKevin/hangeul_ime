@@ -319,7 +319,7 @@ class InputController: IMKInputController {
 
     private func punctutionKeyHandler(event: NSEvent) -> Bool? {
         let key = event.characters!
-        if let punc = punctuations[key] {
+        if inputMode == .hangeul, let punc = punctuations[key] {
 //            dlog("Punctuation " + punc)
             if _supportsTSM {
                 insertText(punc, doClean: true)
@@ -364,7 +364,7 @@ class InputController: IMKInputController {
 
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
 //        dlog("[InputController] handle: \(event.debugDescription)")
-        if _supportsTSM {
+        if inputMode == .hangeul && _supportsTSM {
             let currSelectedLocation = client()!.selectedRange().location
             //        dlog("_prevSelectedLocation: " + (_prevSelectedLocation?.description ?? "nil"))
             //        dlog("currSelectedLocation: " + currSelectedLocation.description)
@@ -388,7 +388,7 @@ class InputController: IMKInputController {
             ])
         let stopPropagation = handler(event)
         
-        if _supportsTSM {
+        if inputMode == .hangeul && _supportsTSM {
             _prevSelectedLocation = client()!.selectedRange().location
             //        dlog("updated _prevSelectedLocation: " + (_prevSelectedLocation?.description ?? "nil"))
         }
