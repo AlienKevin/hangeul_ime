@@ -381,10 +381,10 @@ class InputController: IMKInputController {
             deleteKeyHandler,
             escKeyHandler,
             enterKeyHandler,
-            spaceKeyHandler,
-            punctutionKeyHandler,
             numberKeyHandler,
+            spaceKeyHandler,
             charKeyHandler,
+            punctutionKeyHandler,
             ])
         let stopPropagation = handler(event)
         
