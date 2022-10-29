@@ -245,18 +245,18 @@ class InputController: IMKInputController {
 
         if inputMode == .hangeul && string == "q" {
             dlog("Pressed q, toggleInputMode")
+            self.commitComposition(client()!)
             State.shared.toggleInputMode()
             self.markText("q[English]", cursorLocation: 1)
             return true
         }
         // Found English letter, add them to the string
-        else if match != nil {
+        // english mode takes any string
+        else if match != nil || inputMode == .english {
             _originalString += string
             return true
-        } else {
-            self.commitComposition(client())
-            return nil
         }
+        return nil
     }
     
     private func numberKeyHandler(event: NSEvent) -> Bool? {
