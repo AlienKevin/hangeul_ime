@@ -301,10 +301,12 @@ class InputController: IMKInputController {
         if event.keyCode == kVK_Return && _originalString.count > 0 {
             // commit the actively edited string
             if inputMode == InputMode.english {
-                if !_candidates.isEmpty {
+                if _candidates.isEmpty {
+                    insertText(_originalString, doClean: true)
+                } else {
                     insertCandidate(self._candidates[_selectedIndex])
-                    return true
                 }
+                return true
             } else if _supportsTSM {
                 clean()
             } else {
