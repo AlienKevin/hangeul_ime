@@ -130,10 +130,16 @@ class InputController: IMKInputController {
     }
     
     @objc override func commitComposition(_ sender: Any!) {
-        if _supportsTSM {
-            clean()
+        if inputMode == .english {
+            State.shared.toggleInputMode()
+            self.markText("")
+            CandidatesWindow.shared.close()
         } else {
-            self.insertText(ascii2Hanguls(_originalString), doClean: true)
+            if _supportsTSM {
+                clean()
+            } else {
+                self.insertText(ascii2Hanguls(_originalString), doClean: true)
+            }
         }
     }
 
