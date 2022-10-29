@@ -29,7 +29,9 @@ class State: NSObject {
     
     override init() {
         super.init()
-        loadJson(filename: "KrDict.json")
+        Task.init(priority: TaskPriority.medium) {
+            self.krDict = loadJson(filename: "KrDict.json")
+        }
     }
 
     func toggleInputMode(_ nextInputMode: InputMode? = nil) {
@@ -63,23 +65,21 @@ class State: NSObject {
             return ([], false)
         }
     }
-    
-    // Asynchronously load dictionary JSON to prevent blocking the main thread
-    private func loadJson(filename fileName: String) {
-        Task.init(priority: TaskPriority.medium) {
-            guard let asset = NSDataAsset(name: fileName) else {
-                fatalError("Missing data asset: \(fileName)")
-            }
-            let decoder = JSONDecoder()
-            let rawDict = try! decoder.decode(RawDictionary.self, from: asset.data)
-            var dict = Dictionary();
-            for rawEntries in rawDict {
-                dict[rawEntries.word] = rawEntries.entries
-            }
-            dlog("KrDict loaded!")
-            self.krDict = dict
-        }
-    }
 
     static let shared = State()
+}
+
+// Asynchronously load dictionary JSON to prevent blocking the main thread
+func loadJson(filename fileName: String) -> Dictionary {
+    guard let asset = NSDataAsset(name: fileName) else {
+        fatalError("Missing data asset: \(fileName)")
+    }
+    let decoder = JSONDecoder()
+    let rawDict = try! decoder.decode(RawDictionary.self, from: asset.data)
+    var dict = Dictionary();
+    for rawEntries in rawDict {
+        dict[rawEntries.word] = rawEntries.entries
+    }
+    dlog("KrDict loaded!")
+    return dict
 }
