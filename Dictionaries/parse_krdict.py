@@ -1,10 +1,11 @@
 from collections import defaultdict
+from io import TextIOWrapper
 import lxml.etree
 import os
 from dataclasses import dataclass
 import json
-from itertools import filterfalse
 import dataclasses
+import math
 
 # Use camelCase for field names
 # because Swift needs to decode them
@@ -17,17 +18,23 @@ class Entry:
 
 
 class EnhancedJSONEncoder(json.JSONEncoder):
-    def default(self, o):
+    def default(self, o: object):
         if dataclasses.is_dataclass(o):
             return dataclasses.asdict(o)
         return super().default(o)
 
 
-def parse_krdict(dict_xml, words: dict[str, list[Entry]]):
+def parse_krdict(
+    dict_xml: TextIOWrapper,
+    words: dict[str, list[Entry]],
+    english_word_freqs: dict[str, int],
+) -> int:
     # create element tree object
     tree = lxml.etree.parse(dict_xml)
     # get root element
     root = tree.getroot().find("Lexicon")
+    # number of english word groups in the dictionary
+    english_word_group_size = 0
 
     for entry in root.findall("LexicalEntry"):
         # Get word
@@ -81,14 +88,17 @@ def parse_krdict(dict_xml, words: dict[str, list[Entry]]):
                     language = languages[0].attrib["val"]
                     # Found English equivalent words
                     if language == "영어":
-                        english_val = equivalent.xpath("feat[@att='lemma']")[0].attrib[
-                            "val"
-                        ]
+                        english_val: str = equivalent.xpath("feat[@att='lemma']")[
+                            0
+                        ].attrib["val"]
                         english_words = list(
                             map(lambda word: word.strip(), english_val.split(";"))
                         )
                         # english_words.freeze()
                         equivalent_english_words.append(english_words)
+                        for english_word in set(english_words):
+                            english_word_freqs[english_word] += 1
+                        english_word_group_size += 1
                 else:
                     raise Exception(
                         "Expecting a single language feat for the <Equivalent>"
@@ -98,11 +108,14 @@ def parse_krdict(dict_xml, words: dict[str, list[Entry]]):
             origin, vocabulary_level, valid_prs, equivalent_english_words
         )
         words[word].append(word_entry)
+    return english_word_group_size
 
 
 if __name__ == "__main__":
     # create empty dictionary from (word, origin, vocabulary_level) to pronunciations
     words: defaultdict[str, list[Entry]] = defaultdict(list)
+    english_word_group_size = 0
+    english_word_freqs: defaultdict[str, int] = defaultdict(int)
 
     dir = "krdict/"
 
@@ -111,11 +124,22 @@ if __name__ == "__main__":
         if not filename.endswith(".xml"):
             continue
         with open(dir + filename, "r") as krdict:
-            parse_krdict(krdict, words)
+            english_word_group_size += parse_krdict(krdict, words, english_word_freqs)
+
+    # Calculate Inverse Document Frequency
+    english_word_idf = {word: math.log(english_word_group_size / freq) for word, freq in english_word_freqs.items()}
+    english_word_idf = dict(sorted(english_word_idf.items(), key=lambda item: item[1]))
+    stopwords = list(english_word_idf.items())[:20]
+    for stopword in stopwords:
+        print(stopword)
 
     # Write to output
     with open("KrDict.json", "w+") as output:
         word_list = list(
             map(lambda item: {"word": item[0], "entries": item[1]}, words.items())
         )
-        output.write(json.dumps(word_list, cls=EnhancedJSONEncoder, ensure_ascii=False, indent=None))
+        output.write(
+            json.dumps(
+                word_list, cls=EnhancedJSONEncoder, ensure_ascii=False, indent=None
+            )
+        )
