@@ -145,6 +145,38 @@ Some apps, like the Terminal, do not have good support for the TSMDocumentAccess
 2. LINE
 3. Notion
 4. Terminal
+ 
+## Build and Run
+
+### Build and Run Hangeul
+
+Hangeul is the name of the target in Xcode for the input method app. If you change parts of the source code and run the project in Xcode, you may see a build error that says:
+
+```
+Embedded binary is not signed with the same certificate as the parent app. Verify the embedded binary target's code sign settings match the parent app's.
+```
+
+I'm not sure about the cause of this error but a workaround is to:
+1. Stop the currently running instance
+2. Manually delete the `Hangeul.app` in your `/Library/Input Methods` directory
+3. Build again
+
+### Build and Run KrDictEmbeddingsGenerator
+
+KrDictEmbeddingsGenerator is set up as a unit testing bundle. However, it's actually just a Swift script that generates an ML model containing the sentence embeddings for each english word in `KrDict.json`.
+
+If you show the test navigator on the left of Xcode and click on the run icon on the right of the testGenerateKrDictEmbeddings() function, you will get a build error that says:
+
+```
+Cycle in dependencies between targets 'Hangeul' and 'InputControllerTests'; building could produce unreliable results.
+```
+
+I'm not sure about the cause of this error but a workaround is to:
+1. Select the Hangeul target in Xcode
+2. Go to Build Phases tab
+3. Expand the last build phase called Copy Files
+4. Check "Copy only when installing"
+5. Once you are done running the KrDictEmbeddingsGenerator, uncheck "Copy only when installing"
 
 ## Credits
 
