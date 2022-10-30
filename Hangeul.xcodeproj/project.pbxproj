@@ -7,11 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0196AC290E0ACE00DD4A21 /* KrDictEmbeddings.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0A0196AB290E0ACE00DD4A21 /* KrDictEmbeddings.mlmodel */; };
 		0A135F3C28F6EA5D00B9942A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A135F3B28F6EA5D00B9942A /* Constants.swift */; };
 		0A135F3E28F703BA00B9942A /* Syllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A135F3D28F703BA00B9942A /* Syllable.swift */; };
 		0A135F4228F70BF300B9942A /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 0A135F4128F70BF300B9942A /* en.lproj */; };
 		0A2D3DD629059ABF007F8B79 /* InputControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D3DD529059ABF007F8B79 /* InputControllerTests.swift */; };
-		0A4D39222904B82B0055EFEF /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D39212904B82B0055EFEF /* Dictionary.swift */; };
+		0A4CC578290DDF2C00B13089 /* b_build_installer.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC573290DDF2C00B13089 /* b_build_installer.sh */; };
+		0A4CC579290DDF2C00B13089 /* c_notarize_installer.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC574290DDF2C00B13089 /* c_notarize_installer.sh */; };
+		0A4CC57A290DDF2C00B13089 /* ExportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC575290DDF2C00B13089 /* ExportOptions.plist */; };
+		0A4CC57B290DDF2C00B13089 /* common.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC576290DDF2C00B13089 /* common.sh */; };
+		0A4CC57C290DDF2C00B13089 /* a_build_app.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC577290DDF2C00B13089 /* a_build_app.sh */; };
+		0A4CC591290DE51300B13089 /* KrDictEmbeddingsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4CC590290DE51300B13089 /* KrDictEmbeddingsGenerator.swift */; };
+		0A4CC599290DE8EE00B13089 /* CreateML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4CC598290DE8EE00B13089 /* CreateML.framework */; };
+		0A4D39222904B82B0055EFEF /* KrDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D39212904B82B0055EFEF /* KrDict.swift */; };
 		0A66AEAC29039F1F00FC4D60 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A66AEAB29039F1F00FC4D60 /* InputSource.swift */; };
 		0A72214B28ECD6B1004D153F /* icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A72214A28ECD6B1004D153F /* icon.pdf */; };
 		0A87A434290C032B00589168 /* Hangeul.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A41E61426E745D9009B65D7 /* Hangeul.app */; };
@@ -30,6 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0A4CC592290DE51300B13089 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A41E60C26E745D9009B65D7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A41E61326E745D9009B65D7;
+			remoteInfo = Hangeul;
+		};
 		0A58A03E28F196B60092A616 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A41E60C26E745D9009B65D7 /* Project object */;
@@ -42,7 +57,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		0A87A432290C028400589168 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "/Library/Input Methods";
 			dstSubfolderSpec = 0;
 			files = (
@@ -53,12 +68,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A0196AB290E0ACE00DD4A21 /* KrDictEmbeddings.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = KrDictEmbeddings.mlmodel; sourceTree = "<group>"; };
 		0A135F3B28F6EA5D00B9942A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0A135F3D28F703BA00B9942A /* Syllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable.swift; sourceTree = "<group>"; };
 		0A135F4128F70BF300B9942A /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		0A2D3DD529059ABF007F8B79 /* InputControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputControllerTests.swift; sourceTree = "<group>"; };
 		0A2DBA4828ECD75900DDAF23 /* icon.fig */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.fig; sourceTree = "<group>"; };
-		0A4D39212904B82B0055EFEF /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		0A4CC573290DDF2C00B13089 /* b_build_installer.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = b_build_installer.sh; sourceTree = "<group>"; };
+		0A4CC574290DDF2C00B13089 /* c_notarize_installer.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = c_notarize_installer.sh; sourceTree = "<group>"; };
+		0A4CC575290DDF2C00B13089 /* ExportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
+		0A4CC576290DDF2C00B13089 /* common.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = common.sh; sourceTree = "<group>"; };
+		0A4CC577290DDF2C00B13089 /* a_build_app.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = a_build_app.sh; sourceTree = "<group>"; };
+		0A4CC58E290DE51300B13089 /* KrDictEmbeddingsGenerator.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KrDictEmbeddingsGenerator.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A4CC590290DE51300B13089 /* KrDictEmbeddingsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrDictEmbeddingsGenerator.swift; sourceTree = "<group>"; };
+		0A4CC598290DE8EE00B13089 /* CreateML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CreateML.framework; path = System/Library/Frameworks/CreateML.framework; sourceTree = SDKROOT; };
+		0A4D39212904B82B0055EFEF /* KrDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrDict.swift; sourceTree = "<group>"; };
 		0A58A03A28F196B60092A616 /* InputControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A66AEAB29039F1F00FC4D60 /* InputSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSource.swift; sourceTree = "<group>"; };
 		0A72214A28ECD6B1004D153F /* icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = icon.pdf; sourceTree = "<group>"; };
@@ -79,6 +103,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0A4CC58B290DE51300B13089 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A4CC599290DE8EE00B13089 /* CreateML.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A58A03728F196B60092A616 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -105,6 +137,34 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		0A4CC568290DDEA100B13089 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				0A4CC577290DDF2C00B13089 /* a_build_app.sh */,
+				0A4CC573290DDF2C00B13089 /* b_build_installer.sh */,
+				0A4CC574290DDF2C00B13089 /* c_notarize_installer.sh */,
+				0A4CC576290DDF2C00B13089 /* common.sh */,
+				0A4CC575290DDF2C00B13089 /* ExportOptions.plist */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
+		0A4CC58F290DE51300B13089 /* KrDictEmbeddingsGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				0A4CC590290DE51300B13089 /* KrDictEmbeddingsGenerator.swift */,
+			);
+			path = KrDictEmbeddingsGenerator;
+			sourceTree = "<group>";
+		};
+		0A4CC597290DE8EE00B13089 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A4CC598290DE8EE00B13089 /* CreateML.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0AD9BCCF2905888D0052A4F9 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,10 +176,13 @@
 		1A41E60B26E745D9009B65D7 = {
 			isa = PBXGroup;
 			children = (
+				0A4CC568290DDEA100B13089 /* Scripts */,
 				0A2D3DD429059A43007F8B79 /* Tests */,
 				0AD9BCCF2905888D0052A4F9 /* Theme */,
 				1A41E61626E745D9009B65D7 /* Hangeul */,
+				0A4CC58F290DE51300B13089 /* KrDictEmbeddingsGenerator */,
 				1A41E61526E745D9009B65D7 /* Products */,
+				0A4CC597290DE8EE00B13089 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +191,7 @@
 			children = (
 				1A41E61426E745D9009B65D7 /* Hangeul.app */,
 				0A58A03A28F196B60092A616 /* InputControllerTests.xctest */,
+				0A4CC58E290DE51300B13089 /* KrDictEmbeddingsGenerator.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,11 +209,12 @@
 				0A89877B2900423F00B26621 /* Debug.swift */,
 				0A135F3D28F703BA00B9942A /* Syllable.swift */,
 				1A41E64126E74627009B65D7 /* AppDelegate.swift */,
-				0A4D39212904B82B0055EFEF /* Dictionary.swift */,
+				0A4D39212904B82B0055EFEF /* KrDict.swift */,
 				0A66AEAB29039F1F00FC4D60 /* InputSource.swift */,
 				0A99B8AB28FF9A38005E27A2 /* Jamo.swift */,
 				0A99B8AD28FF9BE5005E27A2 /* Jaso.swift */,
 				1A41E61B26E745DD009B65D7 /* Assets.xcassets */,
+				0A0196AB290E0ACE00DD4A21 /* KrDictEmbeddings.mlmodel */,
 				0A72214A28ECD6B1004D153F /* icon.pdf */,
 				0A2DBA4828ECD75900DDAF23 /* icon.fig */,
 				0A135F3B28F6EA5D00B9942A /* Constants.swift */,
@@ -161,6 +226,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0A4CC58D290DE51300B13089 /* KrDictEmbeddingsGenerator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A4CC594290DE51300B13089 /* Build configuration list for PBXNativeTarget "KrDictEmbeddingsGenerator" */;
+			buildPhases = (
+				0A4CC58A290DE51300B13089 /* Sources */,
+				0A4CC58B290DE51300B13089 /* Frameworks */,
+				0A4CC58C290DE51300B13089 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A4CC593290DE51300B13089 /* PBXTargetDependency */,
+			);
+			name = KrDictEmbeddingsGenerator;
+			productName = KrDictEmbeddingsGenerator;
+			productReference = 0A4CC58E290DE51300B13089 /* KrDictEmbeddingsGenerator.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		0A58A03928F196B60092A616 /* InputControllerTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A58A04228F196B60092A616 /* Build configuration list for PBXNativeTarget "InputControllerTests" */;
@@ -210,6 +293,10 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					0A4CC58D290DE51300B13089 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 1A41E61326E745D9009B65D7;
+					};
 					0A58A03928F196B60092A616 = {
 						CreatedOnToolsVersion = 14.0.1;
 						LastSwiftMigration = 1400;
@@ -238,11 +325,19 @@
 			targets = (
 				1A41E61326E745D9009B65D7 /* Hangeul */,
 				0A58A03928F196B60092A616 /* InputControllerTests */,
+				0A4CC58D290DE51300B13089 /* KrDictEmbeddingsGenerator */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0A4CC58C290DE51300B13089 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A58A03828F196B60092A616 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -257,12 +352,25 @@
 				1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */,
 				0A135F4228F70BF300B9942A /* en.lproj in Resources */,
 				0A72214B28ECD6B1004D153F /* icon.pdf in Resources */,
+				0A4CC57B290DDF2C00B13089 /* common.sh in Resources */,
+				0A4CC579290DDF2C00B13089 /* c_notarize_installer.sh in Resources */,
+				0A4CC578290DDF2C00B13089 /* b_build_installer.sh in Resources */,
+				0A4CC57A290DDF2C00B13089 /* ExportOptions.plist in Resources */,
+				0A4CC57C290DDF2C00B13089 /* a_build_app.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0A4CC58A290DE51300B13089 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A4CC591290DE51300B13089 /* KrDictEmbeddingsGenerator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A58A03628F196B60092A616 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -284,17 +392,23 @@
 				0AC8F69A29058308009A40A2 /* State.swift in Sources */,
 				1A41E64426E74669009B65D7 /* InputController.swift in Sources */,
 				0AC8F69329057A5E009A40A2 /* CandidatesWindow.swift in Sources */,
-				0A4D39222904B82B0055EFEF /* Dictionary.swift in Sources */,
+				0A4D39222904B82B0055EFEF /* KrDict.swift in Sources */,
 				0A66AEAC29039F1F00FC4D60 /* InputSource.swift in Sources */,
 				0A89877C2900423F00B26621 /* Debug.swift in Sources */,
 				0AC8F69829057C04009A40A2 /* Candidates.swift in Sources */,
 				0A135F3C28F6EA5D00B9942A /* Constants.swift in Sources */,
+				0A0196AC290E0ACE00DD4A21 /* KrDictEmbeddings.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0A4CC593290DE51300B13089 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A41E61326E745D9009B65D7 /* Hangeul */;
+			targetProxy = 0A4CC592290DE51300B13089 /* PBXContainerItemProxy */;
+		};
 		0A58A03F28F196B60092A616 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A41E61326E745D9009B65D7 /* Hangeul */;
@@ -303,6 +417,48 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0A4CC595290DE51300B13089 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5TP7VUYRW;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevin.inputmethod.KrDictEmbeddingsGenerator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hangeul.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hangeul";
+			};
+			name = Debug;
+		};
+		0A4CC596290DE51300B13089 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5TP7VUYRW;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevin.inputmethod.KrDictEmbeddingsGenerator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hangeul.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hangeul";
+			};
+			name = Release;
+		};
 		0A58A04028F196B60092A616 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -564,8 +720,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = Z5TP7VUYRW;
+				DEVELOPMENT_TEAM = Z5TP7VUYRW;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -590,6 +745,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0A4CC594290DE51300B13089 /* Build configuration list for PBXNativeTarget "KrDictEmbeddingsGenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A4CC595290DE51300B13089 /* Debug */,
+				0A4CC596290DE51300B13089 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0A58A04228F196B60092A616 /* Build configuration list for PBXNativeTarget "InputControllerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -9,6 +9,7 @@ import Foundation
 
 import Cocoa
 import InputMethodKit
+import NaturalLanguage
 
 let candidateCount = 5
 
@@ -24,13 +25,18 @@ class State: NSObject {
     static let inputModeChanged = Notification.Name("State.inputModeChanged")
 
     var inputMode: InputMode = .hangeul
-    var krDict: Dictionary = Dictionary()
+    var krDict: KrDict = KrDict()
     var server = IMKServer(name: Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String, bundleIdentifier: Bundle.main.bundleIdentifier)
+    var krDictEmbeddings: NLEmbedding = NLEmbedding()
     
     override init() {
         super.init()
         Task.init(priority: TaskPriority.medium) {
-            self.krDict = loadJson(filename: "KrDict.json")
+            self.krDict = KrDict.loadDictionaryFromJson(filename: "KrDict.json")
+        }
+        Task.init(priority: TaskPriority.low) {
+            self.krDictEmbeddings = try! NLEmbedding.init(contentsOf: Bundle.main.url(forResource: "KrDictEmbeddings", withExtension:"mlmodelc")!)
+            dlog("krDictEmbeddings loaded!")
         }
     }
 
@@ -56,7 +62,7 @@ class State: NSObject {
         if origin.count <= 0 {
             return ([], false)
         }
-        let candidates = reverseLookupByEnglish(word: origin, dict: krDict)
+        let candidates = reverseLookupByEnglish(word: origin, dict: krDict, embedding: krDictEmbeddings)
         if (page - 1) * candidateCount < candidates.count {
             let candidatesInPage = Array(candidates[((page - 1) * candidateCount)..<min(page * candidateCount, candidates.count)])
             let hasNext = page * candidateCount < candidates.count
@@ -67,19 +73,4 @@ class State: NSObject {
     }
 
     static let shared = State()
-}
-
-// Asynchronously load dictionary JSON to prevent blocking the main thread
-func loadJson(filename fileName: String) -> Dictionary {
-    guard let asset = NSDataAsset(name: fileName) else {
-        fatalError("Missing data asset: \(fileName)")
-    }
-    let decoder = JSONDecoder()
-    let rawDict = try! decoder.decode(RawDictionary.self, from: asset.data)
-    var dict = Dictionary();
-    for rawEntries in rawDict {
-        dict[rawEntries.word] = rawEntries.entries
-    }
-    dlog("KrDict loaded!")
-    return dict
 }
