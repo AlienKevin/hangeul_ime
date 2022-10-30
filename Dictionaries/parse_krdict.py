@@ -92,13 +92,14 @@ def parse_krdict(
                             0
                         ].attrib["val"]
                         english_words = list(
-                            map(lambda word: word.strip(), english_val.split(";"))
+                            filter(lambda word: word != "(no equivalent expression)", map(lambda word: word.strip(), english_val.split(";")))
                         )
                         # english_words.freeze()
-                        equivalent_english_words.append(english_words)
-                        for english_word in set(english_words):
-                            english_word_freqs[english_word] += 1
-                        english_word_group_size += 1
+                        if len(english_words) > 0:
+                            equivalent_english_words.append(english_words)
+                            for english_word in set(english_words):
+                                english_word_freqs[english_word] += 1
+                            english_word_group_size += 1
                 else:
                     raise Exception(
                         "Expecting a single language feat for the <Equivalent>"
