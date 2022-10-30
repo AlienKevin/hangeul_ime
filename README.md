@@ -180,9 +180,12 @@ I'm not sure about the cause of this error but a workaround is to:
 
 ## Credits
 
-* This project was bootstrapped using the sample code for macOS IMKit from https://github.com/ensan-hcl/macOS_IMKitSample_2021
-* The open source Gureum IME provided a good reference model: https://github.com/gureum/gureum/
-* The schema and examples are derived from the official documentation on the Revised Romanization from https://web.archive.org/web/20070916025652/http://www.korea.net/korea/kor_loca.asp?code=A020303
+* This project was bootstrapped using the sample code for macOS IMKit from [macOS_IMKitSample_2021](https://github.com/ensan-hcl/macOS_IMKitSample_2021)
+* Great open source IMEs I referenced:
+	* [Fire](https://github.com/qwertyyb/Fire), a Wubi input method for simplified Chinese
+	* [Gureum](https://github.com/gureum/gureum/), a Hangeul/Hanja input method for Korean
+	* [vChewing](https://github.com/vChewing/vChewing-macOS), a Zhuyin input method for simplified/traditional Chinese
+* The schema and examples are derived from the [official documentation on the Revised Romanization](https://web.archive.org/web/20070916025652/http://www.korea.net/korea/kor_loca.asp?code=A020303)
 
 ## License
 MIT
