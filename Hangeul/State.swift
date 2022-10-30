@@ -32,7 +32,7 @@ class State: NSObject {
     override init() {
         super.init()
         Task.init(priority: TaskPriority.medium) {
-            self.krDict = KrDict.loadDictionaryFromJson(filename: "KrDict.json")
+            self.krDict = KrDict.loadDictionaryFromJson(filename: "KrDict.json") ?? self.krDict
         }
         Task.init(priority: TaskPriority.low) {
             self.krDictEmbeddings = try! NLEmbedding.init(contentsOf: Bundle.main.url(forResource: "KrDictEmbeddings", withExtension:"mlmodelc")!)

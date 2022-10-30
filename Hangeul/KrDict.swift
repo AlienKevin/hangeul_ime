@@ -27,12 +27,11 @@ typealias KrDict = OrderedDictionary<String, [Entry]>
 
 extension KrDict {
     // Asynchronously load dictionary JSON to prevent blocking the main thread
-    static func loadDictionaryFromJson(filename fileName: String) -> KrDict {
-        guard let asset = NSDataAsset(name: fileName) else {
-            fatalError("Missing data asset: \(fileName)")
-        }
+    static func loadDictionaryFromJson(filename fileName: String) -> KrDict? {
+        guard let jsonPath = Bundle.main.path(forResource: "KrDict", ofType: "json") else { return nil }
+        guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonPath), options: .mappedIfSafe) else { return nil }
         let decoder = JSONDecoder()
-        let rawDict = try! decoder.decode(RawDict.self, from: asset.data)
+        guard let rawDict = try? decoder.decode(RawDict.self, from: jsonData) else { return nil }
         var dict = KrDict();
         for rawEntries in rawDict {
             dict[rawEntries.word] = rawEntries.entries

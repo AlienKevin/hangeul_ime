@@ -22,6 +22,7 @@
 		0A66AEAC29039F1F00FC4D60 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A66AEAB29039F1F00FC4D60 /* InputSource.swift */; };
 		0A72214B28ECD6B1004D153F /* icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A72214A28ECD6B1004D153F /* icon.pdf */; };
 		0A74E8D3290EB99C00F8E618 /* KrDictEmbeddings.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0A74E8D2290EB99C00F8E618 /* KrDictEmbeddings.mlmodel */; };
+		0A74E8D5290EBB8E00F8E618 /* KrDict.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A74E8D4290EBB8E00F8E618 /* KrDict.json */; };
 		0A87A434290C032B00589168 /* Hangeul.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A41E61426E745D9009B65D7 /* Hangeul.app */; };
 		0A89877C2900423F00B26621 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A89877B2900423F00B26621 /* Debug.swift */; };
 		0A99B8AC28FF9A38005E27A2 /* Jamo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99B8AB28FF9A38005E27A2 /* Jamo.swift */; };
@@ -86,6 +87,7 @@
 		0A66AEAB29039F1F00FC4D60 /* InputSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSource.swift; sourceTree = "<group>"; };
 		0A72214A28ECD6B1004D153F /* icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = icon.pdf; sourceTree = "<group>"; };
 		0A74E8D2290EB99C00F8E618 /* KrDictEmbeddings.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = KrDictEmbeddings.mlmodel; sourceTree = "<group>"; };
+		0A74E8D4290EBB8E00F8E618 /* KrDict.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KrDict.json; path = Dictionaries/KrDict.json; sourceTree = SOURCE_ROOT; };
 		0A89877B2900423F00B26621 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		0A99B8AB28FF9A38005E27A2 /* Jamo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jamo.swift; sourceTree = "<group>"; };
 		0A99B8AD28FF9BE5005E27A2 /* Jaso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jaso.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				0A99B8AB28FF9A38005E27A2 /* Jamo.swift */,
 				0A99B8AD28FF9BE5005E27A2 /* Jaso.swift */,
 				1A41E61B26E745DD009B65D7 /* Assets.xcassets */,
+				0A74E8D4290EBB8E00F8E618 /* KrDict.json */,
 				0A74E8D2290EB99C00F8E618 /* KrDictEmbeddings.mlmodel */,
 				0A72214A28ECD6B1004D153F /* icon.pdf */,
 				0A2DBA4828ECD75900DDAF23 /* icon.fig */,
@@ -350,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */,
+				0A74E8D5290EBB8E00F8E618 /* KrDict.json in Resources */,
 				0A135F4228F70BF300B9942A /* en.lproj in Resources */,
 				0A72214B28ECD6B1004D153F /* icon.pdf in Resources */,
 				0A4CC57B290DDF2C00B13089 /* common.sh in Resources */,
