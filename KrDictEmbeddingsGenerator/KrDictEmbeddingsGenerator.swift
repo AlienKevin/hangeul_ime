@@ -13,7 +13,7 @@ import CreateML
 final class KrDictEmbeddingsGenerator: XCTestCase {
     func testGenerateKrDictEmbeddings() throws {
         if let sentenceEmbedding = NLEmbedding.sentenceEmbedding(for: .english) {
-            let dict = KrDict.loadDictionaryFromJson(filename: "KrDict.json")
+            let dict = KrDict.loadDictionaryFromJson(filename: "KrDict.json")!
             var vectors: [String: [Double]] = [:]
             for (wordIndex, (_, entries)) in dict.enumerated() {
                 if wordIndex % 100 == 0 {

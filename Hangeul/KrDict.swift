@@ -46,7 +46,9 @@ func reverseLookupByEnglish(word: String, dict: KrDict, embedding: NLEmbedding) 
     func searchDict(word: String) {
         for (entryWord, entries) in dict {
             for entry in entries {
-                let equivalentEnglishWords = entry.equivalentEnglishWords.filter({$0.map({$0.lowercased()}).contains(word.lowercased())})
+                let equivalentEnglishWords = entry.equivalentEnglishWords.filter({
+                    $0.map({removeStopwords($0.lowercased())}).contains(removeStopwords(word.lowercased()))
+                })
                 if !equivalentEnglishWords.isEmpty {
                     var resultEntries = resultDict[entryWord] ?? []
                     var resultEntry = entry
@@ -109,7 +111,7 @@ func reverseLookupByEnglish(word: String, dict: KrDict, embedding: NLEmbedding) 
     })
 }
 
-func sigmoid(coefficient: Double, input: Double) -> Double {
+private func sigmoid(coefficient: Double, input: Double) -> Double {
     return 1 / (1.0 + exp(-coefficient * input))
 }
 
@@ -118,7 +120,6 @@ private func getEntryWithEmbeddingKey(key: String, dict: KrDict) -> (String, Ent
     let wordIndex = Int(indices[0])!
     let entryIndex = Int(indices[1])!
     let englishWordGroupIndex = Int(indices[2])!
-    let englishWordIndex = Int(indices[3])!
     
     let (entryWord, entries) = dict.elements[wordIndex]
     var resultEntry = entries[entryIndex]
@@ -133,4 +134,29 @@ private func containsOnlyLetters(_ input: String) -> Bool {
       }
    }
    return true
+}
+
+private func removeStopwords(_ input: String) -> String {
+    let stopwords: Set = ["a", "an", "the"]
+    
+    for stopword in stopwords {
+        if input.starts(with: stopword + " ") {
+            var result = input
+            result.removeFirst(stopword.count + 1)
+            return result
+        }
+    }
+    return input
+    
+//    let range = input.startIndex ..< input.endIndex
+//    let tagger = NLTagger(tagSchemes: [.tokenType])
+//    tagger.string = input
+//    var output = ""
+//    tagger.enumerateTags(in: range, unit: .word, scheme: .tokenType) { (tag, range) -> Bool in
+//        if !stopwords.contains(String(input[range])) {
+//            output += input[range]
+//        }
+//      return true
+//    }
+//    return output.isEmpty ? input : output
 }
