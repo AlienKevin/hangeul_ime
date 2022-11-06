@@ -25,6 +25,17 @@ struct RawEntries : Decodable {
 typealias RawDict = [RawEntries]
 typealias KrDict = OrderedDictionary<String, [Entry]>
 
+// Value should be a list of list of two Ints
+// First Int is the wordIndex
+// Second Int is the entryIndex
+typealias RawEnglishLookupTable = [String: [[Int]]]
+struct EntryLocation {
+    var wordIndex: Int
+    var entryIndex: Int
+}
+typealias EnglishLookupTable = [String: [EntryLocation]]
+
+
 extension KrDict {
     // Asynchronously load dictionary JSON to prevent blocking the main thread
     static func loadDictionaryFromJson(filename fileName: String) -> KrDict? {
@@ -39,13 +50,30 @@ extension KrDict {
         dlog("KrDict loaded!")
         return dict
     }
+    
+    static func loadEnglishLookupTableFromJson(filename fileName: String) -> EnglishLookupTable? {
+        guard let jsonPath = Bundle.main.path(forResource: "KrDictEnglishLookupTable", ofType: "json") else { return nil }
+        dlog("Found english lookup table json in bundle")
+        guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonPath), options: .mappedIfSafe) else { return nil }
+        let decoder = JSONDecoder()
+        guard let rawTable = try? decoder.decode(RawEnglishLookupTable.self, from: jsonData) else { return nil }
+        dlog("successfully decoded english lookup table")
+        var table = EnglishLookupTable();
+        for (englishWord, entryLocations) in rawTable {
+            table[englishWord] = entryLocations.map({
+                EntryLocation(wordIndex: $0[0], entryIndex: $0[1])})
+        }
+        return table
+    }
 }
 
-func reverseLookupByEnglish(word: String, dict: KrDict, embedding: NLEmbedding) -> [Candidate] {
+func reverseLookupByEnglish(word: String, dict: KrDict, englishLookupTable: EnglishLookupTable, embedding: NLEmbedding) -> [Candidate] {
     var resultDict = KrDict()
     func searchDict(word: String) {
-        for (entryWord, entries) in dict {
-            for entry in entries {
+        if let entryLocations = englishLookupTable[word] {
+            for entryLocation in entryLocations {
+                let (entryWord, entries) = dict.elements[entryLocation.wordIndex]
+                let entry = entries[entryLocation.entryIndex]
                 let equivalentEnglishWords = entry.equivalentEnglishWords.filter({
                     $0.map({removeStopwords($0.lowercased())}).contains(removeStopwords(word.lowercased()))
                 })

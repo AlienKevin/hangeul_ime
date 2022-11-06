@@ -24,6 +24,20 @@ class EnhancedJSONEncoder(json.JSONEncoder):
         return super().default(o)
 
 
+# https://stackoverflow.com/a/52154263/6798201
+class EnhancedJSONDecoder(json.JSONDecoder):
+    def __init__(self, *args, **kwargs):
+        json.JSONDecoder.__init__(self, object_hook=self.object_hook, *args, **kwargs)
+    def object_hook(self, dict):
+        if "origin" in dict:
+            return Entry(
+                dict["origin"],
+                dict["vocabularyLevel"],
+                dict["prs"],
+                dict["equivalentEnglishWords"],
+            )
+        return dict
+
 def parse_krdict(
     dict_xml: TextIOWrapper,
     words: dict[str, list[Entry]],
@@ -112,7 +126,7 @@ def parse_krdict(
     return english_word_group_size
 
 
-if __name__ == "__main__":
+def generate_dict():
     # create empty dictionary from (word, origin, vocabulary_level) to pronunciations
     words: defaultdict[str, list[Entry]] = defaultdict(list)
     english_word_group_size = 0
@@ -144,3 +158,53 @@ if __name__ == "__main__":
                 word_list, cls=EnhancedJSONEncoder, ensure_ascii=False, indent=None
             )
         )
+
+
+def generate_lookup_table(krdict: dict[str, list[Entry]]):
+    lookup_table_with_freq: defaultdict[str, list[tuple[int, int, int]]] = defaultdict(list)
+    for word_index, (_entry_word, entries) in enumerate(krdict.items()):
+        for entry_index, entry in enumerate(entries):
+            english_word_freqs: defaultdict[str, int] = defaultdict(int)
+            for english_word_group in entry.equivalentEnglishWords:
+                for english_word in english_word_group:
+                    english_word = english_word.lower()
+                    english_word_freqs[english_word] += 1
+                    english_word_cleaned = remove_stopword_at_start(english_word)
+                    if english_word_cleaned != english_word:
+                        english_word_freqs[english_word_cleaned] += 1
+            for english_word, freq in english_word_freqs.items():
+                lookup_table_with_freq[english_word].append((word_index, entry_index, freq))
+    lookup_table: dict[str, list[tuple[int, int]]] = {}
+    for english_word, candidates in lookup_table_with_freq.items():
+        lookup_table[english_word] = list(map(lambda candidate: candidate[:2],
+            sorted(candidates, key=lambda candidate: candidate[2])
+        ))
+    # Write to output
+    with open("KrDictEnglishLookUpTable.json", "w+") as output:
+        output.write(
+            json.dumps(
+                lookup_table, ensure_ascii=False, indent=None
+            )
+        )
+
+
+def remove_stopword_at_start(s: str) -> str:
+    stopwords = {"a", "an", "the"}
+    for stopword in stopwords:
+        if s.startswith(stopword + " "):
+            return s[len(stopword) + 1:]
+    return s
+
+
+def read_dict_from_json() -> dict[str, list[Entry]]:
+    with open("KrDict.json", "r") as f:
+        raw_dict = json.load(f, cls=EnhancedJSONDecoder)
+        dict = {}
+        for word in raw_dict:
+            dict[word["word"]] = word["entries"]
+        return dict
+
+
+if __name__ == "__main__":
+    # generate_dict()
+    generate_lookup_table(read_dict_from_json())
