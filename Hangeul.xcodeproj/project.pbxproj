@@ -17,7 +17,6 @@
 		0A66AEAC29039F1F00FC4D60 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A66AEAB29039F1F00FC4D60 /* InputSource.swift */; };
 		0A72214B28ECD6B1004D153F /* icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A72214A28ECD6B1004D153F /* icon.pdf */; };
 		0A74E8D3290EB99C00F8E618 /* KrDictEmbeddings.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0A74E8D2290EB99C00F8E618 /* KrDictEmbeddings.mlmodel */; };
-		0A74E8D5290EBB8E00F8E618 /* KrDict.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A74E8D4290EBB8E00F8E618 /* KrDict.json */; };
 		0A87A434290C032B00589168 /* Hangeul.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A41E61426E745D9009B65D7 /* Hangeul.app */; };
 		0A89877C2900423F00B26621 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A89877B2900423F00B26621 /* Debug.swift */; };
 		0A99B8AC28FF9A38005E27A2 /* Jamo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99B8AB28FF9A38005E27A2 /* Jamo.swift */; };
@@ -27,7 +26,8 @@
 		0AC8F69829057C04009A40A2 /* Candidates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC8F69729057C04009A40A2 /* Candidates.swift */; };
 		0AC8F69A29058308009A40A2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC8F69929058308009A40A2 /* State.swift */; };
 		0AD9BCD1290588980052A4F9 /* ThemeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD9BCD0290588980052A4F9 /* ThemeConfig.swift */; };
-		0ADECC66291735D100CF0963 /* KrDictEnglishLookupTable.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADECC65291735D100CF0963 /* KrDictEnglishLookupTable.json */; };
+		0ADECC692917F1C700CF0963 /* KrDict.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADECC672917F1C700CF0963 /* KrDict.json */; };
+		0ADECC6A2917F1C700CF0963 /* KrDictEnglishLookupTable.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADECC682917F1C700CF0963 /* KrDictEnglishLookupTable.json */; };
 		0ADED4CE290B029100705D9E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADED4CD290B029100705D9E /* OrderedCollections */; };
 		1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61B26E745DD009B65D7 /* Assets.xcassets */; };
 		1A41E64226E74627009B65D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64126E74627009B65D7 /* AppDelegate.swift */; };
@@ -83,7 +83,6 @@
 		0A66AEAB29039F1F00FC4D60 /* InputSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSource.swift; sourceTree = "<group>"; };
 		0A72214A28ECD6B1004D153F /* icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = icon.pdf; sourceTree = "<group>"; };
 		0A74E8D2290EB99C00F8E618 /* KrDictEmbeddings.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = KrDictEmbeddings.mlmodel; sourceTree = "<group>"; };
-		0A74E8D4290EBB8E00F8E618 /* KrDict.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KrDict.json; path = Dictionaries/KrDict.json; sourceTree = SOURCE_ROOT; };
 		0A89877B2900423F00B26621 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		0A99B8AB28FF9A38005E27A2 /* Jamo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jamo.swift; sourceTree = "<group>"; };
 		0A99B8AD28FF9BE5005E27A2 /* Jaso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jaso.swift; sourceTree = "<group>"; };
@@ -92,7 +91,8 @@
 		0AC8F69729057C04009A40A2 /* Candidates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidates.swift; sourceTree = "<group>"; };
 		0AC8F69929058308009A40A2 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		0AD9BCD0290588980052A4F9 /* ThemeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeConfig.swift; sourceTree = "<group>"; };
-		0ADECC65291735D100CF0963 /* KrDictEnglishLookupTable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KrDictEnglishLookupTable.json; path = Dictionaries/KrDictEnglishLookupTable.json; sourceTree = SOURCE_ROOT; };
+		0ADECC672917F1C700CF0963 /* KrDict.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KrDict.json; path = Dictionaries/krdict/KrDict.json; sourceTree = SOURCE_ROOT; };
+		0ADECC682917F1C700CF0963 /* KrDictEnglishLookupTable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KrDictEnglishLookupTable.json; path = Dictionaries/krdict/KrDictEnglishLookupTable.json; sourceTree = SOURCE_ROOT; };
 		1A41E61426E745D9009B65D7 /* Hangeul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hangeul.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A41E61B26E745DD009B65D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A41E64126E74627009B65D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -213,9 +213,9 @@
 				0A99B8AB28FF9A38005E27A2 /* Jamo.swift */,
 				0A99B8AD28FF9BE5005E27A2 /* Jaso.swift */,
 				1A41E61B26E745DD009B65D7 /* Assets.xcassets */,
-				0A74E8D4290EBB8E00F8E618 /* KrDict.json */,
-				0ADECC65291735D100CF0963 /* KrDictEnglishLookupTable.json */,
 				0A74E8D2290EB99C00F8E618 /* KrDictEmbeddings.mlmodel */,
+				0ADECC672917F1C700CF0963 /* KrDict.json */,
+				0ADECC682917F1C700CF0963 /* KrDictEnglishLookupTable.json */,
 				0A72214A28ECD6B1004D153F /* icon.pdf */,
 				0A2DBA4828ECD75900DDAF23 /* icon.fig */,
 				0A135F3B28F6EA5D00B9942A /* Constants.swift */,
@@ -350,9 +350,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ADECC692917F1C700CF0963 /* KrDict.json in Resources */,
 				1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */,
-				0A74E8D5290EBB8E00F8E618 /* KrDict.json in Resources */,
-				0ADECC66291735D100CF0963 /* KrDictEnglishLookupTable.json in Resources */,
+				0ADECC6A2917F1C700CF0963 /* KrDictEnglishLookupTable.json in Resources */,
 				0A135F4228F70BF300B9942A /* en.lproj in Resources */,
 				0A72214B28ECD6B1004D153F /* icon.pdf in Resources */,
 			);

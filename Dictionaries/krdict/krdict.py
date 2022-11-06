@@ -132,7 +132,7 @@ def generate_dict():
     english_word_group_size = 0
     english_word_freqs: defaultdict[str, int] = defaultdict(int)
 
-    dir = "krdict/"
+    dir = "krdict_xml/"
 
     # Parse dictionary XMLs
     for filename in os.listdir(dir):
