@@ -123,7 +123,7 @@ Compared with 2-Set, the advantage of this schema is that for people who are alr
 Compared with HNC Romaja, the advantage of this schema is that the spellings of the vowels are closer to their phonetic values rather than shape compositions. For example, the vowel ㅐ is spelled as "ai" in HNC Romaja. This resembles the shape composition of the two jamos ㅏ ("a") and ㅣ ("i") more than the sound of the vowel. In this schema, ㅐ is spelled as "ae" which aims to approximate the sound /ɛ/ rather than the shape composition a + i.
 
 ## Reverse Lookup using English
-You can press 'q' to activate reverse lookup using English. Under the hood, we use the [Korean-English Learners' Dictionary](https://krdict.korean.go.kr/eng/) developed by the National Institute of Korean Language. The dictionary is licensed under the Creative Commons Attribution - Share Alike license.
+You can press 'q' to activate reverse lookup using English. Under the hood, we use the [Korean-English Learners' Dictionary](https://krdict.korean.go.kr/eng/) developed by the National Institute of Korean Language. The dictionary is licensed under the Creative Commons Attribution - Share Alike license. The version we used is fetched from the dictionary's website on Auguest 1st, 2021. The dictionary data can be found on [this GitHub repo](https://github.com/spellcheck-ko/korean-dict-nikl).
 
 ### Enter Lookup Mode
 As soon as you press 'q', you will see a prompt that says "[English]" after your cursor:
