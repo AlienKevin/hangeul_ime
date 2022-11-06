@@ -122,6 +122,27 @@ Compared with 2-Set, the advantage of this schema is that for people who are alr
 
 Compared with HNC Romaja, the advantage of this schema is that the spellings of the vowels are closer to their phonetic values rather than shape compositions. For example, the vowel ㅐ is spelled as "ai" in HNC Romaja. This resembles the shape composition of the two jamos ㅏ ("a") and ㅣ ("i") more than the sound of the vowel. In this schema, ㅐ is spelled as "ae" which aims to approximate the sound /ɛ/ rather than the shape composition a + i.
 
+## Reverse Lookup using English
+You can press 'q' to activate reverse lookup using English. Under the hood, we use the [Korean-English Learners' Dictionary](https://krdict.korean.go.kr/eng/) developed by the National Institute of Korean Language. The dictionary is licensed under the Creative Commons Attribution - Share Alike license.
+
+### Enter Lookup Mode
+As soon as you press 'q', you will see a prompt that says "[English]" after your cursor:
+
+![English Reverse Lookup Prompt](./Media/english_lookup_prompt.png)
+
+### Lookup English Words
+Go ahead and type an English word you want to lookup and the most relevant Korean words with that meaning will show up as candidates.
+
+![English Reverse Lookup Candidate Selector](./Media/english_lookup_candidates.png)
+
+### Quit Lookup Mode
+Simply delete the letter 'q' before your cursor to get back to Hangeul mode.
+
+### Reverse Lookup Demo
+The GIF below shows an example workflow that seamlessly switches between the default Hangeul mode and the Lookup mode.
+
+![English Reverse Lookup Demo](./Media/english_lookup_demo.gif)
+
 ## Seamless vs Composition Modes
 For apps that support TSMDocumentAccess protocol, we provide a seamless mode without the need of an inline composition buffer. All jamos are immediately committed to screen and we use `replacementRange` argument in `client()?.insertText` to modify previously committed jamos. Here's a list of apps that support seamless mode:
 
