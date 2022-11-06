@@ -11,11 +11,6 @@
 		0A135F3E28F703BA00B9942A /* Syllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A135F3D28F703BA00B9942A /* Syllable.swift */; };
 		0A135F4228F70BF300B9942A /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 0A135F4128F70BF300B9942A /* en.lproj */; };
 		0A2D3DD629059ABF007F8B79 /* InputControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D3DD529059ABF007F8B79 /* InputControllerTests.swift */; };
-		0A4CC578290DDF2C00B13089 /* b_build_installer.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC573290DDF2C00B13089 /* b_build_installer.sh */; };
-		0A4CC579290DDF2C00B13089 /* c_notarize_installer.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC574290DDF2C00B13089 /* c_notarize_installer.sh */; };
-		0A4CC57A290DDF2C00B13089 /* ExportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC575290DDF2C00B13089 /* ExportOptions.plist */; };
-		0A4CC57B290DDF2C00B13089 /* common.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC576290DDF2C00B13089 /* common.sh */; };
-		0A4CC57C290DDF2C00B13089 /* a_build_app.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0A4CC577290DDF2C00B13089 /* a_build_app.sh */; };
 		0A4CC591290DE51300B13089 /* KrDictEmbeddingsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4CC590290DE51300B13089 /* KrDictEmbeddingsGenerator.swift */; };
 		0A4CC599290DE8EE00B13089 /* CreateML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4CC598290DE8EE00B13089 /* CreateML.framework */; };
 		0A4D39222904B82B0055EFEF /* KrDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D39212904B82B0055EFEF /* KrDict.swift */; };
@@ -360,11 +355,6 @@
 				0ADECC66291735D100CF0963 /* KrDictEnglishLookupTable.json in Resources */,
 				0A135F4228F70BF300B9942A /* en.lproj in Resources */,
 				0A72214B28ECD6B1004D153F /* icon.pdf in Resources */,
-				0A4CC57B290DDF2C00B13089 /* common.sh in Resources */,
-				0A4CC579290DDF2C00B13089 /* c_notarize_installer.sh in Resources */,
-				0A4CC578290DDF2C00B13089 /* b_build_installer.sh in Resources */,
-				0A4CC57A290DDF2C00B13089 /* ExportOptions.plist in Resources */,
-				0A4CC57C290DDF2C00B13089 /* a_build_app.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
