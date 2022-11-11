@@ -38,7 +38,7 @@ typealias EnglishLookupTable = [String: [EntryLocation]]
 
 extension KrDict {
     // Asynchronously load dictionary JSON to prevent blocking the main thread
-    static func loadDictionaryFromJson(filename fileName: String) -> KrDict? {
+    static func loadDictionaryFromJson() -> KrDict? {
         guard let jsonPath = Bundle.main.path(forResource: "KrDict", ofType: "json") else { return nil }
         guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonPath), options: .mappedIfSafe) else { return nil }
         let decoder = JSONDecoder()
@@ -51,7 +51,7 @@ extension KrDict {
         return dict
     }
     
-    static func loadEnglishLookupTableFromJson(filename fileName: String) -> EnglishLookupTable? {
+    static func loadEnglishLookupTableFromJson() -> EnglishLookupTable? {
         guard let jsonPath = Bundle.main.path(forResource: "KrDictEnglishLookupTable", ofType: "json") else { return nil }
         dlog("Found english lookup table json in bundle")
         guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonPath), options: .mappedIfSafe) else { return nil }
@@ -67,7 +67,7 @@ extension KrDict {
     }
 }
 
-func reverseLookupByEnglish(word: String, dict: KrDict, englishLookupTable: EnglishLookupTable, embedding: NLEmbedding) -> [Candidate] {
+func reverseLookupByEnglish(word: String, dict: KrDict, englishLookupTable: EnglishLookupTable, freqDict: FreqDict, embedding: NLEmbedding) -> [Candidate] {
     var resultDict = KrDict()
     func searchDict(word: String) {
         if let entryLocations = englishLookupTable[word] {
@@ -130,7 +130,15 @@ func reverseLookupByEnglish(word: String, dict: KrDict, englishLookupTable: Engl
     func countEnglishWordOccurrences(entries: [Entry]) -> Int {
         return entries.map({return $0.equivalentEnglishWords.count}).reduce(0, +)
     }
-    let sortedResultKeyValuePairs = resultKeyValuePairs.sorted(by: { countEnglishWordOccurrences(entries: $0.1) > countEnglishWordOccurrences(entries: $1.1) })
+    let sortedResultKeyValuePairs = resultKeyValuePairs.sorted(by: {
+        let leftWordRanking = freqDict.getRanking(word: $0.0)
+        let rightWordRanking = freqDict.getRanking(word: $1.0)
+        if leftWordRanking == rightWordRanking {
+            return countEnglishWordOccurrences(entries: $0.1) > countEnglishWordOccurrences(entries: $1.1)
+        } else {
+            return leftWordRanking < rightWordRanking
+        }
+    })
     return sortedResultKeyValuePairs.map({
         let koreanWord = $0.0
         let firstEntry = $0.1.first!

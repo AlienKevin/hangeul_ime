@@ -143,6 +143,10 @@ The GIF below shows an example workflow that seamlessly switches between the def
 
 ![English Reverse Lookup Demo](./Media/english_lookup_demo.gif)
 
+### Frequency Dictionary
+
+https://ankiweb.net/shared/info/1470974730
+
 ## Seamless vs Composition Modes
 For apps that support TSMDocumentAccess protocol, we provide a seamless mode without the need of an inline composition buffer. All jamos are immediately committed to screen and we use `replacementRange` argument in `client()?.insertText` to modify previously committed jamos. Here's a list of apps that support seamless mode:
 

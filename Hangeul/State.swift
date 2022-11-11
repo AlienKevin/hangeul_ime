@@ -29,20 +29,22 @@ class State: NSObject {
     var krDictEnglishLookupTable: EnglishLookupTable = EnglishLookupTable()
     var server = IMKServer(name: Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String, bundleIdentifier: Bundle.main.bundleIdentifier)
     var krDictEmbeddings: NLEmbedding = NLEmbedding()
+    var freqDict: FreqDict = FreqDict()
     
     override init() {
         super.init()
         Task.init(priority: TaskPriority.medium) {
-            self.krDict = KrDict.loadDictionaryFromJson(filename: "KrDict.json") ?? self.krDict
+            self.krDict = KrDict.loadDictionaryFromJson() ?? self.krDict
         }
         Task.init(priority: TaskPriority.medium) {
-            self.krDictEnglishLookupTable = KrDict.loadEnglishLookupTableFromJson(filename: "KrDictEnglishLookupTable.json") ?? self.krDictEnglishLookupTable
+            self.krDictEnglishLookupTable = KrDict.loadEnglishLookupTableFromJson() ?? self.krDictEnglishLookupTable
             if !self.krDictEnglishLookupTable.isEmpty {
                 dlog("krDictEnglishLookupTable loaded!")
                 if let _ = self.krDictEnglishLookupTable["united states"] {
                     dlog("The word \"united states\" is found in the lookup table")
                 }
             }
+            self.freqDict = FreqDict.loadDictionaryFromJson() ?? self.freqDict
         }
         Task.init(priority: TaskPriority.low) {
             self.krDictEmbeddings = try! NLEmbedding.init(contentsOf: Bundle.main.url(forResource: "KrDictEmbeddings", withExtension:"mlmodelc")!)
@@ -72,7 +74,7 @@ class State: NSObject {
         if origin.count <= 0 {
             return ([], false)
         }
-        let candidates = reverseLookupByEnglish(word: origin, dict: krDict, englishLookupTable: krDictEnglishLookupTable, embedding: krDictEmbeddings)
+        let candidates = reverseLookupByEnglish(word: origin, dict: krDict, englishLookupTable: krDictEnglishLookupTable, freqDict: freqDict, embedding: krDictEmbeddings)
         if (page - 1) * candidateCount < candidates.count {
             let candidatesInPage = Array(candidates[((page - 1) * candidateCount)..<min(page * candidateCount, candidates.count)])
             let hasNext = page * candidateCount < candidates.count
