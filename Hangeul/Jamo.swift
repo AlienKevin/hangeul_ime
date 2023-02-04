@@ -5,6 +5,16 @@
 //  Created by Kevin Li on 10/18/22.
 //
 
+// Hangul Composition/Decomposition constants
+let SBase = 0xAC00
+let LBase = 0x1100
+let VBase = 0x1161
+let TBase = 0x11A7
+let LCount = 19
+let TCount = 28
+let NCount = 588 // VCount * TCount
+let SCount = LCount * NCount;   // 11172
+
 func jamo2HangulCompatabilityJamo(_ jamo: Int) -> Int {
     if jamo >= 0x1100 && jamo <= 0x11ff {
         let result = hangulCompatabilityJamos[jamo - 0x1100]
@@ -41,14 +51,8 @@ private func isJamo(_ c: Int) -> Bool {
     return isLPartJamo(c) || isVPartJamo(c) || isTPartJamo(c)
 }
 
+// Based on http://www.unicode.org/versions/Unicode15.0.0/ch03.pdf
 func jamos2Hangul(_ inp: String) -> String {
-    let SBase = 0xAC00
-    let LBase = 0x1100
-    let VBase = 0x1161
-    let TBase = 0x11A7
-    let TCount = 28
-    let NCount = 588 // VCount * TCount
-
     let lState = 0
     let vState = 1
     let tState = 2
@@ -118,3 +122,33 @@ func jamos2Hangul(_ inp: String) -> String {
     return hangul
 }
 
+// Based on http://www.unicode.org/versions/Unicode15.0.0/ch03.pdf
+func hangul2Jamos(_ inp: Character) -> String {
+    // Must only contain a single Hangul character
+    assert(String(inp).unicodeScalars.count == 1)
+    
+    let s = Int(String(inp).unicodeScalars.first!.value)
+    let SIndex = s - SBase
+    if (SIndex < 0 || SIndex >= SCount) {
+        return String(inp)
+    } else {
+        var result = ""
+        let L = LBase + SIndex / NCount
+        let V = VBase + (SIndex % NCount) / TCount
+        let T = TBase + SIndex % TCount
+        result.append(String(UnicodeScalar(L)!))
+        result.append(String(UnicodeScalar(V)!))
+        if (T != TBase) {
+            result.append(String(UnicodeScalar(T)!))
+        }
+        return result
+    }
+}
+
+func hanguls2Jamos(_ inp: String) -> String {
+    var jamos = ""
+    for hangul in inp {
+        jamos.append(hangul2Jamos(hangul))
+    }
+    return jamos
+}

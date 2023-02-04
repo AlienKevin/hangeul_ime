@@ -19,7 +19,7 @@
 		0A66AEAC29039F1F00FC4D60 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A66AEAB29039F1F00FC4D60 /* InputSource.swift */; };
 		0A72214B28ECD6B1004D153F /* icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0A72214A28ECD6B1004D153F /* icon.pdf */; };
 		0A74E8D3290EB99C00F8E618 /* KrDictEmbeddings.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0A74E8D2290EB99C00F8E618 /* KrDictEmbeddings.mlmodel */; };
-		0A87A434290C032B00589168 /* Hangeul.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A41E61426E745D9009B65D7 /* Hangeul.app */; };
+		0A87A434290C032B00589168 /* Hangeul.app in Copy Files */ = {isa = PBXBuildFile; fileRef = 1A41E61426E745D9009B65D7 /* Hangeul.app */; };
 		0A89877C2900423F00B26621 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A89877B2900423F00B26621 /* Debug.swift */; };
 		0A99B8AC28FF9A38005E27A2 /* Jamo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99B8AB28FF9A38005E27A2 /* Jamo.swift */; };
 		0A99B8AE28FF9BE5005E27A2 /* Jaso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99B8AD28FF9BE5005E27A2 /* Jaso.swift */; };
@@ -31,6 +31,8 @@
 		0ADECC692917F1C700CF0963 /* KrDict.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADECC672917F1C700CF0963 /* KrDict.json */; };
 		0ADECC6A2917F1C700CF0963 /* KrDictEnglishLookupTable.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADECC682917F1C700CF0963 /* KrDictEnglishLookupTable.json */; };
 		0ADED4CE290B029100705D9E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADED4CD290B029100705D9E /* OrderedCollections */; };
+		0AF0B631298DFFE80072CCEE /* G2P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF0B630298DFFE80072CCEE /* G2P.swift */; };
+		0AF0B643298E9CCC0072CCEE /* G2PTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF0B642298E9CCC0072CCEE /* G2PTests.swift */; };
 		1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61B26E745DD009B65D7 /* Assets.xcassets */; };
 		1A41E64226E74627009B65D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64126E74627009B65D7 /* AppDelegate.swift */; };
 		1A41E64426E74669009B65D7 /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A41E64326E74669009B65D7 /* InputController.swift */; };
@@ -51,18 +53,26 @@
 			remoteGlobalIDString = 1A41E61326E745D9009B65D7;
 			remoteInfo = Hangeul;
 		};
+		0AF0B644298E9E370072CCEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A41E60C26E745D9009B65D7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A41E61326E745D9009B65D7;
+			remoteInfo = Hangeul;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0A87A432290C028400589168 /* CopyFiles */ = {
+		0A87A432290C028400589168 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			dstPath = "/Library/Input Methods";
 			dstSubfolderSpec = 0;
 			files = (
-				0A87A434290C032B00589168 /* Hangeul.app in CopyFiles */,
+				0A87A434290C032B00589168 /* Hangeul.app in Copy Files */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -97,6 +107,9 @@
 		0AD9BCD0290588980052A4F9 /* ThemeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeConfig.swift; sourceTree = "<group>"; };
 		0ADECC672917F1C700CF0963 /* KrDict.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KrDict.json; path = Dictionaries/krdict/KrDict.json; sourceTree = SOURCE_ROOT; };
 		0ADECC682917F1C700CF0963 /* KrDictEnglishLookupTable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KrDictEnglishLookupTable.json; path = Dictionaries/krdict/KrDictEnglishLookupTable.json; sourceTree = SOURCE_ROOT; };
+		0AF0B630298DFFE80072CCEE /* G2P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G2P.swift; sourceTree = "<group>"; };
+		0AF0B638298E9C2C0072CCEE /* G2PTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = G2PTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AF0B642298E9CCC0072CCEE /* G2PTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G2PTests.swift; sourceTree = "<group>"; };
 		1A41E61426E745D9009B65D7 /* Hangeul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hangeul.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A41E61B26E745DD009B65D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A41E64126E74627009B65D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +134,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0AF0B635298E9C2C0072CCEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1A41E61126E745D9009B65D7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -136,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				0A2D3DD529059ABF007F8B79 /* InputControllerTests.swift */,
+				0AF0B642298E9CCC0072CCEE /* G2PTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -195,6 +216,7 @@
 				1A41E61426E745D9009B65D7 /* Hangeul.app */,
 				0A58A03A28F196B60092A616 /* InputControllerTests.xctest */,
 				0A4CC58E290DE51300B13089 /* KrDictEmbeddingsGenerator.xctest */,
+				0AF0B638298E9C2C0072CCEE /* G2PTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,6 +238,7 @@
 				0A2E340B291EB2DB0097EFE5 /* FreqDict.swift */,
 				0A66AEAB29039F1F00FC4D60 /* InputSource.swift */,
 				0A99B8AB28FF9A38005E27A2 /* Jamo.swift */,
+				0AF0B630298DFFE80072CCEE /* G2P.swift */,
 				0A99B8AD28FF9BE5005E27A2 /* Jaso.swift */,
 				1A41E61B26E745DD009B65D7 /* Assets.xcassets */,
 				0A74E8D2290EB99C00F8E618 /* KrDictEmbeddings.mlmodel */,
@@ -269,6 +292,24 @@
 			productReference = 0A58A03A28F196B60092A616 /* InputControllerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		0AF0B637298E9C2C0072CCEE /* G2PTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0AF0B63C298E9C2C0072CCEE /* Build configuration list for PBXNativeTarget "G2PTests" */;
+			buildPhases = (
+				0AF0B634298E9C2C0072CCEE /* Sources */,
+				0AF0B635298E9C2C0072CCEE /* Frameworks */,
+				0AF0B636298E9C2C0072CCEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0AF0B645298E9E370072CCEE /* PBXTargetDependency */,
+			);
+			name = G2PTests;
+			productName = G2PTests;
+			productReference = 0AF0B638298E9C2C0072CCEE /* G2PTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1A41E61326E745D9009B65D7 /* Hangeul */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A41E63826E745DD009B65D7 /* Build configuration list for PBXNativeTarget "Hangeul" */;
@@ -276,7 +317,7 @@
 				1A41E61026E745D9009B65D7 /* Sources */,
 				1A41E61126E745D9009B65D7 /* Frameworks */,
 				1A41E61226E745D9009B65D7 /* Resources */,
-				0A87A432290C028400589168 /* CopyFiles */,
+				0A87A432290C028400589168 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -297,7 +338,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					0A4CC58D290DE51300B13089 = {
@@ -307,6 +348,11 @@
 					0A58A03928F196B60092A616 = {
 						CreatedOnToolsVersion = 14.0.1;
 						LastSwiftMigration = 1400;
+						TestTargetID = 1A41E61326E745D9009B65D7;
+					};
+					0AF0B637298E9C2C0072CCEE = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 						TestTargetID = 1A41E61326E745D9009B65D7;
 					};
 					1A41E61326E745D9009B65D7 = {
@@ -333,6 +379,7 @@
 				1A41E61326E745D9009B65D7 /* Hangeul */,
 				0A58A03928F196B60092A616 /* InputControllerTests */,
 				0A4CC58D290DE51300B13089 /* KrDictEmbeddingsGenerator */,
+				0AF0B637298E9C2C0072CCEE /* G2PTests */,
 			);
 		};
 /* End PBXProject section */
@@ -346,6 +393,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0A58A03828F196B60092A616 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0AF0B636298E9C2C0072CCEE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -384,6 +438,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0AF0B634298E9C2C0072CCEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AF0B643298E9CCC0072CCEE /* G2PTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1A41E61026E745D9009B65D7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -404,6 +466,7 @@
 				0AC8F69829057C04009A40A2 /* Candidates.swift in Sources */,
 				0A135F3C28F6EA5D00B9942A /* Constants.swift in Sources */,
 				0A74E8D3290EB99C00F8E618 /* KrDictEmbeddings.mlmodel in Sources */,
+				0AF0B631298DFFE80072CCEE /* G2P.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +482,11 @@
 			isa = PBXTargetDependency;
 			target = 1A41E61326E745D9009B65D7 /* Hangeul */;
 			targetProxy = 0A58A03E28F196B60092A616 /* PBXContainerItemProxy */;
+		};
+		0AF0B645298E9E370072CCEE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A41E61326E745D9009B65D7 /* Hangeul */;
+			targetProxy = 0AF0B644298E9E370072CCEE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -449,6 +517,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z5TP7VUYRW;
@@ -488,7 +557,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.InputControllerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.inputmethod.InputControllerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = macosx;
@@ -524,7 +593,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.InputControllerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.inputmethod.InputControllerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = macosx;
@@ -533,6 +602,63 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hangeul.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hangeul";
+			};
+			name = Release;
+		};
+		0AF0B63D298E9C2C0072CCEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5TP7VUYRW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.inputmethod.G2PTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hangeul.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hangeul";
+			};
+			name = Debug;
+		};
+		0AF0B63E298E9C2C0072CCEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5TP7VUYRW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.kevin.inputmethod.G2PTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hangeul.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hangeul";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -765,6 +891,15 @@
 			buildConfigurations = (
 				0A58A04028F196B60092A616 /* Debug */,
 				0A58A04128F196B60092A616 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0AF0B63C298E9C2C0072CCEE /* Build configuration list for PBXNativeTarget "G2PTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AF0B63D298E9C2C0072CCEE /* Debug */,
+				0AF0B63E298E9C2C0072CCEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
