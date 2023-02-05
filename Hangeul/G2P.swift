@@ -88,13 +88,76 @@ func nasalization(s: String) -> (String, [String]) {
     return applyRules(rules: rules, s: s)
 }
 
+func palatalization(s: String) -> (String, [String]) {
+    let rules = [
+        ("ᆮ이", "지", "The consonant ᆮ is palatalized to ᄌ before the vowel 이"),
+        ("ᆮ히", "치", "The consonant ᆮ is palatalized to ᄎ before the sound 히"),
+        ("ᇀ(히|이)", "치", "The consonant ᇀ is palatalized to ᄎ before the sounds 히 and 이"),
+    ]
+    return applyRules(rules: rules, s: s)
+}
+
+func lateralization(s: String) -> (String, [String]) {
+    let rules = [
+        ("ᆫᄅ|ᆯᄂ", "ᆯᄅ", "The nasal ᄂ is lateralized to the liquid ᆯ before or after the liquid ᆯ"),
+    ]
+    return applyRules(rules: rules, s: s)
+}
+
+func aspiration(s: String) -> (String, [String]) {
+    let rules = [
+        ("ᆸᄒ|ᇂᄇ", "ᄑ", "The obstruent ᆸ is aspirated to ᄑ before or after ᇂ"),
+        ("ᆮᄒ|ᇂᄃ", "ᄐ", "The obstruent ᆮ is aspirated to ᄐ before or after ᇂ"),
+        ("ᆨᄒ|ᇂᄀ", "ᄏ", "The obstruent ᆨ is aspirated to ᄏ before or after ᇂ"),
+        ("ᆽᄒ|ᇂᄌ", "ᄎ", "The obstruent ᆽ is aspirated to ᄎ before or after ᇂ"),
+
+        ("ᆭᄇ", "ᆫᄑ", "The plosive ᄇ is aspirated to ᄑ after the consonant cluster ᆭ"),
+        ("ᆭᄃ", "ᆫᄐ", "The plosive ᄃ is aspirated to ᄐ after the consonant cluster ᆭ"),
+        ("ᆭᄀ", "ᆫᄏ", "The plosive ᄀ is aspirated to ᄏ after the consonant cluster ᆭ"),
+
+        ("ᆶᄇ", "ᆯᄑ", "The plosive ᄇ is aspirated to ᄑ after the consonant cluster ᆶ"),
+        ("ᆶᄃ", "ᆯᄐ", "The plosive ᄃ is aspirated to ᄐ after the consonant cluster ᆶ"),
+        ("ᆶᄀ", "ᆯᄏ", "The plosive ᄀ is aspirated to ᄏ after the consonant cluster ᆶ"),
+
+        ("ᆰᄒ", "ᆯᄏ", "The plosive ᄀ in the consonant cluster ᆰ is aspirated to ᄏ before ᄒ"),
+    ]
+    return applyRules(rules: rules, s: s)
+}
+
+func fortis(s: String) -> (String, [String]) {
+    let rules = [
+        ("(ᆸ|ᆮ|ᆨ)ᄇ", "$1ᄈ", "The obstruent ᄇ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
+        ("(ᆸ|ᆮ|ᆨ)ᄃ", "$1ᄄ", "The obstruent ᄃ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
+        ("(ᆸ|ᆮ|ᆨ)ᄀ", "$1ᄁ", "The obstruent ᄀ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
+        ("(ᆸ|ᆮ|ᆨ)ᄉ", "$1ᄊ", "The obstruent ᄉ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
+        ("(ᆸ|ᆮ|ᆨ)ᄌ", "$1ᄍ", "The obstruent ᄌ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
+        ("ᆰᄀ", "ᆯᄁ", "The plosive ᄀ is tensified after the consonant cluster ᆰ"),
+    ]
+    return applyRules(rules: rules, s: s)
+}
+
+func specialCases(s: String) -> (String, [String]) {
+    let rules = [
+        ("희", "히", "Special case: 희 is pronounced as 히"),
+        ("쳐", "처", "Special case: 쳐 is pronounced as 처"),
+    ]
+    return applyRules(rules: rules, s: s)
+}
+
 public func g2p(word: String) -> (String, [String]) {
     // Remove whitespace between morphemes (only 5 words have whitespaces)
     let word = word.replacingOccurrences(of: " ", with: "")
     
     let surfacePhoneticRules = [
+        specialCases,
+        palatalization,
         liaison,
+        lateralization,
+        aspiration,
+        fortis,
         syllableFinalNeutralization,
+        aspiration,
+        fortis,
         nasalization,
     ]
     

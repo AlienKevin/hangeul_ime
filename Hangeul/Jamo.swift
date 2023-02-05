@@ -125,7 +125,9 @@ func jamos2Hangul(_ inp: String) -> String {
 // Based on http://www.unicode.org/versions/Unicode15.0.0/ch03.pdf
 func hangul2Jamos(_ inp: Character) -> String {
     // Must only contain a single Hangul character
-    assert(String(inp).unicodeScalars.count == 1)
+    if String(inp).unicodeScalars.count > 1 {
+        return String(inp)
+    }
     
     let s = Int(String(inp).unicodeScalars.first!.value)
     let SIndex = s - SBase
