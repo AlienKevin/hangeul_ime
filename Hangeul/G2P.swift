@@ -7,22 +7,27 @@
 
 import Foundation
 
-func applyRules(rules: [(String, String, String)], s: String) -> (String, [String]) {
+public struct Explanation {
+    let rule: String;
+    let result: String;
+}
+
+func applyRules(rules: [(String, String, String)], s: String) -> (String, [Explanation]) {
     var result = s
-    var appliedRules: [String] = []
+    var appliedRules: [Explanation] = []
     for (pattern, template, rule) in rules {
         if let regex = try? NSRegularExpression(pattern: pattern, options: []) {
             let oldResult = result
             result = regex.stringByReplacingMatches(in: result, range: NSRange(result.startIndex..., in: result), withTemplate: template)
             if result != oldResult {
-                appliedRules.append(rule)
+                appliedRules.append(Explanation(rule: rule, result: result))
             }
         }
     }
     return (result, appliedRules)
 }
 
-func syllableFinalNeutralization(s: String) -> (String, [String]) {
+func syllableFinalNeutralization(s: String) -> (String, [Explanation]) {
     let rules = [
         ("(ᆿ|ᆩ)", "ᆨ", "ᆿ and ᆩ are neutralized to ᆨ at the end of a syllable"),
         ("(ᇀ|ᆺ|ᆻ|ᆽ|ᆾ|ᇂ)", "ᆮ", "ᇀ, ᆺ, ᆻ, ᆽ, ᆾ, and ᇂ are neutralized to ᆮ at the end of a syllable"),
@@ -42,7 +47,7 @@ func syllableFinalNeutralization(s: String) -> (String, [String]) {
     return applyRules(rules: rules, s: s)
 }
 
-func liaison(s: String) -> (String, [String]) {
+func liaison(s: String) -> (String, [Explanation]) {
     let rules = [
         ("ᆨᄋ", "ᄀ", "The final consonant ᆨ shifts over to the beginning of the next syllable when there is a placeholder ᄋ"),
         ("ᆫᄋ", "ᄂ", "The final consonant ᆫ shifts over to the beginning of the next syllable when there is a placeholder ᄋ"),
@@ -72,7 +77,7 @@ func liaison(s: String) -> (String, [String]) {
     return applyRules(rules: rules, s: s)
 }
 
-func nasalization(s: String) -> (String, [String]) {
+func nasalization(s: String) -> (String, [Explanation]) {
     let rules = [
         // Obstruent Nasalization
         ("ᆸ(ᄆ|ᄂ)", "ᆷ$1", "The obstruent ᆸ is nasalized to ᆷ before the nasals ᄆ and ᄂ"),
@@ -88,7 +93,7 @@ func nasalization(s: String) -> (String, [String]) {
     return applyRules(rules: rules, s: s)
 }
 
-func palatalization(s: String) -> (String, [String]) {
+func palatalization(s: String) -> (String, [Explanation]) {
     let rules = [
         ("ᆮ이", "지", "The consonant ᆮ is palatalized to ᄌ before the vowel 이"),
         ("ᆮ히", "치", "The consonant ᆮ is palatalized to ᄎ before the sound 히"),
@@ -97,14 +102,14 @@ func palatalization(s: String) -> (String, [String]) {
     return applyRules(rules: rules, s: s)
 }
 
-func lateralization(s: String) -> (String, [String]) {
+func lateralization(s: String) -> (String, [Explanation]) {
     let rules = [
         ("ᆫᄅ|ᆯᄂ", "ᆯᄅ", "The nasal ᄂ is lateralized to the liquid ᆯ before or after the liquid ᆯ"),
     ]
     return applyRules(rules: rules, s: s)
 }
 
-func aspiration(s: String) -> (String, [String]) {
+func aspiration(s: String) -> (String, [Explanation]) {
     let rules = [
         ("ᆸᄒ|ᇂᄇ", "ᄑ", "The obstruent ᆸ is aspirated to ᄑ before or after ᇂ"),
         ("ᆮᄒ|ᇂᄃ", "ᄐ", "The obstruent ᆮ is aspirated to ᄐ before or after ᇂ"),
@@ -124,7 +129,7 @@ func aspiration(s: String) -> (String, [String]) {
     return applyRules(rules: rules, s: s)
 }
 
-func fortis(s: String) -> (String, [String]) {
+func fortis(s: String) -> (String, [Explanation]) {
     let rules = [
         ("(ᆸ|ᆮ|ᆨ)ᄇ", "$1ᄈ", "The obstruent ᄇ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
         ("(ᆸ|ᆮ|ᆨ)ᄃ", "$1ᄄ", "The obstruent ᄃ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
@@ -136,7 +141,7 @@ func fortis(s: String) -> (String, [String]) {
     return applyRules(rules: rules, s: s)
 }
 
-func specialCases(s: String) -> (String, [String]) {
+func specialCases(s: String) -> (String, [Explanation]) {
     let rules = [
         ("희", "히", "Special case: 희 is pronounced as 히"),
         ("쳐", "처", "Special case: 쳐 is pronounced as 처"),
@@ -144,7 +149,7 @@ func specialCases(s: String) -> (String, [String]) {
     return applyRules(rules: rules, s: s)
 }
 
-public func g2p(word: String) -> (String, [String]) {
+public func g2p(word: String) -> (String, [Explanation]) {
     // Remove whitespace between morphemes (only 5 words have whitespaces)
     let word = word.replacingOccurrences(of: " ", with: "")
     
@@ -166,5 +171,5 @@ public func g2p(word: String) -> (String, [String]) {
         let (resultWord, newAppliedRules) = rule(word)
         return (resultWord, appliedRules + newAppliedRules)
     })
-    return (jamos2Hangul(resultWord), appliedRules) as! (String, [String])
+    return (jamos2Hangul(resultWord), appliedRules) as! (String, [Explanation])
 }
