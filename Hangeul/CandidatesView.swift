@@ -29,18 +29,17 @@ struct CandidateView: View {
         let annotationColor = selected
             ? themeConfig[colorScheme].selectedCodeColor
             : themeConfig[colorScheme].candidateCodeColor
-
+        
         return HStack(alignment: .center, spacing: 2) {
             Text("\(index + 1).")
                 .foregroundColor(Color(indexColor))
             Text(candidate.koreanWord)
                 .foregroundColor(Color(textColor))
-                .background(RoundedRectangle(cornerRadius: 4, style: .continuous) 
+                .background(RoundedRectangle(cornerRadius: 4, style: .continuous)
                     .fill(Color(backgroundColor)))
             Text(candidate.englishWords.joined(separator: ", "))
                 .foregroundColor(Color(annotationColor))
         }
-//        .fixedSize()
         .onTapGesture {
             NotificationCenter.default.post(
                 name: State.candidateSelected,

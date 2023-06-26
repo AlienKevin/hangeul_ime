@@ -31,6 +31,7 @@
 		0ADECC692917F1C700CF0963 /* KrDict.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADECC672917F1C700CF0963 /* KrDict.json */; };
 		0ADECC6A2917F1C700CF0963 /* KrDictEnglishLookupTable.json in Resources */ = {isa = PBXBuildFile; fileRef = 0ADECC682917F1C700CF0963 /* KrDictEnglishLookupTable.json */; };
 		0ADED4CE290B029100705D9E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 0ADED4CD290B029100705D9E /* OrderedCollections */; };
+		0AED60852A49C38F00F34E21 /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED60842A49C38F00F34E21 /* TooltipView.swift */; };
 		0AF0B631298DFFE80072CCEE /* G2P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF0B630298DFFE80072CCEE /* G2P.swift */; };
 		0AF0B643298E9CCC0072CCEE /* G2PTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF0B642298E9CCC0072CCEE /* G2PTests.swift */; };
 		1A41E61C26E745DD009B65D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41E61B26E745DD009B65D7 /* Assets.xcassets */; };
@@ -107,6 +108,7 @@
 		0AD9BCD0290588980052A4F9 /* ThemeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeConfig.swift; sourceTree = "<group>"; };
 		0ADECC672917F1C700CF0963 /* KrDict.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KrDict.json; path = Dictionaries/krdict/KrDict.json; sourceTree = SOURCE_ROOT; };
 		0ADECC682917F1C700CF0963 /* KrDictEnglishLookupTable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KrDictEnglishLookupTable.json; path = Dictionaries/krdict/KrDictEnglishLookupTable.json; sourceTree = SOURCE_ROOT; };
+		0AED60842A49C38F00F34E21 /* TooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		0AF0B630298DFFE80072CCEE /* G2P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G2P.swift; sourceTree = "<group>"; };
 		0AF0B638298E9C2C0072CCEE /* G2PTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = G2PTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AF0B642298E9CCC0072CCEE /* G2PTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G2PTests.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				0A2DBA4828ECD75900DDAF23 /* icon.fig */,
 				0A135F3B28F6EA5D00B9942A /* Constants.swift */,
 				0A135F4128F70BF300B9942A /* en.lproj */,
+				0AED60842A49C38F00F34E21 /* TooltipView.swift */,
 			);
 			path = Hangeul;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				0A135F3E28F703BA00B9942A /* Syllable.swift in Sources */,
 				0AC8F69A29058308009A40A2 /* State.swift in Sources */,
 				1A41E64426E74669009B65D7 /* InputController.swift in Sources */,
+				0AED60852A49C38F00F34E21 /* TooltipView.swift in Sources */,
 				0AC8F69329057A5E009A40A2 /* CandidatesWindow.swift in Sources */,
 				0A4D39222904B82B0055EFEF /* KrDict.swift in Sources */,
 				0A66AEAC29039F1F00FC4D60 /* InputSource.swift in Sources */,

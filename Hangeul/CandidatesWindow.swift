@@ -12,6 +12,7 @@ typealias CandidatesData = (list: [Candidate], hasPrev: Bool, hasNext: Bool, sel
 
 class CandidatesWindow: NSWindow, NSWindowDelegate {
     let hostingView = NSHostingView(rootView: CandidatesView(candidates: [], origin: ""))
+    let tooltipView = NSHostingView(rootView: AnyView(EmptyView()))
 
     func windowDidMove(_ notification: Notification) {
         /* windowDidMove会先于windowDidResize调用，所以需要
@@ -39,11 +40,55 @@ class CandidatesWindow: NSWindow, NSWindowDelegate {
         hostingView.rootView.hasNext = candidatesData.hasNext
         hostingView.rootView.hasPrev = candidatesData.hasPrev
         hostingView.rootView.selectedIndex = candidatesData.selectedIndex
+        
+        createTooltipView()
+        
         print("origin top left: \(topLeft)")
         print("candidates: \(candidatesData)")
         self.setFrameTopLeftPoint(topLeft)
         self.orderFront(nil)
 //        NSApp.setActivationPolicy(.prohibited)
+    }
+    
+    func createTooltipView() {
+        // Add tooltipView to contentView if it is not there already
+        if tooltipView.superview == nil {
+            self.contentView?.addSubview(tooltipView)
+        }
+
+        // Clear any previous constraints on tooltipView
+        tooltipView.removeConstraints(tooltipView.constraints)
+        
+        // Create constraints
+        let xOffset: CGFloat = 20
+        let yOffset: CGFloat = 0
+
+        let horizontalConstraint = NSLayoutConstraint(
+            item: tooltipView, 
+            attribute: .leading, 
+            relatedBy: .equal, 
+            toItem: hostingView, 
+            attribute: .trailing,
+            multiplier: 1, 
+            constant: xOffset)
+        
+        let verticalConstraint = NSLayoutConstraint(
+            item: tooltipView, 
+            attribute: .top,
+            relatedBy: .equal, 
+            toItem: hostingView, 
+            attribute: .top,
+            multiplier: 1, 
+            constant: yOffset)
+        
+        NSLayoutConstraint.activate([horizontalConstraint, verticalConstraint])
+
+        let (endWord, explanations) = g2p(word: hostingView.rootView.candidates[hostingView.rootView.selectedIndex].koreanWord);
+        
+        tooltipView.rootView = AnyView(PointingTooltipView(
+            text: explanations.isEmpty ? endWord : explanations.map { $0.result + " <= " + $0.rule }.joined(separator: "\n"),
+            tooltipDirection: .right
+        ))
     }
 
     override init(
@@ -70,14 +115,29 @@ class CandidatesWindow: NSWindow, NSWindowDelegate {
     private func setSizePolicy() {
         // 窗口大小可根据内容变化
         hostingView.translatesAutoresizingMaskIntoConstraints = false
+        tooltipView.translatesAutoresizingMaskIntoConstraints = false
+        
         guard self.contentView != nil else {
             return
         }
+        
         self.contentView?.addSubview(hostingView)
-        self.contentView?.leftAnchor.constraint(equalTo: hostingView.leftAnchor).isActive = true
-        self.contentView?.rightAnchor.constraint(equalTo: hostingView.rightAnchor).isActive = true
-        self.contentView?.topAnchor.constraint(equalTo: hostingView.topAnchor).isActive = true
-        self.contentView?.bottomAnchor.constraint(equalTo: hostingView.bottomAnchor).isActive = true
+        self.contentView?.leftAnchor.constraint(lessThanOrEqualTo: hostingView.leftAnchor).isActive = true
+        self.contentView?.rightAnchor.constraint(greaterThanOrEqualTo: hostingView.rightAnchor).isActive = true
+        self.contentView?.topAnchor.constraint(lessThanOrEqualTo: hostingView.topAnchor).isActive = true
+        self.contentView?.bottomAnchor.constraint(greaterThanOrEqualTo: hostingView.bottomAnchor).isActive = true
+        
+        let constraints = [
+            hostingView.leftAnchor.constraint(equalTo: contentView!.leftAnchor),
+            hostingView.topAnchor.constraint(equalTo: contentView!.topAnchor),
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
+        self.contentView?.addSubview(tooltipView)
+        self.contentView?.leftAnchor.constraint(lessThanOrEqualTo: tooltipView.leftAnchor).isActive = true
+        self.contentView?.rightAnchor.constraint(greaterThanOrEqualTo: tooltipView.rightAnchor).isActive = true
+        self.contentView?.topAnchor.constraint(lessThanOrEqualTo: tooltipView.topAnchor).isActive = true
+        self.contentView?.bottomAnchor.constraint(greaterThanOrEqualTo: tooltipView.bottomAnchor).isActive = true
     }
 
     private func transformTopLeft(originalTopLeft: NSPoint) -> NSPoint {

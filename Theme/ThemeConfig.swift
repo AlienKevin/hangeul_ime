@@ -48,6 +48,8 @@ struct ApperanceThemeConfig: Codable {
     let candidateTextColor: ColorData
     let candidateCodeColor: ColorData
     let candidateBackgroundColor: ColorData
+    
+    let tooltipBackgroundColor: ColorData
 
     let selectedIndexColor: ColorData
     let selectedTextColor: ColorData
@@ -85,9 +87,11 @@ struct ThemeConfig: Codable {
 
 let defaultLightAccentColor = ColorData(red: 0, green: 0.110, blue: 0.247, opacity: 1)
 let defaultLightBackgroundColor = ColorData(red: 1, green: 1, blue: 1, opacity: 1)
+let defaultLightGreyColor = ColorData(red: 0.9451, green: 0.9176, blue: 0.8902, opacity: 1)
 
 let defaultDarkAccentColor = ColorData(red: 0.947, green: 0.184, blue: 0.243, opacity: 1)
 let defaultDarkBackgroundColor = ColorData(red: 0, green: 0, blue: 0, opacity: 1)
+let defaultDarkGreyColor = ColorData(red: 0.2235, green: 0.1569, blue: 0.1373, opacity: 1)
 
 let defaultThemeConfig = ThemeConfig(
     id: "default",
@@ -107,6 +111,7 @@ let defaultThemeConfig = ThemeConfig(
         candidateTextColor: ColorData(red: 0.1, green: 0.1, blue: 0.1, opacity: 1),
         candidateCodeColor: ColorData(red: 0.3, green: 0.3, blue: 0.3, opacity: 0.8),
         candidateBackgroundColor: defaultLightBackgroundColor.withOpacity(opacity: 0),
+        tooltipBackgroundColor: defaultLightGreyColor,
         selectedIndexColor: defaultLightAccentColor,
         selectedTextColor: defaultLightBackgroundColor,
         selectedCodeColor: defaultLightAccentColor.withOpacity(opacity: 0.8),
@@ -129,6 +134,7 @@ let defaultThemeConfig = ThemeConfig(
         candidateTextColor: ColorData(red: 0.9, green: 0.9, blue: 0.9, opacity: 1),
         candidateCodeColor: ColorData(red: 0.7, green: 0.7, blue: 0.7, opacity: 0.8),
         candidateBackgroundColor: defaultDarkBackgroundColor,
+        tooltipBackgroundColor: defaultDarkGreyColor,
         selectedIndexColor: defaultDarkAccentColor,
         selectedTextColor: defaultDarkBackgroundColor,
         selectedCodeColor: defaultDarkAccentColor.withOpacity(opacity: 0.8),
