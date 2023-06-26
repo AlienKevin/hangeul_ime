@@ -52,17 +52,26 @@ final class InputControllerTest: XCTestCase {
         XCTAssertEqual(Syllable.syllabify("babwaebeo"), [Syllable(initial: "b", nucleus: "a"), Syllable(initial: "b", nucleus: "uae"), Syllable(initial: "b", nucleus: "eo")])
         
         // double-consonant finals
-        XCTAssertEqual(Syllable.syllabify("galh"), [Syllable(initial: "g", nucleus: "a", final: "lh")])
         XCTAssertEqual(Syllable.syllabify("gabs"), [Syllable(initial: "g", nucleus: "a", final: "bs")])
         XCTAssertEqual(Syllable.syllabify("gags"), [Syllable(initial: "g", nucleus: "a", final: "gs")])
         XCTAssertEqual(Syllable.syllabify("ganj"), [Syllable(initial: "g", nucleus: "a", final: "nj")])
         XCTAssertEqual(Syllable.syllabify("ganh"), [Syllable(initial: "g", nucleus: "a", final: "nh")])
+        
+        XCTAssertEqual(Syllable.syllabify("galh"), [Syllable(initial: "g", nucleus: "a", final: "lh")])
         XCTAssertEqual(Syllable.syllabify("galg"), [Syllable(initial: "g", nucleus: "a", final: "lg")])
         XCTAssertEqual(Syllable.syllabify("galm"), [Syllable(initial: "g", nucleus: "a", final: "lm")])
         XCTAssertEqual(Syllable.syllabify("galb"), [Syllable(initial: "g", nucleus: "a", final: "lb")])
         XCTAssertEqual(Syllable.syllabify("gals"), [Syllable(initial: "g", nucleus: "a", final: "ls")])
         XCTAssertEqual(Syllable.syllabify("galt"), [Syllable(initial: "g", nucleus: "a", final: "lt")])
         XCTAssertEqual(Syllable.syllabify("galp"), [Syllable(initial: "g", nucleus: "a", final: "lp")])
+        
+        XCTAssertEqual(Syllable.syllabify("garh"), [Syllable(initial: "g", nucleus: "a", final: "lh")])
+        XCTAssertEqual(Syllable.syllabify("garg"), [Syllable(initial: "g", nucleus: "a", final: "lg")])
+        XCTAssertEqual(Syllable.syllabify("garm"), [Syllable(initial: "g", nucleus: "a", final: "lm")])
+        XCTAssertEqual(Syllable.syllabify("garb"), [Syllable(initial: "g", nucleus: "a", final: "lb")])
+        XCTAssertEqual(Syllable.syllabify("gars"), [Syllable(initial: "g", nucleus: "a", final: "ls")])
+        XCTAssertEqual(Syllable.syllabify("gart"), [Syllable(initial: "g", nucleus: "a", final: "lt")])
+        XCTAssertEqual(Syllable.syllabify("garp"), [Syllable(initial: "g", nucleus: "a", final: "lp")])
         
         // With capital letters
         XCTAssertEqual(Syllable.syllabify("kkyeonGang"), [Syllable(initial: "kk", nucleus: "ieo", final: "n"), Syllable(initial: "g", nucleus: "a", final: "ng")])

@@ -60,8 +60,10 @@ struct Syllable: Equatable {
     public static func syllabify(_ s: String) -> [Syllable] {
         var syllables: [Syllable] = []
         let vowel = try! NSRegularExpression(pattern: "^([iy]ae|[uw]ae|[iy]eo|ae|[iy]e|[uw]e|[iy]a|[iy]o|oe|[iy][uw]|[uw]o|[uw][iy]|[uw]a|e[uw]|eo|a|e|[iy]|o|[uw])", options: [NSRegularExpression.Options.caseInsensitive])
-        let initial_consonant = try! NSRegularExpression(pattern: "^(jj|ch|ss|pp|tt|kk|p|t|k|b|d|g|j|c|s|h|n|m|l|r)", options: [NSRegularExpression.Options.caseInsensitive])
-        let final_consonant = try! NSRegularExpression(pattern: "^(kk|ss|ng|ch|gs|nj|nh|lg|lm|lb|ls|lt|lp|lh|bs|g|k|d|t|b|p|j|c|s|h|n|m|l|r)", options: [NSRegularExpression.Options.caseInsensitive])
+        let initial_consonant = try! NSRegularExpression(pattern: "^(jj|ch|ss|pp|tt|kk|p|t|k|b|d|g|j|c|s|h|n|m|l)", options: [NSRegularExpression.Options.caseInsensitive])
+        let final_consonant = try! NSRegularExpression(pattern: "^(kk|ss|ng|ch|gs|nj|nh|lg|lm|lb|ls|lt|lp|lh|bs|g|k|d|t|b|p|j|c|s|h|n|m|l)", options: [NSRegularExpression.Options.caseInsensitive])
+        
+        let s = s.replacingOccurrences(of: "r", with: "l").replacingOccurrences(of: "R", with: "L")
         
         var start = s.startIndex
         var end = start
@@ -83,7 +85,7 @@ struct Syllable: Equatable {
                 let initial_match = initial_consonant.matches(in: s, range: NSRange(start..<end, in: s))
                 if let match = initial_match.first {
                     if let swiftRange = Range(match.range, in: s) {
-                        syllable.initial = String(s[swiftRange]).lowercased().replacingOccurrences(of: "r", with: "l")
+                        syllable.initial = String(s[swiftRange]).lowercased()
                         start = s.index(start, offsetBy: match.range.length)
                     }
                 }
@@ -104,7 +106,7 @@ struct Syllable: Equatable {
                         let next_start = s.index(start, offsetBy: final_match.range.length)
                         if vowel.matches(in: s, range: NSRange(next_start..<end, in: s)).isEmpty {
                             if let swiftRange = Range(final_match.range, in: s) {
-                                syllable.final = String(s[swiftRange]).lowercased().replacingOccurrences(of: "r", with: "l")
+                                syllable.final = String(s[swiftRange]).lowercased()
                                 start = s.index(start, offsetBy: final_match.range.length)
                             }
                         } else {
