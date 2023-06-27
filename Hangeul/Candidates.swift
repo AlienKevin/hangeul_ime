@@ -14,6 +14,7 @@ enum CandidatesDirection: Int, Decodable, Encodable {
 
 struct Candidate: Hashable {
     let koreanWord: String
+    let prs: [String]
     let englishWords: [String]
 }
 

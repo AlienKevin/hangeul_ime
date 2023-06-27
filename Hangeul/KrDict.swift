@@ -143,7 +143,7 @@ func reverseLookupByEnglish(word: String, dict: KrDict, englishLookupTable: Engl
         let koreanWord = $0.0
         let firstEntry = $0.1.first!
         let englishWords = NSOrderedSet(array: firstEntry.equivalentEnglishWords).map({ $0 as! [String] })
-        return Candidate(koreanWord: koreanWord, englishWords: englishWords.first!)
+        return Candidate(koreanWord: koreanWord, prs: firstEntry.prs, englishWords: englishWords.first!)
     })
 }
 

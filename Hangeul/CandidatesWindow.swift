@@ -55,40 +55,47 @@ class CandidatesWindow: NSWindow, NSWindowDelegate {
         if tooltipView.superview == nil {
             self.contentView?.addSubview(tooltipView)
         }
-
+        
         // Clear any previous constraints on tooltipView
         tooltipView.removeConstraints(tooltipView.constraints)
         
         // Create constraints
         let xOffset: CGFloat = 20
         let yOffset: CGFloat = 0
-
+        
         let horizontalConstraint = NSLayoutConstraint(
-            item: tooltipView, 
-            attribute: .leading, 
-            relatedBy: .equal, 
-            toItem: hostingView, 
+            item: tooltipView,
+            attribute: .leading,
+            relatedBy: .equal,
+            toItem: hostingView,
             attribute: .trailing,
-            multiplier: 1, 
+            multiplier: 1,
             constant: xOffset)
         
         let verticalConstraint = NSLayoutConstraint(
-            item: tooltipView, 
+            item: tooltipView,
             attribute: .top,
-            relatedBy: .equal, 
-            toItem: hostingView, 
+            relatedBy: .equal,
+            toItem: hostingView,
             attribute: .top,
-            multiplier: 1, 
+            multiplier: 1,
             constant: yOffset)
         
         NSLayoutConstraint.activate([horizontalConstraint, verticalConstraint])
-
-        let (endWord, explanations) = g2p(word: hostingView.rootView.candidates[hostingView.rootView.selectedIndex].koreanWord);
         
-        tooltipView.rootView = AnyView(PointingTooltipView(
-            text: explanations.isEmpty ? endWord : explanations.map { $0.result + " <= " + $0.rule }.joined(separator: "\n"),
-            tooltipDirection: .right
-        ))
+        let selectedCandidate = hostingView.rootView.candidates[hostingView.rootView.selectedIndex]
+        
+        let (derivedPr, explanations) = g2p(word: selectedCandidate.koreanWord)
+        
+        if selectedCandidate.prs.contains(derivedPr) && !explanations.isEmpty {
+            self.tooltipView.isHidden = false
+            tooltipView.rootView = AnyView(PointingTooltipView(
+                text: explanations.map { $0.result + ":\t" + $0.pattern + "\t→\t" + $0.template }.joined(separator: "\n"),
+                tooltipDirection: .right
+            ))
+        } else {
+            self.tooltipView.isHidden = true
+        }
     }
 
     override init(

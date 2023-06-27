@@ -9,6 +9,8 @@ import Foundation
 
 public struct Explanation {
     let rule: String;
+    let pattern: String;
+    let template: String;
     let result: String;
 }
 
@@ -20,7 +22,7 @@ func applyRules(rules: [(String, String, String)], s: String) -> (String, [Expla
             let oldResult = result
             result = regex.stringByReplacingMatches(in: result, range: NSRange(result.startIndex..., in: result), withTemplate: template)
             if result != oldResult {
-                appliedRules.append(Explanation(rule: rule, result: result))
+                appliedRules.append(Explanation(rule: rule, pattern: pattern, template: template, result: result))
             }
         }
     }
