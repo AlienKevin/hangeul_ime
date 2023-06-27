@@ -11,6 +11,8 @@ import InputMethodKit
 typealias CandidatesData = (list: [Candidate], hasPrev: Bool, hasNext: Bool, selectedIndex: Int)
 
 class CandidatesWindow: NSWindow, NSWindowDelegate {
+    var page: Int?
+    
     let hostingView = NSHostingView(rootView: CandidatesView(candidates: [], origin: ""))
     let tooltipView = NSHostingView(rootView: AnyView(EmptyView()))
 
@@ -32,9 +34,12 @@ class CandidatesWindow: NSWindow, NSWindowDelegate {
 
     func setCandidates(
         _ candidatesData: CandidatesData,
+        _ page: Int,
         originalString: String,
         topLeft: NSPoint
     ) {
+        self.page = page
+        
         hostingView.rootView.candidates = candidatesData.list
         hostingView.rootView.origin = originalString
         hostingView.rootView.hasNext = candidatesData.hasNext
@@ -88,11 +93,19 @@ class CandidatesWindow: NSWindow, NSWindowDelegate {
         let (derivedPr, explanations) = g2p(word: selectedCandidate.koreanWord)
         
         if selectedCandidate.prs.contains(derivedPr) && !explanations.isEmpty {
-            self.tooltipView.isHidden = false
-            tooltipView.rootView = AnyView(PointingTooltipView(
-                word: selectedCandidate.koreanWord, explanations: explanations, derivedPr: derivedPr,
-                tooltipDirection: .right
-            ))
+            let oldSelectedIndex = hostingView.rootView.selectedIndex
+            let oldPageIndex = page
+            DispatchQueue.main.asyncAfter(deadline: tooltipView.isHidden ? .now() + 1 : .now()) {
+                let newSelectedIndex = self.hostingView.rootView.selectedIndex
+                let newPageIndex = self.page
+                if oldSelectedIndex == newSelectedIndex && oldPageIndex == newPageIndex {
+                    self.tooltipView.isHidden = false
+                    self.tooltipView.rootView = AnyView(PointingTooltipView(
+                        word: selectedCandidate.koreanWord, explanations: explanations, derivedPr: derivedPr,
+                        tooltipDirection: .right
+                    ))
+                }
+            }
         } else {
             self.tooltipView.isHidden = true
         }

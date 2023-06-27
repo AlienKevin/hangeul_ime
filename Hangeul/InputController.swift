@@ -417,6 +417,7 @@ class InputController: IMKInputController {
         let candidatesData = (list: _candidates, hasPrev: curPage > 1, hasNext: _hasNext, selectedIndex: _selectedIndex)
         CandidatesWindow.shared.setCandidates(
             candidatesData,
+            curPage,
             originalString: _originalString,
             topLeft: getOriginPoint()
         )
