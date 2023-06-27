@@ -63,6 +63,7 @@ struct ApperanceThemeConfig: Codable {
 
     let fontName: String
     let fontSize: Float
+    let annotationFontSize: CGFloat
 }
 
 struct ThemeConfig: Codable {
@@ -107,7 +108,7 @@ let defaultThemeConfig = ThemeConfig(
         originCodeColor: ColorData(red: 0.3, green: 0.3, blue: 0.3, opacity: 1),
         originCandidatesSpace: 6,
         candidateSpace: 8,
-        candidateIndexColor: ColorData(red: 0.1, green: 0.1, blue: 0.1, opacity: 1),
+        candidateIndexColor: ColorData(red: 0.6, green: 0.6, blue: 0.6, opacity: 1),
         candidateTextColor: ColorData(red: 0.1, green: 0.1, blue: 0.1, opacity: 1),
         candidateCodeColor: ColorData(red: 0.3, green: 0.3, blue: 0.3, opacity: 0.8),
         candidateBackgroundColor: defaultLightBackgroundColor.withOpacity(opacity: 0),
@@ -119,7 +120,9 @@ let defaultThemeConfig = ThemeConfig(
         pageIndicatorColor: defaultLightAccentColor,
         pageIndicatorDisabledColor: defaultLightAccentColor.withOpacity(opacity: 0.4),
         fontName: "system",
-        fontSize: 20),
+        fontSize: 20,
+        annotationFontSize: 14
+    ),
     dark: ApperanceThemeConfig(
         windowBackgroundColor: defaultDarkBackgroundColor,
         windowPaddingTop: 6,
@@ -130,7 +133,7 @@ let defaultThemeConfig = ThemeConfig(
         originCodeColor: ColorData(red: 1, green: 1, blue: 1, opacity: 1),
         originCandidatesSpace: 6,
         candidateSpace: 8,
-        candidateIndexColor: ColorData(red: 0.9, green: 0.9, blue: 0.9, opacity: 1),
+        candidateIndexColor: ColorData(red: 0.6, green: 0.6, blue: 0.6, opacity: 1),
         candidateTextColor: ColorData(red: 0.9, green: 0.9, blue: 0.9, opacity: 1),
         candidateCodeColor: ColorData(red: 0.7, green: 0.7, blue: 0.7, opacity: 0.8),
         candidateBackgroundColor: defaultDarkBackgroundColor,
@@ -142,7 +145,8 @@ let defaultThemeConfig = ThemeConfig(
         pageIndicatorColor: defaultDarkAccentColor,
         pageIndicatorDisabledColor: defaultDarkAccentColor.withOpacity(opacity: 0.4),
         fontName: "system",
-        fontSize: 20
+        fontSize: 20,
+        annotationFontSize: 14
     )
 )
 

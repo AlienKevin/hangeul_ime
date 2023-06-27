@@ -30,15 +30,19 @@ struct CandidateView: View {
             ? themeConfig[colorScheme].selectedCodeColor
             : themeConfig[colorScheme].candidateCodeColor
         
-        return HStack(alignment: .center, spacing: 2) {
-            Text("\(index + 1).")
+        return HStack(alignment: .center, spacing: 4) {
+            Text("\(index + 1)")
                 .foregroundColor(Color(indexColor))
+                .font(.system(size: themeConfig.current.annotationFontSize))
             Text(candidate.koreanWord)
+                .lineLimit(1)
                 .foregroundColor(Color(textColor))
                 .background(RoundedRectangle(cornerRadius: 4, style: .continuous)
-                    .fill(Color(backgroundColor)))
+                .fill(Color(backgroundColor)))
             Text(candidate.englishWords.joined(separator: ", "))
+                .lineLimit(1)
                 .foregroundColor(Color(annotationColor))
+                .font(.system(size: themeConfig.current.annotationFontSize))
         }
         .onTapGesture {
             NotificationCenter.default.post(
@@ -111,20 +115,19 @@ struct CandidatesView: View {
                     _candidatesView
                     _indicator
                 }
-                .fixedSize()
             } else {
                 VStack(alignment: .leading, spacing: CGFloat(themeConfig[colorScheme].candidateSpace)) {
                     _candidatesView
+                    Spacer()
                     _indicator
                 }
-                .fixedSize()
             }
         })
             .padding(.top, CGFloat(themeConfig[colorScheme].windowPaddingTop))
             .padding(.bottom, CGFloat(themeConfig[colorScheme].windowPaddingBottom))
             .padding(.leading, CGFloat(themeConfig[colorScheme].windowPaddingLeft))
             .padding(.trailing, CGFloat(themeConfig[colorScheme].windowPaddingRight))
-            .fixedSize()
+            .frame(width: 200, height: 200, alignment: .topLeading)
             .font(.system(size: CGFloat(themeConfig[colorScheme].fontSize)))
             .background(Color(themeConfig[colorScheme].windowBackgroundColor))
             .cornerRadius(CGFloat(themeConfig[colorScheme].windowBorderRadius), antialiased: true)

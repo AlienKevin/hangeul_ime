@@ -122,22 +122,16 @@ class CandidatesWindow: NSWindow, NSWindowDelegate {
         }
         
         self.contentView?.addSubview(hostingView)
-        self.contentView?.leftAnchor.constraint(lessThanOrEqualTo: hostingView.leftAnchor).isActive = true
-        self.contentView?.rightAnchor.constraint(greaterThanOrEqualTo: hostingView.rightAnchor).isActive = true
-        self.contentView?.topAnchor.constraint(lessThanOrEqualTo: hostingView.topAnchor).isActive = true
-        self.contentView?.bottomAnchor.constraint(greaterThanOrEqualTo: hostingView.bottomAnchor).isActive = true
-        
-        let constraints = [
-            hostingView.leftAnchor.constraint(equalTo: contentView!.leftAnchor),
-            hostingView.topAnchor.constraint(equalTo: contentView!.topAnchor),
-        ]
-        NSLayoutConstraint.activate(constraints)
+        self.contentView?.leftAnchor.constraint(equalTo: hostingView.leftAnchor).isActive = true
+//        self.contentView?.rightAnchor.constraint(greaterThanOrEqualTo: hostingView.rightAnchor).isActive = true
+        self.contentView?.topAnchor.constraint(equalTo: hostingView.topAnchor).isActive = true
+        self.contentView?.bottomAnchor.constraint(equalTo: hostingView.bottomAnchor).isActive = true
         
         self.contentView?.addSubview(tooltipView)
-        self.contentView?.leftAnchor.constraint(lessThanOrEqualTo: tooltipView.leftAnchor).isActive = true
-        self.contentView?.rightAnchor.constraint(greaterThanOrEqualTo: tooltipView.rightAnchor).isActive = true
-        self.contentView?.topAnchor.constraint(lessThanOrEqualTo: tooltipView.topAnchor).isActive = true
-        self.contentView?.bottomAnchor.constraint(greaterThanOrEqualTo: tooltipView.bottomAnchor).isActive = true
+//        self.contentView?.leftAnchor.constraint(lessThanOrEqualTo: tooltipView.leftAnchor).isActive = true
+        self.contentView?.rightAnchor.constraint(equalTo: tooltipView.rightAnchor).isActive = true
+//        self.contentView?.topAnchor.constraint(lessThanOrEqualTo: tooltipView.topAnchor).isActive = true
+//        self.contentView?.bottomAnchor.constraint(greaterThanOrEqualTo: tooltipView.bottomAnchor).isActive = true
     }
 
     private func transformTopLeft(originalTopLeft: NSPoint) -> NSPoint {
