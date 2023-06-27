@@ -29,8 +29,16 @@ func applyRules(rules: [(String, String, String)], s: String) -> (String, [Expla
 
 func syllableFinalNeutralization(s: String) -> (String, [Explanation]) {
     let rules = [
-        ("(ᆿ|ᆩ)", "ᆨ", "ᆿ and ᆩ are neutralized to ᆨ at the end of a syllable"),
-        ("(ᇀ|ᆺ|ᆻ|ᆽ|ᆾ|ᇂ)", "ᆮ", "ᇀ, ᆺ, ᆻ, ᆽ, ᆾ, and ᇂ are neutralized to ᆮ at the end of a syllable"),
+        ("ᆿ", "ᆨ", "ᆿ is neutralized to ᆨ at the end of a syllable"),
+        ("ᆩ", "ᆨ", "ᆩ is neutralized to ᆨ at the end of a syllable"),
+        
+        ("ᇀ", "ᆮ", "ᇀ is neutralized to ᆮ at the end of a syllable"),
+        ("ᆺ", "ᆮ", "ᆺ is neutralized to ᆮ at the end of a syllable"),
+        ("ᆻ", "ᆮ", "ᆻ is neutralized to ᆮ at the end of a syllable"),
+        ("ᆽ", "ᆮ", "ᆽ is neutralized to ᆮ at the end of a syllable"),
+        ("ᆾ", "ᆮ", "ᆾ is neutralized to ᆮ at the end of a syllable"),
+        ("ᇂ", "ᆮ", "ᇂ is neutralized to ᆮ at the end of a syllable"),
+        
         ("ᇁ", "ᆸ", "ᇁ is neutralized to ᆸ at the end of a syllable"),
         ("ᆪ", "ᆨ", "ᆪ is neutralized to ᆨ at the end of a syllable"),
         ("ᆬ", "ᆫ", "ᆬ is neutralized to ᆫ at the end of a syllable"),
@@ -80,15 +88,23 @@ func liaison(s: String) -> (String, [Explanation]) {
 func nasalization(s: String) -> (String, [Explanation]) {
     let rules = [
         // Obstruent Nasalization
-        ("ᆸ(ᄆ|ᄂ)", "ᆷ$1", "The obstruent ᆸ is nasalized to ᆷ before the nasals ᄆ and ᄂ"),
-        ("ᆮ(ᄆ|ᄂ)", "ᆫ$1", "The obstruent ᆮ is nasalized to ᆫ before the nasals ᄆ and ᄂ"),
-        ("ᆨ(ᄆ|ᄂ)", "ᆼ$1", "The obstruent ᆨ is nasalized to ᆼ before the nasals ᄆ and ᄂ"),
+        ("ᆸᄆ", "ᆷᄆ", "The obstruent ᆸ is nasalized to ᆷ before the nasal ᄆ"),
+        ("ᆸᄂ", "ᆷᄂ", "The obstruent ᆸ is nasalized to ᆷ before the nasal ᄂ"),
+        
+        ("ᆮᄆ", "ᆫᄆ", "The obstruent ᆮ is nasalized to ᆫ before the nasal ᄆ"),
+        ("ᆮᄂ", "ᆫᄂ", "The obstruent ᆮ is nasalized to ᆫ before the nasal ᄂ"),
+        
+        ("ᆨᄆ", "ᆼᄆ", "The obstruent ᆨ is nasalized to ᆼ before the nasal ᄆ"),
+        ("ᆨᄂ", "ᆼᄂ", "The obstruent ᆨ is nasalized to ᆼ before the nasal ᄂ"),
+        
         ("ᆸᄅ", "ᆷᄂ", "The obstruent ᆸ is nasalized to ᆷ before the liquid ᄅ and ᄅ is nasalized to ᄂ"),
         ("ᆨᄅ", "ᆼᄂ", "The obstruent ᆨ is nasalized to ᆼ before the liquid ᄅ and ᄅ is nasalized to ᄂ"),
+        
         // Liquid Nasalization
         // /m/ + /l/ → [m] + [n]
         // /ŋ/ + /l/ → [ŋ] + [n]
-        ("(ᆷ|ᆼ)ᄅ", "$1ᄂ", "The liquid ᄅ is nasalized to ᄂ after the nasals ᆷ and ᆼ"),
+        ("ᆷᄅ", "ᆷᄂ", "The liquid ᄅ is nasalized to ᄂ after the nasal ᆷ"),
+        ("ᆼᄅ", "ᆼᄂ", "The liquid ᄅ is nasalized to ᄂ after the nasal ᆼ"),
     ]
     return applyRules(rules: rules, s: s)
 }
@@ -97,24 +113,33 @@ func palatalization(s: String) -> (String, [Explanation]) {
     let rules = [
         ("ᆮ이", "지", "The consonant ᆮ is palatalized to ᄌ before the vowel 이"),
         ("ᆮ히", "치", "The consonant ᆮ is palatalized to ᄎ before the sound 히"),
-        ("ᇀ(히|이)", "치", "The consonant ᇀ is palatalized to ᄎ before the sounds 히 and 이"),
+        ("ᇀ히", "치", "The consonant ᇀ is palatalized to ᄎ before the sound 히"),
+        ("ᇀ이", "치", "The consonant ᇀ is palatalized to ᄎ before the sound 이"),
     ]
     return applyRules(rules: rules, s: s)
 }
 
 func lateralization(s: String) -> (String, [Explanation]) {
     let rules = [
-        ("ᆫᄅ|ᆯᄂ", "ᆯᄅ", "The nasal ᄂ is lateralized to the liquid ᆯ before or after the liquid ᆯ"),
+        ("ᆫᄅ", "ᆯᄅ", "The nasal ᄂ is lateralized to the liquid ᆯ before the liquid ᆯ"),
+        ("ᆯᄂ", "ᆯᄅ", "The nasal ᄂ is lateralized to the liquid ᆯ after the liquid ᆯ"),
     ]
     return applyRules(rules: rules, s: s)
 }
 
 func aspiration(s: String) -> (String, [Explanation]) {
     let rules = [
-        ("ᆸᄒ|ᇂᄇ", "ᄑ", "The obstruent ᆸ is aspirated to ᄑ before or after ᇂ"),
-        ("ᆮᄒ|ᇂᄃ", "ᄐ", "The obstruent ᆮ is aspirated to ᄐ before or after ᇂ"),
-        ("ᆨᄒ|ᇂᄀ", "ᄏ", "The obstruent ᆨ is aspirated to ᄏ before or after ᇂ"),
-        ("ᆽᄒ|ᇂᄌ", "ᄎ", "The obstruent ᆽ is aspirated to ᄎ before or after ᇂ"),
+        ("ᆸᄒ", "ᄑ", "The obstruent ᆸ is aspirated to ᄑ before ᇂ"),
+        ("ᇂᄇ", "ᄑ", "The obstruent ᆸ is aspirated to ᄑ after ᇂ"),
+        
+        ("ᆮᄒ", "ᄐ", "The obstruent ᆮ is aspirated to ᄐ before ᇂ"),
+        ("ᇂᄃ", "ᄐ", "The obstruent ᆮ is aspirated to ᄐ after ᇂ"),
+        
+        ("ᆨᄒ", "ᄏ", "The obstruent ᆨ is aspirated to ᄏ before ᇂ"),
+        ("ᇂᄀ", "ᄏ", "The obstruent ᆨ is aspirated to ᄏ after ᇂ"),
+        
+        ("ᆽᄒ", "ᄎ", "The obstruent ᆽ is aspirated to ᄎ before ᇂ"),
+        ("ᇂᄌ", "ᄎ", "The obstruent ᆽ is aspirated to ᄎ after ᇂ"),
 
         ("ᆭᄇ", "ᆫᄑ", "The plosive ᄇ is aspirated to ᄑ after the consonant cluster ᆭ"),
         ("ᆭᄃ", "ᆫᄐ", "The plosive ᄃ is aspirated to ᄐ after the consonant cluster ᆭ"),
@@ -131,11 +156,26 @@ func aspiration(s: String) -> (String, [Explanation]) {
 
 func fortis(s: String) -> (String, [Explanation]) {
     let rules = [
-        ("(ᆸ|ᆮ|ᆨ)ᄇ", "$1ᄈ", "The obstruent ᄇ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
-        ("(ᆸ|ᆮ|ᆨ)ᄃ", "$1ᄄ", "The obstruent ᄃ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
-        ("(ᆸ|ᆮ|ᆨ)ᄀ", "$1ᄁ", "The obstruent ᄀ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
-        ("(ᆸ|ᆮ|ᆨ)ᄉ", "$1ᄊ", "The obstruent ᄉ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
-        ("(ᆸ|ᆮ|ᆨ)ᄌ", "$1ᄍ", "The obstruent ᄌ is tensified after the obstruents ᆸ, ᆮ, and ᆨ"),
+        ("ᆸᄇ", "ᆸᄈ", "The obstruent ᄇ is tensified after the obstruent ᆸ"),
+        ("ᆮᄇ", "ᆮᄈ", "The obstruent ᄇ is tensified after the obstruent ᆮ"),
+        ("ᆨᄇ", "ᆨᄈ", "The obstruent ᄇ is tensified after the obstruent ᆨ"),
+        
+        ("ᆸᄃ", "ᆸᄄ", "The obstruent ᄃ is tensified after the obstruents ᆸ"),
+        ("ᆮᄃ", "ᆮᄄ", "The obstruent ᄃ is tensified after the obstruents ᆮ"),
+        ("ᆨᄃ", "ᆨᄄ", "The obstruent ᄃ is tensified after the obstruents ᆨ"),
+        
+        ("ᆸᄀ", "ᆸᄁ", "The obstruent ᄀ is tensified after the obstruent ᆸ"),
+        ("ᆮᄀ", "ᆮᄁ", "The obstruent ᄀ is tensified after the obstruent ᆮ"),
+        ("ᆨᄀ", "ᆨᄁ", "The obstruent ᄀ is tensified after the obstruent ᆨ"),
+        
+        ("ᆸᄉ", "ᆸᄊ", "The obstruent ᄉ is tensified after the obstruents ᆸ"),
+        ("ᆮᄉ", "ᆮᄊ", "The obstruent ᄉ is tensified after the obstruents ᆮ"),
+        ("ᆨᄉ", "ᆨᄊ", "The obstruent ᄉ is tensified after the obstruents ᆨ"),
+        
+        ("ᆸᄌ", "ᆸᄍ", "The obstruent ᄌ is tensified after the obstruents ᆸ"),
+        ("ᆮᄌ", "ᆮᄍ", "The obstruent ᄌ is tensified after the obstruents ᆮ"),
+        ("ᆨᄌ", "ᆨᄍ", "The obstruent ᄌ is tensified after the obstruents ᆨ"),
+        
         ("ᆰᄀ", "ᆯᄁ", "The plosive ᄀ is tensified after the consonant cluster ᆰ"),
     ]
     return applyRules(rules: rules, s: s)
