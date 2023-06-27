@@ -89,23 +89,8 @@ class CandidatesWindow: NSWindow, NSWindowDelegate {
         
         if selectedCandidate.prs.contains(derivedPr) && !explanations.isEmpty {
             self.tooltipView.isHidden = false
-            let content = explanations.enumerated().reduce(Text("")) { (result, element) in
-                let (i, t) = element
-                let indexText = Text("\(i + 1) ")
-                    .font(.system(size: defaultThemeConfig.current.annotationFontSize, design: .monospaced))
-                    .foregroundColor(Color(defaultThemeConfig.current.candidateIndexColor))
-                let word = i == 0 ? selectedCandidate.koreanWord : explanations[i - 1].result
-                let resultText = Text(word + " ")
-                let patternText = Text(t.pattern).font(.system(size: defaultThemeConfig.current.annotationFontSize))
-                let templateText =  Text(" → " + t.template + "\n").font(.system(size: defaultThemeConfig.current.annotationFontSize))
-                return result + indexText + resultText + patternText + templateText
-            }
-            let result = Text("\(explanations.count + 1) ")
-                .font(.system(size: defaultThemeConfig.current.annotationFontSize, design: .monospaced))
-                .foregroundColor(Color(defaultThemeConfig.current.candidateIndexColor))
-                    + Text(derivedPr)
             tooltipView.rootView = AnyView(PointingTooltipView(
-                text: (content + result).font(.system(size: CGFloat(defaultThemeConfig.current.fontSize), design: .monospaced)),
+                word: selectedCandidate.koreanWord, explanations: explanations, derivedPr: derivedPr,
                 tooltipDirection: .right
             ))
         } else {

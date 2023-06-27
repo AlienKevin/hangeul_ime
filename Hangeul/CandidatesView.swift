@@ -33,7 +33,7 @@ struct CandidateView: View {
         return HStack(alignment: .center, spacing: 4) {
             Text("\(index + 1)")
                 .foregroundColor(Color(indexColor))
-                .font(.system(size: themeConfig.current.annotationFontSize))
+                .font(.system(size: themeConfig[colorScheme].annotationFontSize))
             Text(candidate.koreanWord)
                 .lineLimit(1)
                 .foregroundColor(Color(textColor))
@@ -42,7 +42,7 @@ struct CandidateView: View {
             Text(candidate.englishWords.joined(separator: ", "))
                 .lineLimit(1)
                 .foregroundColor(Color(annotationColor))
-                .font(.system(size: themeConfig.current.annotationFontSize))
+                .font(.system(size: themeConfig[colorScheme].annotationFontSize))
         }
         .onTapGesture {
             NotificationCenter.default.post(

@@ -50,6 +50,7 @@ struct ApperanceThemeConfig: Codable {
     let candidateBackgroundColor: ColorData
     
     let tooltipBackgroundColor: ColorData
+    let tooltipSelectedTextColor: ColorData
 
     let selectedIndexColor: ColorData
     let selectedTextColor: ColorData
@@ -86,7 +87,7 @@ struct ThemeConfig: Codable {
     }
 }
 
-let defaultLightAccentColor = ColorData(red: 0, green: 0.110, blue: 0.247, opacity: 1)
+let defaultLightAccentColor = ColorData(red: 0, green: 80/255, blue: 180/255, opacity: 1)
 let defaultLightBackgroundColor = ColorData(red: 1, green: 1, blue: 1, opacity: 1)
 let defaultLightGreyColor = ColorData(red: 0.9451, green: 0.9176, blue: 0.8902, opacity: 1)
 
@@ -113,6 +114,7 @@ let defaultThemeConfig = ThemeConfig(
         candidateCodeColor: ColorData(red: 0.3, green: 0.3, blue: 0.3, opacity: 0.8),
         candidateBackgroundColor: defaultLightBackgroundColor.withOpacity(opacity: 0),
         tooltipBackgroundColor: defaultLightGreyColor,
+        tooltipSelectedTextColor: defaultLightAccentColor.withOpacity(opacity: 0.8),
         selectedIndexColor: defaultLightAccentColor,
         selectedTextColor: defaultLightBackgroundColor,
         selectedCodeColor: defaultLightAccentColor.withOpacity(opacity: 0.8),
@@ -138,6 +140,7 @@ let defaultThemeConfig = ThemeConfig(
         candidateCodeColor: ColorData(red: 0.7, green: 0.7, blue: 0.7, opacity: 0.8),
         candidateBackgroundColor: defaultDarkBackgroundColor,
         tooltipBackgroundColor: defaultDarkGreyColor,
+        tooltipSelectedTextColor: defaultDarkAccentColor.withOpacity(opacity: 0.8),
         selectedIndexColor: defaultDarkAccentColor,
         selectedTextColor: defaultDarkBackgroundColor,
         selectedCodeColor: defaultDarkAccentColor.withOpacity(opacity: 0.8),
