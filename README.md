@@ -132,6 +132,7 @@ As soon as you press 'q', you will see a prompt that says "[English]" after your
 
 ### Lookup English Words
 Go ahead and type an English word you want to lookup and the most relevant Korean words with that meaning will show up as candidates.
+For phrases where grapheme to phoneme rules apply, we will show a derivation from the surface form to the underlying phonetic form on the side.
 
 ![English Reverse Lookup Candidate Selector](./Media/english_lookup_candidates.png)
 
@@ -141,7 +142,7 @@ Simply delete the letter 'q' before your cursor to get back to Hangeul mode.
 ### Reverse Lookup Demo
 The GIF below shows an example workflow that seamlessly switches between the default Hangeul mode and the Lookup mode.
 
-![English Reverse Lookup Demo](./Media/english_lookup_demo.gif)
+![English Reverse Lookup Demo](./Media/demo.gif)
 
 ### Frequency Dictionary
 
